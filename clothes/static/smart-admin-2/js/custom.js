@@ -157,7 +157,7 @@ function do_create_table(url, one_record_only=false, edit_button=true, delete_bu
                             "targets": [ (foto_idx > -1) ? parseInt(foto_idx): '-1' ],
                             
                             render: function(data) {
-                                // console.log('inside target');
+                                console.log('inside target',data);
                                 // console.log(foto_idx);
 
                                 // if (foto_idx > -1) {
