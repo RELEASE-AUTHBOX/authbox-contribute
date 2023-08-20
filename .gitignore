@@ -9,3 +9,6 @@ __pycache__/
 !.env-default
 
 sendgrid.env
+
+# ignore origin, karena tidak digunakan di server
+origin/
