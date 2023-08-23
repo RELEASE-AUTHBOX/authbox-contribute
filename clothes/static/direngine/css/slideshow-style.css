@@ -111,6 +111,7 @@
 }
 /*0.2s blur ease-in*/
 
+/* hilangkan ini agar direngine slide show tidak terlalu lama  */
 /* .active {
   z-index: 10;
   
