@@ -111,12 +111,12 @@
 }
 /*0.2s blur ease-in*/
 
-.active {
+/* .active {
   z-index: 10;
   
   -webkit-animation: 3s fadeOut ease-in  ; 
           animation: 3s fadeOut ease-in  ; 
-}
+} */
 
 
 @-webkit-keyframes circle {
