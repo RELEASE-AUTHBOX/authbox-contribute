@@ -1,1 +1,1 @@
-{% extends "direngine/base.html" %} {% load static %} {% block content %} {% block hero-image %}{% endblock %} {% block detail %}{% endblock %} {% endblock %}
+{% extends "direngine/base.html" %} {% load static %} {% block content %} {% if content_detail %} {% block hero-image %}{% endblock %} {% block detail %}{% endblock %} {% endif %} {% endblock %}
