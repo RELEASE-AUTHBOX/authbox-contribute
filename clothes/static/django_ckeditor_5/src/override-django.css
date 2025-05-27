@@ -37,3 +37,11 @@ form .aligned .ck ul {
 .ck-word-count__words{
     margin-right: 10px;
 }
+
+.ck.ck-editor {
+    position: relative;
+    width: 100%;
+}
+.ck-editor-container{
+    width: 100%;
+}
