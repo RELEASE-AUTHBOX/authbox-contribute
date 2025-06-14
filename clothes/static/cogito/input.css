@@ -1,3 +1,19 @@
-@import "tailwindcss" source(none);
+/* @import "tailwindcss" source(none);
 @plugin "./daisyui.js";
-@source "../../templates/cogito";
+*/
+
+
+@import "tailwindcss"; 
+
+/* source(none); */
+/* @source "./src/*.{html,js}"; */
+
+@plugin "./daisyui";
+@source "../../templates/cogito"; 
+
+/* @plugin "daisyui" {
+    themes: light --default, dark --prefersdark;
+} */
+/* @custom-variant dark (&:where(.dark, .dark *)); */
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
