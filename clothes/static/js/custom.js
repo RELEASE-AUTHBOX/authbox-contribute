@@ -393,7 +393,6 @@ function smartCropImage(file, targetWidth, targetHeight, callback) {
 };
 
 
-
 $(document).ready(function() {
     // PHOTO modification
     // ------------------
@@ -409,6 +408,10 @@ $(document).ready(function() {
     };      
     var ww = 0;
     var hh = 0; 
+
+
+
+
 
     $("#modalCrop").on("show.bs.modal", function () {
         // ww dan hh default sudah ada di masing2 template pemanggil
@@ -588,6 +591,7 @@ $(document).ready(function() {
         // //$("#formUpload").submit();
         // $("#modalCrop").modal('hide');
     });
+
 
     // BACK to TOP
     /* [ Back to top ] */
