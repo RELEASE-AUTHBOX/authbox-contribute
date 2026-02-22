@@ -1,13 +1,13 @@
-const staticPaths = new Set(["/","/sitemap.xml"]);
+const staticPaths = new Set(["/static/news-qwik-django/","/static/news-qwik-django/sitemap.xml"]);
 function isStaticPath(method, url) {
   if (method.toUpperCase() !== 'GET') {
     return false;
   }
   const p = url.pathname;
-  if (p.startsWith("/build/")) {
+  if (p.startsWith("/static/news-qwik-django/build/")) {
     return true;
   }
-  if (p.startsWith("/assets/")) {
+  if (p.startsWith("/static/news-qwik-django/assets/")) {
     return true;
   }
   if (staticPaths.has(p)) {
