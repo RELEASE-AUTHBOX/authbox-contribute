@@ -1,0 +1,1 @@
+const s=t=>{t.preventDefault();const e=document.getElementById("breakingnews");if(e){const o=e.getBoundingClientRect().top+window.pageYOffset-80;window.scrollTo({top:o,behavior:"smooth"})}};export{s as s_go950hYiyzw};

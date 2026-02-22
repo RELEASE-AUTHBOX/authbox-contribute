@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  {% include 'new-float-ui-frontend/snippets/meta.html' %}
+  {% include 'new-float-ui-frontend/snippets/link.html' %}
+  <title>
+   {{ title }}
+  </title>
+  {% block extra_head %} {% endblock %}
+ </head>
+ <body>
+  {% include 'new-float-ui-frontend/snippets/header.html' %}
+  {% block main %}{% endblock %}
+  {% include 'new-float-ui-frontend/snippets/footer.html' %}
+  <div class="page-loading" id="loadingOverlay">
+   <div class="spinner">
+   </div>
+  </div>
+  <a class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top">
+   <svg class="w-5 h-5 mx-3 my-3 fill-gray-200" data-name="Layer 1" id="Layer_1" viewbox="0 0 115.4 122.88" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24.94,67.88A14.66,14.66,0,0,1,4.38,47L47.83,4.21a14.66,14.66,0,0,1,20.56,0L111,46.15A14.66,14.66,0,0,1,90.46,67.06l-18-17.69-.29,59.17c-.1,19.28-29.42,19-29.33-.25L43.14,50,24.94,67.88Z">
+    </path>
+   </svg>
+  </a>
+  {% include 'new-float-ui-frontend/snippets/script.html' %}
+  {% block extra_body %} {% endblock %}
+ </body>
+</html>

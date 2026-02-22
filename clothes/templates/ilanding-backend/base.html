@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  {% include 'ilanding-backend/snippets/meta.html' %}
+  {% include 'ilanding-backend/snippets/link.html' %}
+  <title>
+   {{ title }}
+  </title>
+  {% block extra_head %} {% endblock %}
+ </head>
+ <body class="index-page">
+  {% include 'ilanding-backend/snippets/header.html' %}
+  {% block main %}{% endblock %}
+  {% include 'ilanding-backend/snippets/footer.html' %}
+  <div class="page-loading" id="loadingOverlay" style="display: none;">
+   <div class="spinner">
+   </div>
+  </div>
+  <div id="custom-tooltip">
+  </div>
+  <div id="modal-container">
+  </div>
+  <a class="scroll-top d-flex align-items-center justify-content-center" id="scroll-top">
+   <span class="hoverable hoverable-mark" data-modal-code="14-bi-icon-70" data-modal-title='&lt;i class="bi bi-arrow-up-short"&gt;&lt;/i&gt;' data-modal-type="icon" data-tooltip="Link ini hanya tampil di mode edit. Silahkan klik untuk mengedit data!" id="14-bi-icon-70">
+    <i class="bi bi-arrow-up-short">
+    </i>
+   </span>
+  </a>
+  {% include 'ilanding-backend/snippets/script.html' %}
+  {% block extra_body %} {% endblock %}
+ </body>
+</html>

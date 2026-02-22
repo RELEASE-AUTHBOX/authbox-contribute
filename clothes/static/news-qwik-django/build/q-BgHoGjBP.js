@@ -1,0 +1,1 @@
+import{_ as t}from"./q-BKZ00VYc.js";const o=[["/",[()=>t(()=>import("./q-BzyY_a3j.js"),[])]],["detail/[slug]/",[()=>t(()=>import("./q-BKixBkpw.js"),[])]]],e=[];const r=!0;export{r as c,e as m,o as r};

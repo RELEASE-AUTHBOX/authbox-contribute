@@ -1,0 +1,33 @@
+{% load static %}
+<script defer="" src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js">
+</script>
+<script crossorigin="anonymous" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" src="https://code.jquery.com/jquery-3.7.1.js">
+</script>
+<script src="{% static 'new-float-ui-backend/smooth-modal.js' %}">
+</script>
+<script src="{% static 'new-float-ui-backend/main.js' %}">
+</script>
+<script src="{% static 'new-float-ui-backend/hover-click.js' %}">
+</script>
+<script src="{% static 'new-float-ui-backend/splash-screen.js' %}">
+</script>
+<script src="{% static 'new-float-ui-backend/slideshow-main.js' %}">
+</script>
+<script src="{% static 'js/smartcrop.min.js' %}"></script>
+<script>
+    function skeletonLoader() {
+      return {
+        loading: true, // Initial state: loading
+        loadContent() {
+          this.loading = true; // Show skeleton
+          setTimeout(() => {
+            this.loading = false; // Simulate data load
+          }, 1000); // 2-second delay
+        },
+        init() {
+          // Automatically load content on page load
+          this.loadContent();
+        }
+      };
+    }
+  </script>

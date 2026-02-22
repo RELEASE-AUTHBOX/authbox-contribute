@@ -1,0 +1,567 @@
+{% extends 'new-float-ui-frontend/base-index.html' %}
+        {% load static %}
+{% block about %}
+<section class="py-28" id="about" x-data="{ stats: [ { data: '35K', title: 'Customers' }, { data: '40%', title: 'Mataram' }, { data: '25%', title: 'Lombok Timur' }, { data: '35%', title: 'Lombok Barat' } ] }">
+ <div class="max-w-screen-xl mx-auto px-4 text-gray-600 gap-x-12 items-start justify-between lg:flex md:px-8">
+  <div class="sm:hidden lg:block lg:max-w-xl">
+   <span class="hoverable-mark" data-modal-type="image" id="9-image-2">
+    <img alt="" class="rounded-lg" src="https://images.unsplash.com/photo-1622675363311-3e1904dc1885?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=870&amp;q=80"/>
+   </span>
+  </div>
+  <div class="mt-6 gap-12 sm:mt-0 md:flex lg:block">
+   <div class="max-w-2xl">
+    <h3 class="text-gray-800 text-3xl font-semibold sm:text-4xl">
+     <span class="hoverable-mark" data-modal-type="text" id="2-about-1">
+      Kami lakukan yang terbaik untuk kepuasan customer
+     </span>
+    </h3>
+    <p class="mt-3 max-w-xl">
+     <span class="hoverable-mark" data-modal-type="text" id="2-about-2">
+      Customer dengan tingkat kepuasan tinggi adalah tujuan Kami. Customer yang telah mengenal dan merasakan masakan dari catering Kami dengan sebaran wilayah sebagai berikut
+     </span>
+    </p>
+   </div>
+   <div class="flex-none mt-6 md:mt-0 lg:mt-6">
+    <span class="hoverable-mark" data-modal-type="unordered-list" id="9-unordered-list-1">
+     <ul class="inline-grid gap-y-8 gap-x-14 grid-cols-2">
+      <template :key="idx" x-for="(item, idx) in stats">
+       <li>
+        <h4 class="text-4xl text-sky-500 font-semibold" x-text="item.data">
+        </h4>
+        <p class="mt-3 font-medium" x-text="item.title">
+        </p>
+       </li>
+      </template>
+     </ul>
+    </span>
+   </div>
+  </div>
+ </div>
+</section>
+{% endblock %}
+{% block feature %}
+<section class="relative py-28 bg-gray-900" id="feature" x-data="{ features: [ { icon: 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z', title: 'Bahan Segar', desc: 'Seluruh bahan diolah dalam keadaan segar sehingga rasa benar-benar lezat' }, { icon: 'M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z', title: 'Higienis', desc: 'Diproses secara higienis dan tahan lama hingga menu dihidangkan' }, { icon: 'M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3', title: 'Pengantaran tepat waktu', desc: 'Dengan tenaga profesional seluruh pesanan akan tersajikan tepat waktu' }, ] }">
+ <div class="relative z-10 max-w-screen-xl mx-auto px-4 text-gray-300 justify-between gap-24 lg:flex md:px-8">
+  <div class="max-w-xl">
+   <h3 class="text-white text-3xl font-semibold sm:text-4xl">
+    <span class="hoverable-mark" data-modal-type="text" id="3-feature-1">
+     Kami memiliki berbagai menu dan peralatan catering terbaik
+    </span>
+   </h3>
+   <p class="mt-3">
+    <span class="hoverable-mark" data-modal-type="text" id="3-feature-2">
+     Dengan dukungan 2 unit kendaraan, memastikan hajatan Anda dapat terlaksana sesuai dengan jadwal yang telah ditentukan
+    </span>
+   </p>
+  </div>
+  <div class="mt-12 lg:mt-0">
+   <span class="hoverable-mark" data-modal-type="unordered-list" id="9-unordered-list-2">
+    <ul class="grid gap-8 sm:grid-cols-2">
+     <template :key="idx" x-for="(item, idx) in features">
+      <li class="flex gap-x-4">
+       <div class="flex-none w-12 h-12 bg-sky-500 rounded-lg flex items-center justify-center">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+         <path :d="item.icon" stroke-linecap="round" stroke-linejoin="round">
+         </path>
+        </svg>
+       </div>
+       <div>
+        <h4 class="text-lg text-gray-100 font-semibold" x-text="item.title">
+        </h4>
+        <p class="mt-3" x-text="item.desc">
+        </p>
+       </div>
+      </li>
+     </template>
+    </ul>
+   </span>
+  </div>
+ </div>
+ <div class="absolute inset-0 max-w-md mx-auto h-72 blur-[118px]" style="background: linear-gradient(152.92deg, rgba(192, 132, 252, 0.2) 4.54%, rgba(232, 121, 249, 0.26) 34.2%, rgba(192, 132, 252, 0.1) 77.55%)">
+ </div>
+</section>
+{% endblock %}
+{% block cta %}
+<section class="py-14 bg-center bg-cover bg-no-repeat bg-fixed" id="cta" style="background-image: url('https://picsum.photos/1920/1920/?random');" x-data="{open : false}">
+ <div class="max-w-screen-xl mx-auto px-4 text-gray-600 gap-x-12 items-start justify-between lg:flex md:px-8">
+  <div class="mt-6 gap-12 sm:mt-0 md:flex lg:block">
+   <div class="max-w-2xl">
+    <h3 class="text-gray-800 text-3xl font-semibold text-white font-extrabold drop-shadow-lg drop-shadow-gray-950 sm:text-4xl">
+     <span class="hoverable-mark" data-modal-type="text" id="4-cta-1">
+      Sekarang giliran Anda
+     </span>
+    </h3>
+    <p class="mt-3 max-w-xl text-white drop-shadow-lg drop-shadow-gray-950">
+     <span class="hoverable-mark" data-modal-type="text" id="4-cta-2">
+      Pilih hari dan tanggal hajatan Anda, dan segera pesan tempat karena kami hanya menerima 2 orderan per hari. Hal ini untuk memastikan menu tetap fresh dan tepat waktu saat dihidangkan ke tamu undangan Anda
+     </span>
+    </p>
+   </div>
+   <div class="py-7">
+    <button @click="open = true" class="flex items-center justify-center gap-x-2 py-2.5 px-4 mt-3 w-full text-sm text-white font-medium bg-sky-500 hover:bg-sky-400 active:bg-sky-600 duration-150 rounded-lg sm:mt-0 sm:w-auto cursor-pointer">
+     <span class="hoverable-mark" data-modal-type="text" id="4-cta-3">
+      Pesan hari dan tanggal sekarang
+     </span>
+     <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path clip-rule="evenodd" d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z" fill-rule="evenodd">
+      </path>
+     </svg>
+    </button>
+   </div>
+  </div>
+  <div class="sm:hidden lg:block lg:max-w-xl">
+   <span class="hoverable-mark" data-modal-type="image" id="9-image-3">
+    <img alt="" class="rounded-lg" src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=774&amp;q=80"/>
+   </span>
+  </div>
+ </div>
+ <div class="fixed inset-0 z-50 overflow-y-auto" x-cloak x-data="{ name: '', errors: {}, validateForm() { this.errors = {}; if (!this.name) this.errors.name = 'Name is required'; return Object.keys(this.errors).length === 0; }, submitForm() { if (this.validateForm()) { // Simulate form submission setTimeout(() =&gt; { alert('Form submitted successfully!'); this.open = false; this.resetForm(); }, 500); } }, resetForm() { this.name = ''; this.datetime = ''; this.message = ''; this.errors = {}; } }" x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100" x-transition:enter-start="opacity-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-end="opacity-0" x-transition:leave-start="opacity-100">
+  <div @click="open = false" class="fixed inset-0 bg-black bg-opacity-50">
+  </div>
+  <div class="flex items-center justify-center min-h-screen p-4">
+   <div @click.outside="open = false" class="relative bg-white rounded-xl shadow-2xl max-w-md w-full p-6" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 scale-100" x-transition:enter-start="opacity-0 scale-95" x-transition:leave="transition ease-in duration-200" x-transition:leave-end="opacity-0 scale-95" x-transition:leave-start="opacity-100 scale-100">
+    <div class="flex justify-between items-center mb-6">
+     <h2 class="text-xl font-bold text-gray-800">
+      <span class="hoverable-mark" data-modal-type="text" id="4-cta-4">
+       Booking Tanggal Acara
+      </span>
+     </h2>
+     <button @click="open = false" class="text-gray-500 hover:text-gray-700 transition duration-200">
+      <i class="fas fa-times text-xl">
+      </i>
+     </button>
+    </div>
+    <form @submit.prevent="submitForm()" class="space-y-4">
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="name">
+       Nama
+      </label>
+      <div class="relative">
+       <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <i class="fas fa-user text-gray-400">
+        </i>
+       </div>
+       <input :class="errors.name ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-indigo-500'" class="pl-10 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 transition duration-200" id="name" placeholder="Masukkan Nama Anda" required type="text" x-model="name"/>
+      </div>
+      <p class="text-red-500 text-xs mt-1" x-show="errors.name" x-text="errors.name">
+      </p>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="datetime">
+       Pilih Tanggal &amp; Waktu Acara
+      </label>
+      <input class="w-full mt-2 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" id="datetime" name="datetime" required type="datetime-local"/>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="message">
+       Pesan Anda
+      </label>
+      <textarea class="w-full mt-2 h-36 px-3 py-2 resize-none appearance-none bg-transparent outline-none border border-gray-300 focus:border-cyan-500 shadow-sm rounded-lg transition-colors" id="message" name="message" placeholder="Type your message here..." required>Saya akan mengadakan acara pada tanggal tersebut, apakah masih tersedia?</textarea>
+     </div>
+     <div class="pt-2">
+      <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition duration-200 flex items-center justify-center cursor-pointer" type="submit">
+       <i class="fas fa-user-plus mr-2">
+       </i>
+       Kirim
+      </button>
+     </div>
+    </form>
+   </div>
+  </div>
+ </div>
+</section>
+{% endblock %}
+{% block gallery %}
+<section class="py-28 bg-gray-900" id="gallery" x-data="{ posts: [ { title: 'Acara Akad Nikah dan Resepsi Ibnu dan Amel', desc: 'Bertempat di gedung extravaganza jl. panji tilar mataram, acara berlangsung meriah dengan MC terkenal', img: 'https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=870&amp;q=80', date: '4 Jan 2025', href: 'javascript:void(0)' }, { title: 'Acara Aqiqah Putra Bapak Sapoan', desc: 'Bertempat di kediaman Bapak Sapoan acara meriah dengan menghadirkah Rudat (kesenian khas lombok)', img: 'https://images.unsplash.com/photo-1620287341056-49a2f1ab2fdc?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=870&amp;q=80', date: '9 Jan 2025', href: 'javascript:void(0)' }, { title: 'Acara Maulidan Nabi Muhammad SAW, di kediaman Ibu Rusmini', desc: 'Acara berlangsung dari magrib sampai pukul 9 malam, meriah dengan dekor lampu gemerlap', img: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=870&amp;q=80', date: '5 Feb 2025', href: 'javascript:void(0)' }, { title: 'Acara Ngurisan Putri Ibu Riska', desc: 'Bertempat di kediaman Ibu Riska, jl. sapta pesona pagutan permai, acara berlangsung sakral', img: 'https://images.unsplash.com/photo-1617529497471-9218633199c0?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=870&amp;q=80', date: '10 Feb 2025', href: 'javascript:void(0)' }], showModal: false, currentIndex: 0, openModal(index) { this.currentIndex = index; this.showModal = true; }, prev() { this.currentIndex = (this.currentIndex - 1 + this.posts.length) % this.posts.length; }, next() { this.currentIndex = (this.currentIndex + 1) % this.posts.length; } }">
+ <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+  <div class="space-y-5 sm:text-center sm:max-w-md sm:mx-auto">
+   <h1 class="text-gray-500 text-3xl font-extrabold sm:text-4xl">
+    <span class="hoverable-mark" data-modal-type="text" id="5-gallery-1">
+     Galeri Kegiatan Kami
+    </span>
+   </h1>
+   <p class="text-gray-300">
+    <span class="hoverable-mark" data-modal-type="text" id="5-gallery-2">
+     Hajatan, resepsi pernikahan, aqiqah, acara kantor dan masih banyak lagi
+    </span>
+   </p>
+  </div>
+  <span class="hoverable-mark" data-modal-type="unordered-list" id="9-unordered-list-3">
+   <ul class="grid gap-x-8 gap-y-10 mt-16 sm:grid-cols-2 lg:grid-cols-3">
+    <template :key="index" x-for="(item, index) in posts">
+     <li class="w-full mx-auto group sm:max-w-sm">
+      <button @click="openModal(index)" class="w-full cursor-pointer">
+       <span class="hoverable-mark" data-modal-type="image" id="9-image-4">
+        <img :alt="item.title" :src="item.img" class="w-full rounded-lg transition-transform duration-300 group-hover:scale-105" loading="lazy"/>
+       </span>
+       <div class="mt-3 space-y-2">
+        <span class="block text-sky-500 text-sm" x-text="item.date">
+        </span>
+        <h3 class="text-lg text-gray-500 duration-150 group-hover:text-indigo-300 font-semibold" x-text="item.title">
+        </h3>
+        <p class="text-gray-300 text-sm duration-150 group-hover:text-gray-500" x-text="item.desc">
+        </p>
+       </div>
+      </button>
+     </li>
+    </template>
+   </ul>
+  </span>
+ </div>
+ <div class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50" x-show="showModal" x-transition="">
+  <div class="relative max-w-4xl w-full p-4">
+   <button @click="showModal=false" class="absolute top-4 right-4 text-white text-3xl cursor-pointer">
+    <span class="hoverable-mark" data-modal-type="text" id="5-gallery-3">
+     ×
+    </span>
+   </button>
+   <span class="hoverable-mark" data-modal-type="image" id="9-image-5">
+    <img :src="posts[currentIndex].img" class="w-full max-h-[80vh] object-contain rounded-lg"/>
+   </span>
+   <div class="text-center mt-4 text-white">
+    <h2 class="text-xl font-bold" x-text="posts[currentIndex].title">
+    </h2>
+    <p class="text-gray-300" x-text="posts[currentIndex].desc">
+    </p>
+   </div>
+   <button @click="prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl cursor-pointer">
+    <span class="hoverable-mark" data-modal-type="text" id="5-gallery-4">
+     ❮
+    </span>
+   </button>
+   <button @click="next" class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl cursor-pointer">
+    <span class="hoverable-mark" data-modal-type="text" id="5-gallery-5">
+     ❯
+    </span>
+   </button>
+  </div>
+ </div>
+</section>
+{% endblock %}
+{% block testimony %}
+<section id="testimony" x-data="{ testimonials: [ { avatar: 'https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg', name: 'Ibu Riska', title: 'Acara Ngusiran', quote: 'Pelayanan yang prima, semua makanan fresh, dan tepat waktu pengantarannya. Bisa jadi langganan nih, hehehe...' }, { avatar: 'https://randomuser.me/api/portraits/women/79.jpg', name: 'Pak Sapoan', title: 'Acara Aqiqah', quote: 'Semua tamu puas dengan makanannya, enak dan fresh, sukses terus pak Owner...' }, { avatar: 'https://randomuser.me/api/portraits/men/86.jpg', name: 'Ibu Silvia', title: 'Acara Akad Nikah &amp; Resepsi', quote: 'Acaranya lancar dan semua tamu puas, Alhamdulillah, terima kasih pak Owner' } ], currentTestimonial: 0, autoSlideInterval: null, isPaused: false, isTransitioning: false, direction: 'next', // Track direction for animation init() { this.startAutoSlide(); // Pause auto-slide when user interacts //this.Rpel.addEventListener('mouseenter', () =&gt; { // this.pauseAutoSlide(); //}); //this.Rpel.addEventListener('mouseleave', () =&gt; { // if (!this.isPaused) { // this.startAutoSlide(); // } //}); }, startAutoSlide() { this.autoSlideInterval = setInterval(() =&gt; { this.nextTestimonial(); }, 5000); // Change every 5 seconds }, pauseAutoSlide() { if (this.autoSlideInterval) { clearInterval(this.autoSlideInterval); this.autoSlideInterval = null; } }, async nextTestimonial() { if (this.isTransitioning) return; this.isTransitioning = true; this.direction = 'next'; // Wait for fade out await new Promise(resolve =&gt; setTimeout(resolve, 600)); this.currentTestimonial = (this.currentTestimonial + 1) % this.testimonials.length; // Wait a bit before allowing next transition setTimeout(() =&gt; { this.isTransitioning = false; }, 100); }, async prevTestimonial() { if (this.isTransitioning) return; this.isTransitioning = true; this.direction = 'prev'; // Wait for fade out await new Promise(resolve =&gt; setTimeout(resolve, 600)); this.currentTestimonial = this.currentTestimonial === 0 ? this.testimonials.length - 1 : this.currentTestimonial - 1; // Wait a bit before allowing next transition setTimeout(() =&gt; { this.isTransitioning = false; }, 100); }, async goToTestimonial(index) { if (this.isTransitioning || this.currentTestimonial === index) return; this.isTransitioning = true; this.direction = index &gt; this.currentTestimonial ? 'next' : 'prev'; // Wait for fade out await new Promise(resolve =&gt; setTimeout(resolve, 600)); this.currentTestimonial = index; // Wait a bit before allowing next transition setTimeout(() =&gt; { this.isTransitioning = false; }, 100); }, toggleAutoSlide() { if (this.autoSlideInterval) { this.pauseAutoSlide(); this.isPaused = true; } else { this.startAutoSlide(); this.isPaused = false; } } }">
+ <section class="py-28">
+  <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+   <div class="max-w-3xl mx-auto text-center">
+    <h3 class="text-sky-500 font-semibold pb-6">
+     <span class="hoverable-mark" data-modal-type="text" id="6-testimony-1">
+      Apa Kata Customer Kami?
+     </span>
+    </h3>
+    <template :key="index" x-for="(testimonial, index) in testimonials">
+     <div x-show="currentTestimonial === index">
+      <figure>
+       <blockquote>
+        <p class="text-gray-800 text-xl font-semibold sm:text-2xl" x-text="testimonial.quote">
+        </p>
+       </blockquote>
+       <div class="mt-6">
+        <span class="hoverable-mark" data-modal-type="image" id="9-image-6">
+         <img :src="testimonial.avatar" class="w-16 h-16 mx-auto rounded-full"/>
+        </span>
+        <div class="mt-3">
+         <span class="block text-gray-800 font-semibold" x-text="testimonial.name">
+         </span>
+         <span class="block text-gray-600 text-sm mt-0.5" x-text="testimonial.title">
+         </span>
+        </div>
+       </div>
+      </figure>
+     </div>
+    </template>
+   </div>
+   <div class="mt-6">
+    <span class="hoverable-mark" data-modal-type="unordered-list" id="9-unordered-list-4">
+     <ul class="flex gap-x-3 justify-center">
+      <template :key="index" x-for="(testimonial, index) in testimonials">
+       <li>
+        <button :class="{ 'bg-sky-500': currentTestimonial === index, 'bg-gray-300': currentTestimonial !== index }" @click="currentTestimonial = index" class="w-2.5 h-2.5 rounded-full duration-150 ring-offset-2 ring-indigo-600 focus:ring">
+        </button>
+       </li>
+      </template>
+     </ul>
+    </span>
+   </div>
+  </div>
+ </section>
+</section>
+{% endblock %}
+{% block price %}
+<section id="price" x-data="{ open : false, idx : 0, plans: [ { name: 'Paket A1', desc: 'Paket Prasmanan dengan harga Rp.30.000 / Pax', price: 30, isMostPop: true, features: [ 'Curabitur faucibus', 'massa ut pretium maximus', 'Sed posuere nisi', 'Pellentesque eu nibh et neque', 'Suspendisse a leo', 'Praesent quis venenatis ipsum', 'Duis non diam vel tortor', ], }, { name: 'Paket A2', desc: 'Paket Prasmanan dengan harga Rp.40.000 / Pax', price: 40, isMostPop: false, features: [ 'Curabitur faucibus', 'massa ut pretium maximus', 'Sed posuere nisi', 'Pellentesque eu nibh et neque', 'Suspendisse a leo', 'Praesent quis venenatis ipsum', 'Duis non diam vel tortor', ], }, { name: 'Paket B1', desc: 'Paket Prasmanan dengan harga Rp.40.000 / Pax', price: 40, isMostPop: false, features: [ 'Curabitur faucibus', 'massa ut pretium maximus', 'Sed posuere nisi', 'Pellentesque eu nibh et neque', 'Suspendisse a leo', 'Praesent quis venenatis ipsum', 'Duis non diam vel tortor', ], }, { name: 'Paket B2', desc: 'Paket Prasmanan dengan harga Rp.40.000 / Pax', price: 40, isMostPop: false, features: [ 'Curabitur faucibus', 'massa ut pretium maximus', 'Sed posuere nisi', 'Pellentesque eu nibh et neque', 'Suspendisse a leo', 'Praesent quis venenatis ipsum', 'Duis non diam vel tortor', ], }, { name: 'Paket C1', desc: 'Paket Prasmanan dengan harga Rp.45.000 / Pax', price: 45, isMostPop: false, features: [ 'Curabitur faucibus', 'massa ut pretium maximus', 'Sed posuere nisi', 'Pellentesque eu nibh et neque', 'Suspendisse a leo', 'Praesent quis venenatis ipsum', 'Duis non diam vel tortor', ], }, { name: 'Paket C2', desc: 'Paket Prasmanan dengan harga Rp.50.000 / Pax', price: 50, isMostPop: false, features: [ 'Curabitur faucibus', 'massa ut pretium maximus', 'Sed posuere nisi', 'Pellentesque eu nibh et neque', 'Suspendisse a leo', 'Praesent quis venenatis ipsum', 'Duis non diam vel tortor', ], }, ] }">
+ <div class="relative py-28 px-4 sm:px-6 lg:px-8 bg-gray-900 sm:px-4 md:px-8">
+  <div class="max-w-xl mx-auto text-center space-y-3">
+   <h3 class="text-sky-500 font-semibold">
+    <span class="hoverable-mark" data-modal-type="text" id="7-price-1">
+     Daftar Harga
+    </span>
+   </h3>
+   <h2 class="text-3xl font-semibold sm:text-4xl text-white">
+    <span class="hoverable-mark" data-modal-type="text" id="7-price-2">
+     Pilih Paket Sesuai kebutuhan Anda
+    </span>
+   </h2>
+   <p class="text-gray-300 max-w-xl mx-auto">
+    <span class="hoverable-mark" data-modal-type="text" id="7-price-3">
+     Paket dapat di konsultasikan melalui Whatsapp
+    </span>
+   </p>
+  </div>
+  <div class="mt-16 max-w-screen-xl mx-auto grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 px-8">
+   <template :key="index" x-for="(item, index) in plans">
+    <div :class="item.isMostPop ? 'border-sky-500 bg-gray-800' : 'border-gray-700 bg-gray-900'" class="relative flex flex-col h-full rounded-xl border-2 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+     <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-sky-500 text-gray-900 px-4 py-1 rounded-full text-sm font-semibold" x-show="item.isMostPop">
+      Most Popular
+     </div>
+     <div class="p-6 border-b border-gray-700">
+      <span class="text-white font-medium" x-text="item.name">
+      </span>
+      <div class="text-sky-500 text-3xl font-semibold mt-2">
+       <span x-text="`Rp.Rp{item.price}rb`">
+       </span>
+       <span class="text-xl font-normal">
+        /pax
+       </span>
+      </div>
+      <p class="text-gray-400 mt-2" x-text="item.desc">
+      </p>
+      <button @click="open = true, idx = index" class="mt-4 w-full py-3 px-4 rounded-lg font-semibold text-sm text-white bg-sky-500 hover:bg-sky-600 active:bg-sky-700 transition-colors duration-200 cursor-pointer">
+       Pilih
+      </button>
+     </div>
+     <span class="hoverable-mark" data-modal-type="unordered-list" id="9-unordered-list-5">
+      <ul class="p-6 space-y-3 flex-grow">
+       <template :key="fIndex" x-for="(feature, fIndex) in item.features">
+        <li class="flex items-center gap-3">
+         <svg :class="item.isMostPop ? 'text-sky-500' : 'text-gray-400'" class="h-5 w-5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd">
+          </path>
+         </svg>
+         <span class="text-gray-300" x-text="feature">
+         </span>
+        </li>
+       </template>
+      </ul>
+     </span>
+    </div>
+   </template>
+  </div>
+ </div>
+ <div class="fixed inset-0 z-50 overflow-y-auto" x-cloak x-data="{ name: '', errors: {}, validateForm() { this.errors = {}; if (!this.name) this.errors.name = 'Name is required'; return Object.keys(this.errors).length === 0; }, submitForm() { if (this.validateForm()) { // Simulate form submission setTimeout(() =&gt; { alert('Form submitted successfully!'); this.open = false; this.resetForm(); }, 500); } }, resetForm() { this.name = ''; this.datetime = ''; this.message = ''; this.errors = {}; } }" x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100" x-transition:enter-start="opacity-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-end="opacity-0" x-transition:leave-start="opacity-100">
+  <div @click="open = false" class="fixed inset-0 bg-black bg-opacity-50">
+  </div>
+  <div class="flex items-center justify-center min-h-screen p-4">
+   <div @click.outside="open = false" class="relative bg-white rounded-xl shadow-2xl max-w-md w-full p-6" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 scale-100" x-transition:enter-start="opacity-0 scale-95" x-transition:leave="transition ease-in duration-200" x-transition:leave-end="opacity-0 scale-95" x-transition:leave-start="opacity-100 scale-100">
+    <div class="flex justify-between items-center mb-6">
+     <h2 class="text-xl font-bold text-gray-800">
+      <span class="hoverable-mark" data-modal-type="text" id="7-price-5">
+       Pilih
+      </span>
+      <span class="font-extrabold" x-text="plans[idx]['name']">
+      </span>
+     </h2>
+     <button @click="open = false" class="text-gray-500 hover:text-gray-700 transition duration-200 cursor-pointer">
+      <i class="fas fa-times text-xl">
+      </i>
+     </button>
+    </div>
+    <form @submit.prevent="submitForm()" class="space-y-4">
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="name">
+       Nama
+      </label>
+      <div class="relative">
+       <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <i class="fas fa-user text-gray-400">
+        </i>
+       </div>
+       <input :class="errors.name ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-indigo-500'" class="pl-10 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 transition duration-200" id="name" placeholder="Masukkan Nama Anda" required type="text" x-model="name"/>
+      </div>
+      <p class="text-red-500 text-xs mt-1" x-show="errors.name" x-text="errors.name">
+      </p>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="datetime">
+       Pilih Tanggal &amp; Waktu Acara
+      </label>
+      <input class="w-full mt-2 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" id="datetime" name="datetime" required type="datetime-local"/>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="message">
+       Pesan Anda
+      </label>
+      <div class="w-full mt-2 px-3 py-2 bg-transparent outline-none border border-gray-300 focus:border-cyan-500 shadow-sm rounded-lg transition-colors" contenteditable="true">
+       Saya akan mengadakan acara pada tanggal tersebut, apakah masih tersedia?
+       <br/>
+       <span class="font-extrabold" x-text="plans[idx]['name']">
+       </span>
+       :
+       <br/>
+       <span x-text="plans[idx]['desc']">
+       </span>
+       <br/>
+       <span class="font-extrabold">
+        Menu :
+       </span>
+       <br/>
+       <span x-text="plans[idx]['features']">
+       </span>
+       <br/>
+       <ul>
+        <template :key="line" x-for="line in plans[idx]['features'].split(',')">
+         <li x-text="line">
+         </li>
+        </template>
+       </ul>
+      </div>
+     </div>
+     <div class="pt-2">
+      <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition duration-200 flex items-center justify-center cursor-pointer" type="submit">
+       <i class="fas fa-user-plus mr-2">
+       </i>
+       Kirim
+      </button>
+     </div>
+    </form>
+   </div>
+  </div>
+ </div>
+</section>
+{% endblock %}
+{% block faq %}
+<section id="faq" x-data="{ selectedFaq: null, faqs: [ { q: 'What are some random questions to ask?', a: 'That\'s exactly the reason we created this random question generator. There are hundreds of random questions to choose from so you\'re able to find the perfect random question.' }, { q: 'Do you include common questions?', a: 'This generator doesn\'t include most common questions. The thought is that you can come up with common questions on your own so most of the questions in this generator.' }, { q: 'Can I use this for 21 questions?', a: 'Yes! there are two ways that you can use this question generator depending on what you\'re after. You can indicate that you want 21 questions generated.' }, { q: 'Are these questions for girls or for boys?', a: 'The questions in this generator are gender neutral and can be used to ask either male of females (or any other gender the person identifies with).' }, { q: 'What do you wish you had more talent doing?', a: 'If you\'ve been searching for a way to get random questions, you\'ve landed on the correct webpage. We created the Random Question Generator to ask you as many random questions as your heart desires.' } ] }">
+ <div class="leading-relaxed max-w-screen-xl mt-12 mx-auto px-4 md:px-8 pb-12">
+  <div class="space-y-3 text-center">
+   <h1 class="text-3xl text-gray-800 font-semibold">
+    <span class="hoverable-mark" data-modal-type="text" id="8-faq-1">
+     Pertanyaan yang sering ditanyakan
+    </span>
+   </h1>
+   <p class="text-gray-600 max-w-lg mx-auto text-lg">
+    Answered all frequently asked questions, Still confused? feel free to contact us.
+   </p>
+  </div>
+  <div class="mt-14 max-w-2xl mx-auto">
+   <template :key="index" x-for="(item, index) in faqs">
+    <div @click="selectedFaq = selectedFaq === index ? null : index" class="space-y-3 mt-5 overflow-hidden border-b">
+     <h4 class="cursor-pointer pb-5 flex items-center justify-between text-lg text-gray-700 font-medium">
+      <span x-text="item.q">
+      </span>
+      <svg class="h-5 w-5 text-gray-500 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" x-show="selectedFaq === index" xmlns="http://www.w3.org/2000/svg">
+       <path d="M20 12H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+       </path>
+      </svg>
+      <svg class="h-5 w-5 text-gray-500 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" x-show="selectedFaq !== index" xmlns="http://www.w3.org/2000/svg">
+       <path d="M12 4v16m8-8H4" strokelinecap="round" strokelinejoin="round" strokewidth="2">
+       </path>
+      </svg>
+     </h4>
+     <div :style="{ maxHeight: selectedFaq === index ? '1000px' : '0px', opacity: selectedFaq === index ? 1 : 0, }" class="transition-[max-height,opacity] overflow-hidden duration-500 ease-in-out" x-ref="answerElRef">
+      <div>
+       <p class="text-gray-500 pb-4" x-text="item.a">
+       </p>
+      </div>
+     </div>
+    </div>
+   </template>
+  </div>
+ </div>
+</section>
+{% endblock %}
+{% block contact %}
+<section class="relative py-16 lg:py-28 bg-gray-900" id="contact">
+ <div class="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-lg space-y-3 mx-auto text-center mb-12">
+   <h3 class="text-sky-500 font-semibold">
+    <span class="hoverable-mark" data-modal-type="text" id="9-contact-1">
+     Kontak Kami
+    </span>
+   </h3>
+   <p class="text-white text-3xl font-semibold sm:text-4xl">
+    <span class="hoverable-mark" data-modal-type="text" id="9-contact-2">
+     Silahkan hubungi kami
+    </span>
+   </p>
+   <p class="text-gray-300">
+    <span class="hoverable-mark" data-modal-type="text" id="9-contact-3">
+     Kami senang mendapat kabar dari Anda, silahkan mengisi form di bawah ini
+    </span>
+   </p>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+   <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg h-full">
+    <form class="space-y-5" onsubmit="event.preventDefault()">
+     <div>
+      <label class="font-medium text-gray-700">
+       Nama
+      </label>
+      <input class="w-full mt-2 px-3 py-2 text-gray-700 bg-transparent outline-none border border-gray-300 focus:border-cyan-500 shadow-sm rounded-lg transition-colors" required type="text"/>
+     </div>
+     <div>
+      <label class="font-medium text-gray-700">
+       Telp. / Whatsapp
+      </label>
+      <input class="w-full mt-2 px-3 py-2 text-gray-700 bg-transparent outline-none border border-gray-300 focus:border-cyan-500 shadow-sm rounded-lg transition-colors" type="tel"/>
+     </div>
+     <div>
+      <label class="font-medium text-gray-700">
+       Pesan
+      </label>
+      <textarea class="w-full mt-2 h-36 px-3 py-2 resize-none appearance-none bg-transparent outline-none border border-gray-300 focus:border-cyan-500 shadow-sm rounded-lg transition-colors" required></textarea>
+     </div>
+     <button class="w-full px-4 py-3 text-white font-medium bg-sky-500 hover:bg-sky-600 active:bg-sky-700 rounded-lg duration-150 transition-colors">
+      Kirim
+     </button>
+    </form>
+   </div>
+   <div class="h-full flex flex-col">
+    <div class="map-container flex-grow border-2">
+     <iframe allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.800350188318!2d107.61015731431763!3d-6.907718169732153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e639b77db16d%3A0x7b8426c2b3c0e9d2!2sBandung%20City%2C%20West%20Java%2C%20Indonesia!5e0!3m2!1sen!2sus!4v1641234567890!5m2!1sen!2sus">
+     </iframe>
+    </div>
+    <div class="bg-gray-800 p-6 rounded-xl mt-6 lg:mt-8">
+     <h3 class="text-xl font-semibold text-white mb-4">
+      <span class="hoverable-mark" data-modal-type="text" id="9-contact-4">
+       Informasi Kontak
+      </span>
+     </h3>
+     <div class="space-y-3">
+      <div class="flex items-start">
+       <svg class="w-5 h-5 text-sky-500 mt-1 mr-3 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path clip-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" fill-rule="evenodd">
+        </path>
+       </svg>
+       <span class="text-gray-300">
+        <span class="hoverable-mark" data-modal-type="text" id="9-contact-5">
+         123 Business Avenue, Suite 100, City, State 12345
+        </span>
+       </span>
+      </div>
+      <div class="flex items-center">
+       <svg class="w-5 h-5 text-sky-500 mr-3 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z">
+        </path>
+       </svg>
+       <span class="text-gray-300">
+        +1 (555) 123-4567
+       </span>
+      </div>
+      <div class="flex items-center">
+       <svg class="w-5 h-5 text-sky-500 mr-3 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+        </path>
+        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z">
+        </path>
+       </svg>
+       <span class="text-gray-300">
+        <span class="hoverable-mark" data-modal-type="text" id="9-contact-6">
+         info@example.com
+        </span>
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+{% endblock %}

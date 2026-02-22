@@ -1,0 +1,1 @@
+import{_ as i}from"./q-BKZ00VYc.js";import{r as s,N as a}from"./q-DxS6npjT.js";const c=s(a(()=>i(()=>import("./q-DELwnPuL.js").then(t=>t.i),[]),"s_M7IYOv0Q12s")),p=({params:t})=>({title:(t.slug||"").split("-").map(e=>e.charAt(0).toUpperCase()+e.slice(1)).join(" ")||"Article Detail",meta:[{name:"description",content:"Read the full article"}]});export{c as default,p as head};
