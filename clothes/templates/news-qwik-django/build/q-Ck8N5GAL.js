@@ -1,0 +1,1 @@
+import{_ as t}from"./q-CZOPgReS.js";const o=[["/static/news-qwik-django/",[()=>t(()=>import("./q-C1JDx4Uw.js"),[])]],["static/news-qwik-django/detail/[slug]/",[()=>t(()=>import("./q-BqJKutLy.js"),[])]]],a=[];const e=!0;export{e as c,a as m,o as r};
