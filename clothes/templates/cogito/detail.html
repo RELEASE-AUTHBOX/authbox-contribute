@@ -1,6 +1,7 @@
 {% extends "cogito/base-detail.html" %}
 {% load static %}
 {% load thumbnail %}
+{% load humanize %}
 
 {% block title %}
 {{ name|title }} - {{ content_detail.title }}
@@ -101,7 +102,7 @@
                         <p class="font-normal text-xs">Terbit : {{ content_detail.created_at }} Wita</p>
                         <!-- WITA -->
                         <p class="font-normal text-xs">Baca : ±{{ content_detail.reading_time }} Menit</p>
-                        <p class="font-normal text-xs">Dilihat : {{ content_detail.current_hit_count|default:1 }} Kali
+                        <p class="font-normal text-xs">Dilihat : {{ content_detail.current_hit_count|default:1|intcomma }} Kali
                         </p>
                     </div>
                 </div>
@@ -324,14 +325,14 @@
                                                     dark:text-slate-50 relative" href="javascript:void(0)"
                                         title="Ubah Data Seksi">
 
-                                        Redaksi
+                                        {{i.categories.name}}
                                     </a>
                                     <span class="text-gray-200">|</span>
                                     <a class="inline-block text-xs text-gray-400 
                                                 dark:text-slate-50 relative" href="javascript:void(0)"
                                         title="Ubah Data Seksi">
 
-                                        23 menit lalu
+                                        {{i.created_at_str}}
                                     </a>
                                 </div>
                             </div>
@@ -520,7 +521,7 @@
                         <div class="mt-0">
                             <!-- <a class="inline-block text-lg font-bold dark:text-slate-50" href="#">Diskomdigi2</a> -->
                             <a class="inline-block text-xs text-gray-400 
-                                        dark:text-slate-50 " href="javascript:void(0)" title="Redaksi">
+                                        dark:text-slate-50 " href="javascript:void(0)" title="Kategori">
 
                                 {{i.categories.name}}
                             </a>
