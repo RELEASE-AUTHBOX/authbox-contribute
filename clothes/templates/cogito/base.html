@@ -1,1 +1,342 @@
-{% load static %} <!DOCTYPE html> <html lang=en  > <title>{% block title %}{% endblock %}</title> <meta charset=utf-8 > <meta name=viewport  content="width=device-width, initial-scale=1, shrink-to-fit=no"> <link rel=icon  href="{% static 'cogito/favicon.png' %}" type="image/x-icon"> <script> const userPreference = localStorage.getItem('theme'); if (userPreference === 'dark') { document.documentElement.classList.add('dark'); } else { document.documentElement.classList.remove('dark'); }; </script> <style> [x-cloak] { display: none !important; } </style> {% include 'cogito/snippets/style.html' %} {% block extra_head %}{% endblock %} <body class="relative light"> <div class="dark:bg-gray-900 dark:text-white text-gray-800 bg-white"> {% include 'cogito/snippets/nav.html' %} {% block content %}{% endblock %} <div class=pt-10 ></div> </div> {% include 'cogito/snippets/footer.html' %} {% include 'cogito/snippets/script.html' %} {% block extra_body %}{% endblock %} <script> const parag = document.querySelectorAll('.ck-content p'); parag.forEach(element => { element.classList.add('pt-4'); }); const heading1 = document.querySelectorAll('.ck-content h1'); heading1.forEach(element => { element.classList.add('pt-4'); element.classList.add('text-3xl'); }); const heading2 = document.querySelectorAll('.ck-content h2'); heading2.forEach(element => { element.classList.add('pt-4'); element.classList.add('text-2xl'); }); const heading3 = document.querySelectorAll('.ck-content h3'); heading3.forEach(element => { element.classList.add('pt-4'); element.classList.add('text-xl'); }); const buttons = document.querySelectorAll('.theme-toggle'); buttons.forEach(button => { button.addEventListener('click', function() { console.log('Button clicked!', this.textContent); var currentTheme = document.documentElement.classList.contains("dark"); if (currentTheme) { document.documentElement.classList.remove('dark'); localStorage.setItem('theme', 'light'); } else { document.documentElement.classList.add('dark'); localStorage.setItem('theme', 'dark'); } }); }); function copyToClipboard() { const url = window.location.href; navigator.clipboard.writeText(url).then(() => { console.log('URL copied to clipboard!'); alert('URL copied to clipboard!'); }).catch(err => { console.error('Failed to copy URL: ', err); }); }; </script>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+    <!-- Tambahan ini dari update error 404 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <!--Favicon-->
+    <link rel="icon" href="{% static 'cogito/favicon.png' %}" type="image/x-icon">
+
+    <!-- <script>
+        // console.log('theme before', localStorage.theme);
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        // document.documentElement.setAttribute('data-theme', targetTheme)
+        // document.documentElement.classList.toggle(
+        //     "dark",
+        //     localStorage.theme === "dark" ||
+        //         (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+        // );
+        // console.log('=', localStorage.theme);
+        // console.log('=', localStorage);
+        // console.log('=', window.matchMedia("(prefers-color-scheme: dark)"));
+        
+
+        // if (localStorage.theme === "dark" ||
+        //     (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) 
+        //     document.documentElement.setAttribute('data-theme', 'dark');
+        // else
+        //     document.documentElement.setAttribute('data-theme', 'light');
+
+        // var storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        // if (storedTheme)
+        //     document.documentElement.setAttribute('data-theme', storedTheme)
+
+    
+        // console.log('theme after', localStorage.theme);
+    </script> -->
+    <script>
+        // var currentTheme = document.documentElement.classList.contains("dark");            
+        // console.log('currTheme', currentTheme);
+
+        // if (currentTheme) {
+        //     document.documentElement.classList.remove('dark');
+        //     localStorage.theme = "light";
+        // } 
+        // else {
+        //     document.documentElement.classList.add('dark');
+        //     localStorage.theme = "dark";
+        // }
+        
+        // Gak usah pakai setting preference (langsung set detail light)
+        const userPreference = localStorage.getItem('theme');
+        // console.log('userPreference', userPreference);
+        // if (!userPreference)
+        //     console.log('userPreference', 'false or none');
+        // else
+        //     console.log('userPreference', userPreference);
+
+        // const prefersDark = window.matchMedia(
+        //     '(prefers-color-scheme: dark)',
+        // ).matches;
+
+        // if (userPreference === 'dark' || (!userPreference && prefersDark)) {                        
+        if (userPreference === 'dark') {   
+            // console.log('Theme', 'kondisi if');
+            document.documentElement.classList.add('dark');            
+        } else {
+            // console.log('Theme', 'kondisi else');
+            document.documentElement.classList.remove('dark');
+            // Kondisi awal, pertama kali buka cogito
+            // const currentTheme = document.documentElement.classList.contains("dark");            
+            // if (!currentTheme) {
+            //     document.documentElement.classList.remove('dark');                
+            //     localStorage.setItem('theme', 'light');
+            // } 
+            // else {
+            //     document.documentElement.classList.add('dark');                
+            //     localStorage.setItem('theme', 'dark');
+            // }
+        };
+
+        
+
+    </script>
+    
+    <style>
+        [x-cloak] { 
+            display: none !important;
+        }    
+    </style>
+
+
+    {% include 'cogito/snippets/style.html' %}
+    {% block extra_head %}{% endblock %}      
+</head>
+<body class="relative light"> 
+    <!-- 
+    {% comment %}
+        {{request.LANGUAGE_CODE}} 
+    {% endcomment %}
+    -->
+  <!-- nav bar -->
+  <!--  
+  Beranda
+  Latest News
+  Periksa Fakta
+  News
+    Flash News
+    Perspektif
+    Wawancara Khusus
+  Bisnis
+    Insider
+    Side Job
+  Contact Us
+  -->
+  <!-- w-[calc(100%-2rem)]  lg:max-w-6xl-->
+  <!-- x-data="{isOpen : false}" -->
+   <!-- p-2 md:p-3 -translate-x-1/2 left-1/2  z-99-->
+    <!--  flex-row flex-nowrap  md:flex-row p-2 md:p-3-->
+    <!-- fixed w-full h-16 top-0 left-0 
+            flex items-center z-50 justify-between 
+            bg-slate-50/90 backdrop-blur-sm shadow-lg px-4
+            dark:bg-gray-800/90 dark:border-b dark:border-gray-600 -->
+      
+    <!--dark:bg-neutral dark:text-neutral-content  -->
+    <div class="dark:bg-gray-900 dark:text-white text-gray-800 bg-white">
+
+        {% include 'cogito/snippets/nav.html' %}
+
+        {% block content %}{% endblock %}
+        
+        <div class="pt-10"></div>
+    </div>
+
+    {% include 'cogito/snippets/footer.html' %}
+
+    <!-- 
+    1. Berita
+    2. Ulasan Mendalam
+    3. Politik
+    4. Ekonomi
+    5. Lingkungan
+    6. Pariwisata, Seni & budaya
+    7. Opini 
+    -->
+    <!-- xs sm md lg xl xxl -->
+    <!-- <script>
+        const container = document.getElementById('nav-container');
+        const button4 = document.getElementById('button-4');
+        
+        function checkOverflow() {
+            if (container.scrollWidth > container.clientWidth) {
+                button4.classList.add('hidden');
+            } else {
+                button4.classList.remove('hidden');
+            }
+        }
+        
+        // Check on load and resize
+        window.addEventListener('load', checkOverflow);
+        window.addEventListener('resize', checkOverflow);
+    </script> -->
+
+    {% include 'cogito/snippets/script.html' %}    
+    {% block extra_body %}{% endblock %}  
+
+    <script>
+        // Check and apply the user's stored preference or the system preference on page load
+        // if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        // // document.documentElement.classList.add('dark');
+        //     document.body.classList.add('dark');
+        //         // document.documentElement.setAttribute('data-theme', 'dark');
+        //     // toggleTheme('dark');
+            
+        // } else {
+        //     document.documentElement.classList.remove('dark');
+        //         // document.documentElement.setAttribute('data-theme', 'light');
+        //     // toggleTheme('light');
+            
+        // };
+        // localStorage.theme = 'light';
+
+        // // User actions to explicitly choose themes
+        // function toggleDarkMode(isDark) {
+        //     // alert('enter');
+        //     localStorage.theme = isDark ? 'dark' : 'light'; // Save preference
+        //     document.documentElement.classList.toggle('dark', isDark);
+        //     // document.documentElement.setAttribute('data-theme', 'dark');
+        //     // alert('toggle');
+        // };
+
+        // var element = document.getElementsByClassName("ck-content");
+        // if (element) {
+        //     const paragraphs = element.getElementsByTagName('p');
+        //     console.log(paragraphs);
+            
+        //     paragraphs.forEach(paragraph => {
+        //         paragraph.classList.add('p-4');
+        //     });
+        //     // console.log('element', element);
+        //     // element.classList.add("pt-4");
+        // };
+        // alert('oke');
+        // Get all elements with the specified tag name
+
+        // const elements = document.getElementsByClassName('ck-content');
+        // console.log(elements);
+        // console.log(document)
+        // const elements = document.querySelectorAll('.ck-content');
+
+        const parag = document.querySelectorAll('.ck-content p');
+        // Loop through the elements and do something
+        parag.forEach(element => {
+            // console.log(element.textContent); // Example: Log the text content of each element
+            element.classList.add('pt-4');
+        });
+
+        const heading1 = document.querySelectorAll('.ck-content h1');
+        // Loop through the elements and do something
+        heading1.forEach(element => {
+            // console.log(element.textContent); // Example: Log the text content of each element
+            element.classList.add('pt-4');
+            element.classList.add('text-3xl');
+        });
+
+        const heading2 = document.querySelectorAll('.ck-content h2');
+        // Loop through the elements and do something
+        heading2.forEach(element => {
+            // console.log(element.textContent); // Example: Log the text content of each element
+            element.classList.add('pt-4');
+            element.classList.add('text-2xl');
+        });
+
+        const heading3 = document.querySelectorAll('.ck-content h3');
+        // Loop through the elements and do something
+        heading3.forEach(element => {
+            // console.log(element.textContent); // Example: Log the text content of each element
+            element.classList.add('pt-4');
+            element.classList.add('text-xl');
+        });
+
+        // Example: Get all <p> elements
+        // const paragraphs = elements.getElementsByTagName('p');
+        // const heading1 = elements.getElementsByTagName('h1');
+        // const heading2 = elements.getElementsByTagName('h2');
+        // const heading3 = elements.getElementsByTagName('h3');
+
+        // Loop through the elements
+        // for (let i = 0; i < paragraphs.length; i++) {
+        //     // console.log(paragraphs[i].textContent);
+        //     paragraphs[i].classList.add('pt-2');
+        // };
+        // for (let i = 0; i < heading1.length; i++) {
+        //     // console.log(paragraphs[i].textContent);
+        //     heading1[i].classList.add('pt-4');
+        //     heading1[i].classList.add('text-3xl');
+        // };
+        // for (let i = 0; i < heading2.length; i++) {
+        //     // console.log(heading1[i].textContent);
+        //     heading2[i].classList.add('pt-4');
+        //     heading2[i].classList.add('text-2xl');
+        // };
+        // for (let i = 0; i < heading3.length; i++) {
+        //     // console.log(paragraphs[i].textContent);
+        //     heading3[i].classList.add('pt-4');
+        //     heading3[i].classList.add('text-xl');
+        // };    
+        
+        // var toggle = document.getElementById("theme-toggle");
+
+        // var storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        // if (storedTheme)
+        //     document.documentElement.setAttribute('data-theme', storedTheme)
+
+    //   const userPreference = localStorage.getItem('theme');
+    //   const prefersDark = window.matchMedia(
+    //     '(prefers-color-scheme: dark)',
+    //   ).matches;
+    //   if (userPreference === 'dark' || (!userPreference && prefersDark)) {
+    //     document.documentElement.classList.add('dark');
+    //   } else {
+    //     document.documentElement.classList.remove('dark');
+    //   }
+        const buttons = document.querySelectorAll('.theme-toggle');
+
+        // Add click event to each button
+        buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            console.log('Button clicked!', this.textContent);
+            // Your click logic here
+            var currentTheme = document.documentElement.classList.contains("dark");            
+            // console.log('currTheme', currentTheme);
+
+            if (currentTheme) {
+                document.documentElement.classList.remove('dark');
+                // localStorage.theme = "light";
+                localStorage.setItem('theme', 'light');
+            } 
+            else {
+                document.documentElement.classList.add('dark');
+                // localStorage.theme = "dark";
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        });
+
+
+
+        // toggle.onclick = function() {
+        //     var currentTheme = document.documentElement.classList.contains("dark");            
+        //     // console.log('currTheme', currentTheme);
+
+        //     if (currentTheme) {
+        //         document.documentElement.classList.remove('dark');
+        //         // localStorage.theme = "light";
+        //         localStorage.setItem('theme', 'light');
+        //     } 
+        //     else {
+        //         document.documentElement.classList.add('dark');
+        //         // localStorage.theme = "dark";
+        //         localStorage.setItem('theme', 'dark');
+        //     }
+        // };
+
+        function copyToClipboard() {
+            const url = window.location.href; // Get the current URL
+            navigator.clipboard.writeText(url).then(() => {
+                console.log('URL copied to clipboard!');
+                alert('URL copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy URL: ', err);
+            });
+        };
+
+
+    </script>
+</body>
+</html>
