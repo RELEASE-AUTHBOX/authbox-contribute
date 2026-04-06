@@ -3,40 +3,40 @@
 
 
 {% block title %}
-    {{ name|title }} - Error 404 (Halaman Tidak Ditemukan)
+    {{ name|title }} - Error 500 (Kesalahan Server Internal)
 {% endblock %}
 
 {% block extra_head %}
   <style>
-    /* ── Scoped: only affects elements inside .fargo-404 ── */
-    .fargo-404 {
+    /* ── Scoped: only affects elements inside .fargo-500 ── */
+    .fargo-500 {
       height: 100vh;
       height: 100dvh;
       min-height: 480px;
+      {% comment %} margin: 0; {% endcomment %}
+      box-sizing: border-box;
       font-family: "Dosis", sans-serif;
       font-size: clamp(16px, 4vw, 32px);
       font-weight: 500;
       color: #5d7399;
-      {% comment %} margin: 0; {% endcomment %}
-      box-sizing: border-box;
       
       
     }
 
-    .fargo-404 .content {        
+    .fargo-500 .content {        
       padding-top: 200px;
       padding-bottom: -200px;
       height: 100%;
       position: relative;
       z-index: 1;
-      {% comment %} background-color: #d2e1ec; {% endcomment %}
-      background-color: #e8f2f6;
-      background-image: linear-gradient(to bottom, #bbcfe1 0%, #e8f2f6 80%);
+      {% comment %} background-color: #f0e8e8; {% endcomment %}
+      background-color: #f6eeee;
+      background-image: linear-gradient(to bottom, #e8c4c4 0%, #f6eeee 80%);
       overflow: hidden;
       
     }
 
-    .fargo-404 .snow {
+    .fargo-500 .snow {
       position: absolute;
       top: 0;
       left: 0;
@@ -45,14 +45,14 @@
       margin: 100px 0 -100px 0;
     }
 
-    .fargo-404 .main-text {
+    .fargo-500 .main-text {
       padding: 8vh 20px 0 20px;
       text-align: center;
       line-height: 1.6em;
       font-size: clamp(18px, 5vw, 5vh);
     }
 
-    .fargo-404 .home-link {
+    .fargo-500 .home-link {
       font-size: 0.6em;
       font-weight: 400;
       color: inherit;
@@ -60,21 +60,21 @@
       opacity: 0.6;
       border-bottom: 1px dashed rgba(93, 115, 153, 0.5);
     }
-    .fargo-404 .home-link:hover {
+    .fargo-500 .home-link:hover {
       opacity: 1;
     }
 
-    .fargo-404 .ground {
+    .fargo-500 .ground {
       height: 160px;
       width: 100%;
       position: absolute;
       bottom: 0;
       left: 0;
-      background: #f6f9fa;
-      box-shadow: 0 0 10px 10px #f6f9fa;
+      background: #fdf6f6;
+      box-shadow: 0 0 10px 10px #fdf6f6;
     }
-    .fargo-404 .ground:before,
-    .fargo-404 .ground:after {
+    .fargo-500 .ground:before,
+    .fargo-500 .ground:after {
       content: "";
       display: block;
       width: 250px;
@@ -85,40 +85,40 @@
       background: transparent;
       transform: scaleX(0.2) rotate(45deg);
     }
-    .fargo-404 .ground:after {
+    .fargo-500 .ground:after {
       left: 50%;
       margin-left: -166.6666666667px;
-      box-shadow: -275px 325px 15px #b7c1d3, -565px 635px 15px #94a3be,
-        -855px 945px 15px #8193b2, -1155px 1245px 15px #97a6c0,
-        -1530px 1470px 15px #a1aec6, -1785px 1815px 15px #b0bccf,
-        -2145px 2055px 15px #8798b6, -2350px 2450px 15px #8496b4,
-        -2650px 2750px 15px #7e90b0, -2990px 3010px 15px #aab6cb,
-        -3315px 3285px 15px #8193b2, -3555px 3645px 15px #8798b6,
-        -3880px 3920px 15px #94a3be, -4210px 4190px 15px #8496b4,
-        -4475px 4525px 15px #9aa9c2, -4805px 4795px 15px #91a1bc;
+      box-shadow: -275px 325px 15px #d3b7b7, -565px 635px 15px #be9494,
+        -855px 945px 15px #b28181, -1155px 1245px 15px #c09797,
+        -1530px 1470px 15px #c6a1a1, -1785px 1815px 15px #cfb0b0,
+        -2145px 2055px 15px #b68787, -2350px 2450px 15px #b48484,
+        -2650px 2750px 15px #b07e7e, -2990px 3010px 15px #cbaaaa,
+        -3315px 3285px 15px #b28181, -3555px 3645px 15px #b68787,
+        -3880px 3920px 15px #be9494, -4210px 4190px 15px #b48484,
+        -4475px 4525px 15px #c29a9a, -4805px 4795px 15px #bc9191;
     }
-    .fargo-404 .ground:before {
+    .fargo-500 .ground:before {
       right: 50%;
       margin-right: -166.6666666667px;
-      box-shadow: 305px -295px 15px #a7b4c9, 570px -630px 15px #8a9bb8,
-        915px -885px 15px #b0bccf, 1210px -1190px 15px #9aa9c2,
-        1500px -1500px 15px #8193b2, 1850px -1750px 15px #9aa9c2,
-        2115px -2085px 15px #b7c1d3, 2430px -2370px 15px #8a9bb8,
-        2720px -2680px 15px #a4b1c8, 2995px -3005px 15px #aab6cb,
-        3255px -3345px 15px #a7b4c9, 3590px -3610px 15px #b4bed1,
-        3930px -3870px 15px #8e9eba, 4165px -4235px 15px #8193b2,
-        4490px -4510px 15px #8496b4, 4850px -4750px 15px #8e9eba;
+      box-shadow: 305px -295px 15px #c9a7a7, 570px -630px 15px #b88a8a,
+        915px -885px 15px #cfb0b0, 1210px -1190px 15px #c29a9a,
+        1500px -1500px 15px #b28181, 1850px -1750px 15px #c29a9a,
+        2115px -2085px 15px #d3b7b7, 2430px -2370px 15px #b88a8a,
+        2720px -2680px 15px #c8a4a4, 2995px -3005px 15px #cbaaaa,
+        3255px -3345px 15px #c9a7a7, 3590px -3610px 15px #d1b4b4,
+        3930px -3870px 15px #ba8e8e, 4165px -4235px 15px #b28181,
+        4490px -4510px 15px #b48484, 4850px -4750px 15px #ba8e8e;
     }
 
-    .fargo-404 .mound {
+    .fargo-500 .mound {
       margin-top: -80px;
       font-weight: 800;
       font-size: 180px;
       text-align: center;
-      color: #dd4040;
+      color: #c0392b;
       pointer-events: none;
     }
-    .fargo-404 .mound:before {
+    .fargo-500 .mound:before {
       content: "";
       display: block;
       width: 600px;
@@ -129,10 +129,10 @@
       top: 50px;
       z-index: 1;
       border-radius: 100%;
-      background-color: #e8f2f6;
-      background-image: linear-gradient(to bottom, #dee8f1, #f6f9fa 60px);
+      background-color: #f6eeee;
+      background-image: linear-gradient(to bottom, #f1dee8, #fdf6f6 60px);
     }
-    .fargo-404 .mound:after {
+    .fargo-500 .mound:after {
       content: "";
       display: block;
       width: 28px;
@@ -142,18 +142,18 @@
       margin-left: -150px;
       top: 68px;
       z-index: 2;
-      background: #dd4040;
+      background: #c0392b;
       border-radius: 100%;
       transform: rotate(-15deg);
-      box-shadow: -56px 12px 0 1px #dd4040, -126px 6px 0 2px #dd4040,
-        -196px 24px 0 3px #dd4040;
+      box-shadow: -56px 12px 0 1px #c0392b, -126px 6px 0 2px #c0392b,
+        -196px 24px 0 3px #c0392b;
     }
 
-    .fargo-404 .mound_text {
+    .fargo-500 .mound_text {
       transform: rotate(6deg);
     }
 
-    .fargo-404 .mound_spade {
+    .fargo-500 .mound_spade {
       display: block;
       width: 35px;
       height: 30px;
@@ -163,112 +163,112 @@
       margin-right: -250px;
       z-index: 0;
       transform: rotate(35deg);
-      background: #dd4040;
+      background: #c0392b;
     }
-    .fargo-404 .mound_spade:before,
-    .fargo-404 .mound_spade:after {
+    .fargo-500 .mound_spade:before,
+    .fargo-500 .mound_spade:after {
       content: "";
       display: block;
       position: absolute;
     }
-    .fargo-404 .mound_spade:before {
+    .fargo-500 .mound_spade:before {
       width: 40%;
       height: 30px;
       bottom: 98%;
       left: 50%;
       margin-left: -20%;
-      background: #dd4040;
+      background: #c0392b;
     }
-    .fargo-404 .mound_spade:after {
+    .fargo-500 .mound_spade:after {
       width: 100%;
       height: 30px;
       top: -55px;
       left: 0%;
       box-sizing: border-box;
-      border: 10px solid #dd4040;
+      border: 10px solid #c0392b;
       border-radius: 4px 4px 20px 20px;
     }
 
     /* ── Responsive: tablet (≤768px) ── */
     @media (max-width: 768px) {
-      .fargo-404 {
+      .fargo-500 {
         min-height: 360px;
       }
 
-      .fargo-404 .main-text {
+      .fargo-500 .main-text {
         padding: 6vh 16px 0 16px;
         font-size: clamp(18px, 5vw, 5vh);
         line-height: 1.5em;
       }
 
-      .fargo-404 .mound {
+      .fargo-500 .mound {
         font-size: 110px;
         margin-top: -55px;
       }
 
-      .fargo-404 .mound:before {
+      .fargo-500 .mound:before {
         width: 360px;
         height: 130px;
         margin-left: -180px;
         top: 35px;
       }
 
-      .fargo-404 .mound:after {
+      .fargo-500 .mound:after {
         top: 50px;
       }
 
-      .fargo-404 .mound_spade {
+      .fargo-500 .mound_spade {
         top: 38%;
         margin-right: -165px;
       }
 
-      .fargo-404 .ground {
+      .fargo-500 .ground {
         height: 100px;
       }
     }
 
     /* ── Responsive: phone (≤480px) ── */
     @media (max-width: 480px) {
-      .fargo-404 {
+      .fargo-500 {
         min-height: 320px;
       }
 
-      .fargo-404 .main-text {
+      .fargo-500 .main-text {
         padding: 5vh 12px 0 12px;
         font-size: clamp(16px, 5.5vw, 4.5vh);
         line-height: 1.4em;
       }
 
-      .fargo-404 .mound {
+      .fargo-500 .mound {
         font-size: 72px;
         margin-top: -40px;
       }
 
-      .fargo-404 .mound:before {
+      .fargo-500 .mound:before {
         width: 240px;
         height: 90px;
         margin-left: -120px;
         top: 25px;
       }
 
-      .fargo-404 .mound:after {
+      .fargo-500 .mound:after {
         top: 36px;
         margin-left: -90px;
       }
 
-      .fargo-404 .mound_spade {
+      .fargo-500 .mound_spade {
         width: 20px;
         height: 18px;
         top: 36%;
         margin-right: -110px;
       }
 
-      .fargo-404 .ground {
+      .fargo-500 .ground {
         height: 75px;
       }
 
-      .fargo-404 .ground:before,
-      .fargo-404 .ground:after {
+      .fargo-500 .ground:before,
+      .fargo-500 .ground:after {
         width: 160px;
         height: 160px;
         top: -40px;
@@ -279,15 +279,15 @@
 
 
 {% block error-page %}
-  <div class="fargo-404">
+  <div class="fargo-500">
     <div class="content">
       <canvas class="snow" id="snow"></canvas>
       <div class="main-text">
-        <h1>Ups!<br/>Halaman yang Anda cari tidak ditemukan...</h1><a class="home-link" href="/">Kembali ke Beranda?</a>
+        <h1>Aduh!<br/>Terjadi kesalahan pada server kami...</h1><a class="home-link" href="/">Kembali ke Beranda?</a>
       </div>
       <div class="ground">
         <div class="mound">
-          <div class="mound_text">404</div>
+          <div class="mound_text">500</div>
           <div class="mound_spade"></div>
         </div>
       </div>
@@ -344,7 +344,7 @@
 
         function updateParticles() {
           ctx.clearRect(0, 0, width, height);
-          ctx.fillStyle = "#f6f9fa";
+          ctx.fillStyle = "#fdf6f6";
 
           particles.forEach(function (particle) {
             particle.y += particle.dy;
