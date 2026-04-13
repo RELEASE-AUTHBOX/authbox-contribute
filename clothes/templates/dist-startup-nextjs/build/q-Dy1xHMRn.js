@@ -1,0 +1,1 @@
+import{_ as a}from"./q-BISu0Ete.js";import{p as e,a as t}from"./q-DrFPdy-W.js";const i=e(t(()=>a(()=>import("./q-LvV_x7Kl.js"),[]),"s_B0lqk5IDDy4")),r={title:"WebCraft - Jasa Pembuatan Website Profesional",meta:[{name:"description",content:"Jasa pembuatan website profesional dengan teknologi terkini, desain modern, dan harga terjangkau."}]};export{i as default,r as head};

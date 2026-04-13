@@ -1,0 +1,1 @@
+import{_ as t}from"./q-BISu0Ete.js";import{p as a,a as e}from"./q-DrFPdy-W.js";const s=a(e(()=>t(()=>import("./q-BJMSfSfl.js"),[]),"s_N4k0Zawx0Kw")),n=[{id:1,title:"Home",path:"/",newTab:!1},{id:2,title:"About",path:"/#about",newTab:!1},{id:3,title:"Pricing",path:"/#pricing",newTab:!1},{id:4,title:"Contact Us",path:"/#contact",newTab:!1}];export{s as T,n as m};

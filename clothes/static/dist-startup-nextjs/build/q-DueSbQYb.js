@@ -1,0 +1,1 @@
+import{_ as t}from"./q-BISu0Ete.js";const s=()=>t(()=>import("./q-DVrzb5Hx.js"),[]),o=[["/static/dist-startup-nextjs/",[s,()=>t(()=>import("./q-XyQUDgqv.js"),[])]],["static/dist-startup-nextjs/signin/",[s,()=>t(()=>import("./q-CNPaicvM.js"),[])]]],r=[];const a=!0;export{a as c,r as m,o as r};

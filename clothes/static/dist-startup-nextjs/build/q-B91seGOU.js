@@ -1,0 +1,1 @@
+import{h as e}from"./q-DrFPdy-W.js";import{g as h}from"./q-DrFPdy-W.js";const n=()=>{const[t]=e(),o=document.getElementById(t);o&&o.scrollIntoView({behavior:"smooth"})};export{h as _hW,n as s_10PWGsf4ht0};
