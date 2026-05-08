@@ -1,0 +1,142 @@
+{% extends "smart-admin-2/base-crud.html" %}
+{% load static %}
+{% load menu_tags %}
+{% load crispy_forms_tags %}
+
+{% block breadcrumb %}
+    <div id="ribbon">
+
+        <span class="ribbon-button-alignment"> 
+            <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true">
+                <i class="fa fa-refresh"></i>
+            </span> 
+        </span>
+
+        <!-- breadcrumb -->
+        <ol class="breadcrumb">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="{% url 'application' %}">Application</a></li>
+            {% for i in my_active %}
+                <li>{{i}}</li>
+            {% endfor %}
+            <li>Info Konten</li>
+        </ol>
+        <!-- end breadcrumb -->
+
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <form method="post">
+        {% csrf_token %}
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- col -->
+            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                <h1 class="page-title txt-color-blueDark">
+                    {% for i in my_menu %}
+                        {% if i.name in my_active %}
+                            <i class="fa-fw fa {{ i.icon }}"></i>
+                        {% endif %}
+                    {% endfor %}
+                    {% for i in my_active %}
+                        {% if forloop.last %}
+                            {{ i }}
+                        {% endif %}
+                    {% endfor %}
+                    <span>> Info Konten</span>
+                </h1>
+            </div>
+            <!-- end col -->
+
+            <!-- right side -->
+            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+                <ul id="sparks">
+                    <li class="sparks-info">
+                        <button type="submit" class="btn btn-primary" title="Simpan">
+                            <i class="fa fa-save"></i> Simpan
+                        </button>
+                        <a href="{% url 'application' %}" class="btn btn-danger" title="Batal">
+                            <i class="fa fa-times"></i> Batal
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- end col -->
+
+        </div>
+        <!-- end row -->
+
+        <!-- widget grid -->
+        <section id="widget-grid" class="">
+
+            <!-- row -->
+            <div class="row">
+
+                <!-- NEW WIDGET START -->
+                <article class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+
+                    <!-- Widget -->
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0"
+                            data-widget-colorbutton="false"
+                            data-widget-editbutton="false"
+                            data-widget-custombutton="false">
+
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-toggle-on"></i> </span>
+                            <h2>Setting Info Konten</h2>
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <input class="form-control" type="text">
+                            </div>
+                            <!-- end widget edit box -->
+
+                            <!-- widget content -->
+                            <div class="widget-body">
+
+                                <p class="text-muted">
+                                    Atur tampilan blok info konten (Penulis, Tanggal Terbit, Estimasi Baca, Jumlah Dilihat)
+                                    pada halaman detail berita.
+                                </p>
+
+                                {{ form|crispy }}
+
+                                <hr class="simple">
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-primary" title="Simpan">
+                                        <i class="fa fa-save"></i> Simpan
+                                    </button>
+                                    <a href="{% url 'application' %}" class="btn btn-danger" title="Batal">
+                                        <i class="fa fa-times"></i> Batal
+                                    </a>
+                                </div>
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+                    <!-- end widget -->
+
+                </article>
+                <!-- WIDGET END -->
+
+            </div>
+            <!-- end row -->
+
+        </section>
+        <!-- end widget grid -->
+
+        </form>
+    </div>
+{% endblock %}
