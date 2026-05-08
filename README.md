@@ -14,3 +14,11 @@ repository ini tidak dapat digunakan tanpa repository master, jadi untuk mulai m
 
 # Kunjungi website resmi kami 
 [AUTHBOX.web.id](https://authbox.web.id)
+
+
+# How to use
+To hide the block: create a GlobalSetting record in the admin panel:
+
+name = 4 (Content Meta Info)
+value = hide
+To show the block (default): no record needed, or set any value other than 'hide' (e.g., show).

@@ -94,19 +94,21 @@
                         </div>
                     </div>
                 </div> -->
-            <div class="md:w-1/5 w-full  text-right   ">
+            {% if CONTENT_META != 'hide' %}
+
+            <div class="md:w-1/5 w-full  text-right">
                 <div class="flex flex-col  h-full">
                     <div class="flex-1 "></div>
                     <div class=" ">
                         <p class="font-normal text-xs">Oleh : {{ content_detail.admin.name|default:content_detail.admin }}</p>
-                        <p class="font-normal text-xs">Terbit : {{ content_detail.created_at }} Wita</p>
-                        <!-- WITA -->
+                        <p class="font-normal text-xs">Terbit : {{ content_detail.created_at }} Wita</p>                        
                         <p class="font-normal text-xs">Baca : ±{{ content_detail.reading_time }} Menit</p>
                         <p class="font-normal text-xs">Dilihat : {{ content_detail.current_hit_count|default:1|intcomma }} Kali
                         </p>
                     </div>
                 </div>
             </div>
+            {% endif %}
             <!-- <div class="w-full  text-right items-end pt-2"> -->
             <div class="w-full flex justify-end items-center pt-4 gap-1 ">
                 Share:
