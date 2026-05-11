@@ -4,13 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Lombok Biking Tour{% endblock %}</title>
+    <title>{% block title %}{{name|title}}{% endblock %}</title>
     
     <!-- Meta Tags -->
-    <meta property="og:title" content="Lombok Biking Tour - Explore Lombok on Two Wheels">
-    <meta property="og:description" content="Experience the best biking adventures in Lombok with professional guides and top-quality equipment. Discover scenic routes and beautiful landscapes.">
-    <meta property="og:image" content="{% static 'lombok-biking-tour/assets/themes/img/Logo.png' %}">
-    <meta property="og:type" content="website">
+    {% if agency_meta %}
+        <meta property="og:url" content="{{agency_meta.url}}">    
+        <meta property="og:title" content="{{agency_meta.title}}">         
+        <meta property="og:description" content="{{agency_meta.description}}">                  
+        <meta property="og:type" content="{{agency_meta.get_web_type_display}}" /> 
+    
+        {% if agency_meta.file_path %}
+        <meta property="og:image" content="{{agency_meta.file_path}}">
+        {% else %}
+        <meta property="og:image" content="{{agency_meta.url}}/media/{{logo_top_normal.file_path}}">
+        {% endif %}
+
+        <meta property="og:image:type" content="{{agency_meta.get_image_type_display}}" />  
+        <meta property='og:site_name' content='{{agency_meta.name}}' />  
+        <meta property='og:locale' content='{{agency_meta.get_locale_display}}' />
+        <meta property='og:locale:alternate' content='{{agency_meta.get_locale_alternate_display}}' />                        
+        
+        <meta property="twitter:domain" content="{{agency_meta.name}}">        
+        <meta property="twitter:url" content="{{agency_meta.url}}">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{agency_meta.title}}">
+        <meta name="twitter:description" content="{{agency_meta.description}}">
+        
+        {% if agency_meta.file_path %}
+        <meta name="twitter:image" content="{{agency_meta.file_path}}">
+        {% else %}
+        <meta name="twitter:image" content="{{agency_meta.url}}/media/{{logo_top_normal.file_path}}">
+        {% endif %}
+    {% endif %}
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -72,36 +97,36 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
     {% block head %}{% endblock %}
 </head>
-<body class="font-sans text-gray-800 antialiased overflow-x-hidden" id="page-top" x-data="{ scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 50)">
+<body class="font-sans text-gray-800 antialiased overflow-x-hidden" id="page-top" x-data="{ scrolled: (window.pageYOffset > 50) }" @scroll.window="scrolled = (window.pageYOffset > 50)">
 {% block content %}
     
     <nav id="mainNav"
         x-data="{ mobileMenuOpen: false }" 
         :class="{ 'bg-white shadow-md py-2': scrolled, 'bg-transparent py-4 text-white': !scrolled }"
-        class="fixed top-0 w-full z-50 transition duration-300">
+        class="fixed top-0 w-full z-50 transition duration-300 bg-transparent py-4 text-white">
         
         <div class="container mx-auto px-6 md:px-12 max-w-6xl">
             <div class="flex justify-between items-center">
                 
                 <!-- Brand -->
-                <a href="#" class="flex items-center gap-2 font-heading font-bold text-xl transition-colors shrink-0"
+                <a href="#" class="flex items-center gap-2 font-heading font-bold text-xl transition-colors shrink-0 text-white"
                    :class="scrolled ? 'text-gray-900' : 'text-white'">
                    <img src="{% static 'lombok-biking-tour/assets/themes/img/Logo.png' %}" alt="Logo" class="h-10">
                    <span class="hidden sm:inline">Lombok Biking Tour</span>
                 </a>
                 
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded focus:outline-none" :class="scrolled ? 'text-gray-800' : 'text-white'">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded focus:outline-none text-white" :class="scrolled ? 'text-gray-800' : 'text-white'">
                     <i class="fa fa-bars text-2xl"></i>
                 </button>
                 
                 <!-- Desktop Nav -->
                 <div class="hidden md:flex space-x-6">
-                    <a href="#about" class="text-sm font-semibold uppercase tracking-wider hover:text-primary transition-colors" :class="scrolled ? 'text-gray-700' : 'text-white/80'">About</a>
-                    <a href="#package" class="text-sm font-semibold uppercase tracking-wider hover:text-primary transition-colors" :class="scrolled ? 'text-gray-700' : 'text-white/80'">Package</a>
-                    <a href="#galery" class="text-sm font-semibold uppercase tracking-wider hover:text-primary transition-colors" :class="scrolled ? 'text-gray-700' : 'text-white/80'">Gallery</a>
-                    <a href="#testimonials" class="text-sm font-semibold uppercase tracking-wider hover:text-primary transition-colors" :class="scrolled ? 'text-gray-700' : 'text-white/80'">Testimonials</a>
-                    <a href="#contact" class="text-sm font-semibold uppercase tracking-wider hover:text-primary transition-colors" :class="scrolled ? 'text-gray-700' : 'text-white/80'">Contact</a>
+                    <a href="#about" class="text-sm font-semibold uppercase tracking-wider hover:text-primary transition-colors text-white/80" :class="scrolled ? 'text-gray-700' : 'text-white/80'">About</a>
+                    <a href="#package" class="text-sm font-semibold uppercase tracking-wider hover:text-primary transition-colors text-white/80" :class="scrolled ? 'text-gray-700' : 'text-white/80'">Package</a>
+                    <a href="#galery" class="text-sm font-semibold uppercase tracking-wider hover:text-primary transition-colors text-white/80" :class="scrolled ? 'text-gray-700' : 'text-white/80'">Gallery</a>
+                    <a href="#testimonials" class="text-sm font-semibold uppercase tracking-wider hover:text-primary transition-colors text-white/80" :class="scrolled ? 'text-gray-700' : 'text-white/80'">Testimonials</a>
+                    <a href="#contact" class="text-sm font-semibold uppercase tracking-wider hover:text-primary transition-colors text-white/80" :class="scrolled ? 'text-gray-700' : 'text-white/80'">Contact</a>
                 </div>
             </div>
             
@@ -156,17 +181,17 @@
                     </div>
                     <!-- Slide Content -->
                     <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
-                        <h1 class="text-white text-4xl md:text-6xl font-bold uppercase mb-4 text-shadow" x-text="slide.title"></h1>
+                        <h1 class="text-white text-3xl md:text-5xl lg:text-6xl font-bold uppercase mb-4 text-shadow leading-tight" x-text="slide.title"></h1>
                         <hr class="w-16 border-primary border-t-4 mx-auto mb-6 rounded">
-                        <p class="text-white/80 text-lg md:text-xl font-light mb-8 max-w-2xl text-shadow" x-text="slide.desc"></p>
-                        <a href="#about" class="bg-primary hover:bg-primary-dark text-white font-bold py-4 px-8 rounded-full uppercase tracking-wider transition-colors shadow-lg">Read More</a>
+                        <p class="text-white/80 text-base md:text-xl font-light mb-8 max-w-2xl text-shadow" x-text="slide.desc"></p>
+                        <div class="flex items-center justify-center gap-4 sm:gap-8 md:gap-12 w-full max-w-md">
+                            <button @click.prevent="prevSlide()" class="text-white/70 hover:text-white transition-all text-2xl sm:text-3xl md:text-4xl focus:outline-none hover:scale-110 transform shrink-0"><i class="fa fa-chevron-left"></i></button>
+                            <a href="#about" class="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 md:py-4 md:px-10 text-sm md:text-base rounded-full uppercase tracking-wider transition-all shadow-lg hover:scale-105 transform whitespace-nowrap">Read More</a>
+                            <button @click.prevent="nextSlide()" class="text-white/70 hover:text-white transition-all text-2xl sm:text-3xl md:text-4xl focus:outline-none hover:scale-110 transform shrink-0"><i class="fa fa-chevron-right"></i></button>
+                        </div>
                     </div>
                 </div>
             </template>
-
-            <!-- Controls -->
-            <button @click="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 text-white/50 hover:text-white transition-colors text-4xl"><i class="fa fa-chevron-left"></i></button>
-            <button @click="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 text-white/50 hover:text-white transition-colors text-4xl"><i class="fa fa-chevron-right"></i></button>
 
             <!-- Indicators -->
             <div class="absolute bottom-8 left-0 right-0 flex justify-center space-x-3 z-20">
@@ -523,12 +548,12 @@
 
                     <!-- Info Sidebar -->
                     <div class="md:w-1/3 flex flex-col space-y-8 mt-4 md:mt-0">
-                        <a href="tel:+6281917269380" class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow border border-gray-100 hover:shadow-lg transition-shadow group">
+                        <a href="tel:+6282236876881" class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow border border-gray-100 hover:shadow-lg transition-shadow group">
                             <i class="fa fa-phone text-4xl text-primary mb-4 group-hover:scale-110 transition-transform"></i>
-                            <p class="text-gray-700 font-bold">+62 819 1726 9380</p>
+                            <p class="text-gray-700 font-bold">+62 822 3687 6881</p>
                         </a>
                         
-                        <a href="#" @click.prevent="window.open('https://wa.me/6281917269380', '_blank')" class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow border border-gray-100 hover:shadow-lg transition-shadow group">
+                        <a href="#" @click.prevent="window.open('https://wa.me/6282236876881', '_blank')" class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow border border-gray-100 hover:shadow-lg transition-shadow group">
                             <i class="fa fa-whatsapp text-4xl text-green-500 mb-4 group-hover:scale-110 transition-transform"></i>
                             <p class="text-gray-700 font-bold">WhatsApp Us</p>
                         </a>
@@ -643,7 +668,7 @@
                     
                     // Formulate WA text
                     const waText = `New Message from Website:\nName: ${this.formData.name}\nEmail: ${this.formData.email}\nSubject: ${this.formData.subject}\nMessage: ${this.formData.message}`;
-                    const waNumber = "6281917269380";
+                    const waNumber = "6282236876881";
                     
                     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
                     if (isMobile) {

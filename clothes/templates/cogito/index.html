@@ -69,7 +69,13 @@
                             </div>
                         </figure>                
                     </div>                
-                                
+
+                    
+                    {% for i in autoheadline %} 
+                        {{i}}<br>
+                    {% endfor %}
+                    count:{{autoheadline.count}}
+
                     <!-- Load real image border-r-1 border-b-1 -->
                     <!--  -->                
                     {% for i in autoheadline|slice:":1" %} 
@@ -150,8 +156,9 @@
             <!-- add two card here -->
             <div class="flex flex-row gap-8 mt-8">
                 {% for i in autoheadline|slice:"1:3" %}
-                <div class="w-1/2 h-80">
-                    <div class="relative w-full h-full rounded-lg overflow-hidden shadow-lg
+                <div class="w-1/2">
+                    <div class="relative flex flex-col w-full rounded-lg overflow-hidden shadow-lg
+                        bg-base-100 dark:bg-gray-800
                         transition-transform duration-500 hover:scale-101"
                         x-data="{ isLoaded: false }"
                         x-init="
@@ -165,18 +172,18 @@
                             {% endif %}
                         ">
 
-                        <!-- Skeleton: absolute overlay, hidden once loaded -->
+                        <!-- Skeleton: covers whole card while loading -->
                         <div x-show="!isLoaded"
                              class="absolute inset-0 z-10 bg-gray-200 dark:bg-gray-700 animate-pulse
-                                    flex items-center justify-center">
+                                    flex items-center justify-center rounded-lg">
                             <svg class="w-8 h-8 stroke-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20.5499 15.15L19.8781 14.7863C17.4132 13.4517 16.1808 12.7844 14.9244 13.0211C13.6681 13.2578 12.763 14.3279 10.9528 16.4679L7.49988 20.55M3.89988 17.85L5.53708 16.2384C6.57495 15.2167 7.09388 14.7059 7.73433 14.5134C7.98012 14.4396 8.2352 14.4011 8.49185 14.3993C9.16057 14.3944 9.80701 14.7296 11.0999 15.4M11.9999 21C12.3154 21 12.6509 21 12.9999 21C16.7711 21 18.6567 21 19.8283 19.8284C20.9999 18.6569 20.9999 16.7728 20.9999 13.0046C20.9999 12.6828 20.9999 12.3482 20.9999 12C20.9999 11.6845 20.9999 11.3491 20.9999 11.0002C20.9999 7.22883 20.9999 5.34316 19.8283 4.17158C18.6568 3 16.7711 3 12.9998 3H10.9999C7.22865 3 5.34303 3 4.17145 4.17157C2.99988 5.34315 2.99988 7.22877 2.99988 11C2.99988 11.349 2.99988 11.6845 2.99988 12C2.99988 12.3155 2.99988 12.651 2.99988 13C2.99988 16.7712 2.99988 18.6569 4.17145 19.8284C5.34303 21 7.22921 21 11.0016 21C11.3654 21 11.7021 21 11.9999 21ZM7.01353 8.85C7.01353 9.84411 7.81942 10.65 8.81354 10.65C9.80765 10.65 10.6135 9.84411 10.6135 8.85C10.6135 7.85589 9.80765 7.05 8.81354 7.05C7.81942 7.05 7.01353 7.85589 7.01353 8.85Z" stroke="stroke-current" stroke-width="1.6" stroke-linecap="round"></path>
                             </svg>
                         </div>
 
-                        <!-- Image: fills entire card -->
+                        <!-- Image area -->
                         <a href="/{{request.LANGUAGE_CODE}}/{{i.get_kind_display|lower}}/detail/{{i.slug}}"
-                           class="block w-full h-full">
+                           class="block w-full h-54 overflow-hidden flex-shrink-0">
                             {% if i.file_path %}
                                 <img
                                     src="/media/{{i.file_path}}"
@@ -184,18 +191,22 @@
                                     class="w-full h-full object-cover"
                                 />
                             {% else %}
-                                <div class="w-full h-full bg-gray-200 dark:bg-gray-700"></div>
+                                <div class="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-400 text-xs">
+                                    No Image
+                                </div>
                             {% endif %}
+                        </a>
 
-                            <!-- Title overlay: always in DOM, always inside card -->
-                            <div class="absolute bottom-0 left-0 right-0 z-20
-                                        bg-gradient-to-t from-black/80 via-black/50 to-transparent
-                                        px-3 pt-8 pb-3">
-                                <h3 class="text-white text-sm font-semibold leading-5 line-clamp-3">
-                                    {{i.title}}
-                                </h3>
-                                <p class="text-gray-300 text-xs mt-1">{{i.created_at_str}}</p>
-                            </div>
+                        <!-- Text area: below image, always in DOM -->
+                        <a href="/{{request.LANGUAGE_CODE}}/{{i.get_kind_display|lower}}/detail/{{i.slug}}"
+                           class="block px-4 py-6">
+                            <h3 class="text-sm font-semibold leading-5 line-clamp-2
+                                       text-gray-900 dark:text-gray-100">
+                                {{i.title}}
+                            </h3>
+                            <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                                {{i.created_at_str}}
+                            </p>
                         </a>
 
                     </div>
@@ -383,7 +394,7 @@
   <!-- Three card new-->
   <div class="flex flex-row flex-wrap justify-center lg:max-w-6xl lg:mx-auto 
    pt-8 mx-2 md:mx-10">
-   {% for i in autoheadline|slice:"2:5" %} 
+   {% for i in autoheadline|slice:"3:6" %} 
         <div class="w-full lg:w-1/3 items-center justify-center py-2 md:p-2">
             <div class="max-w-full h-auto mx-auto">
                 
@@ -790,7 +801,7 @@
 {% block news-plus %}
   <!-- News Plus -->
     <!-- Title -->
-    {% if autoheadline|slice:"5:10" %} 
+    {% if autoheadline|slice:"6:11" %} 
         <div class="max-w-6xl mx-auto lg:px-2 md:px-12 px-8 pt-8 md:pb-2 ">
             <div class="flex flex-row justify-between items-center">
                 <span class="font-bold text-xl">News Plus</span>
@@ -804,7 +815,7 @@
         <div class="w-full lg:w-1/2 items-center justify-center p-2 md:pt-6 ">
             <div class="max-w-full h-auto object-cover">
                 <!-- Left news -->
-                {% for i in autoheadline|slice:"5:6" %} 
+                {% for i in autoheadline|slice:"6:7" %} 
                     <div class="card bg-base-100 dark:bg-gray-800 dark:text-gray-300 text-gray-900 shadow-lg w-full md:-mt-2
                         transition-transform duration-500 hover:scale-102"
                         x-data="{ isLoaded: false }" 
@@ -910,7 +921,7 @@
             <!-- Right news -->
             <!-- Split to 4 -->
             <div class="flex flex-col md:flex-row flex-wrap lg:-mr-4 ">
-                {% for i in autoheadline|slice:"6:10" %} 
+                {% for i in autoheadline|slice:"7:11" %} 
                     <div class=" md:w-1/2 items-center justify-center md:p-2 py-2">
                         <div class="card bg-base-100 dark:bg-gray-800 dark:text-gray-300 text-gray-900 shadow-lg w-full
                             transition-transform duration-500 hover:scale-103 h-full "
