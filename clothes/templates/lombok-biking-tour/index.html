@@ -307,9 +307,8 @@
                 <!-- Static Packages List using Alpine for mock data -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <template x-for="item in packages" :key="item.id">
-                        <div class="bg-white rounded-lg overflow-hidden shadow-xl hover:-translate-y-1 transition-transform duration-300 cursor-pointer group flex flex-col"
-                             x-show="activeFilter === '0' || activeFilter === item.category"
-                             @click="openModal({ id: item.id, title: item.title, img: STATIC_THEMES_IMAGES + item.img, desc: item.desc })">
+                        <div class="bg-white rounded-lg overflow-hidden shadow-xl hover:-translate-y-1 transition-transform duration-300 group flex flex-col"
+                             x-show="activeFilter === '0' || activeFilter === item.category">
                              
                             <div class="relative h-60 overflow-hidden shrink-0">
                                 <img :src="STATIC_THEMES_IMAGES + item.img" :alt="item.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
@@ -318,7 +317,18 @@
                             <div class="p-6 text-left flex-grow flex flex-col">
                                 <h5 class="text-xl font-bold mb-3 font-heading text-gray-800" x-text="item.title"></h5>
                                 <div class="text-gray-600 text-sm mb-4 line-clamp-3" x-html="item.desc"></div>
-                                <button class="text-primary font-semibold hover:text-primary-dark uppercase text-sm mt-auto self-start">View Details <i class="fa fa-arrow-right ml-1"></i></button>
+                                
+                                <!-- Buttons -->
+                                <div class="mt-auto flex flex-wrap gap-2">
+                                    <button @click="openModal({ id: item.id, title: item.title, img: STATIC_THEMES_IMAGES + item.img, desc: item.desc })" 
+                                            class="bg-primary hover:bg-primary-dark text-white text-xs font-bold py-2 px-4 rounded transition-colors uppercase tracking-wide">
+                                        Quick View Modal
+                                    </button>
+                                    <a :href="`detail.html?slug=${item.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`" 
+                                       class="border border-primary text-primary hover:bg-primary hover:text-white text-xs font-bold py-2 px-4 rounded transition-colors uppercase tracking-wide inline-block text-center">
+                                        Detail Page
+                                    </a>
+                                </div>
                             </div>
                             <div class="bg-gray-50 p-4 border-t border-gray-100 flex items-center text-xs text-gray-500 text-left mt-auto">
                                 <i class="fa fa-clock-o mr-2"></i> Updated: recently
