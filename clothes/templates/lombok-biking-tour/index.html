@@ -402,8 +402,8 @@
                     <div class="p-4 border-t bg-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
                         <div class="flex items-center gap-2 w-full sm:w-auto">
                             <span class="text-sm font-bold whitespace-nowrap">Captcha:</span>
-                            <span id="modal-captcha-question" class="bg-primary text-white px-3 py-2 rounded-l text-sm font-bold"></span>
-                            <input type="number" id="modal-captcha" class="border p-2 rounded-r w-24 text-sm" placeholder="Result" required>
+                            <span id="modal-captcha-question" class="bg-primary text-white px-3 py-2 rounded-l text-sm font-bold tracking-widest italic select-none"></span>
+                            <input type="text" id="modal-captcha" class="border p-2 rounded-r w-24 text-sm" placeholder="Type text" required>
                             <input type="hidden" id="modal-captcha-answer">
                         </div>
                         <div class="flex gap-2 w-full sm:w-auto">
@@ -570,10 +570,10 @@
                             <div class="bg-gray-50 p-4 rounded-lg flex items-center gap-4">
                                 <label class="font-bold text-gray-700 whitespace-nowrap">Captcha:</label>
                                 <div class="flex items-center">
-                                    <span x-text="`${captcha.num1} + ${captcha.num2} =`" class="bg-primary text-white p-3 rounded-l font-bold w-24 text-center block"></span>
-                                    <input x-model.number="captcha.input" type="number" placeholder="?" required class="w-24 border border-gray-200 border-l-0 rounded-r p-3 focus:outline-none h-[48px]">
+                                    <span x-text="captcha.text" class="bg-primary text-white p-3 rounded-l font-bold w-24 text-center block tracking-widest italic select-none"></span>
+                                    <input x-model="captcha.input" type="text" placeholder="Text" required class="w-24 border border-gray-200 border-l-0 rounded-r p-3 focus:outline-none h-[48px]">
                                 </div>
-                                <span x-show="captchaError" class="text-red-500 text-sm font-bold ml-2">Incorrect!</span>
+                                <span x-show="captchaError" style="display:none;" class="text-red-500 text-sm font-bold ml-2">Incorrect!</span>
                             </div>
 
                             <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-lg transition-colors shadow-md flex justify-center items-center gap-2 text-lg focus:outline-none focus:ring-4 focus:ring-primary/30">
@@ -665,12 +665,15 @@
     
     <!-- Scripts -->
     <script>
-        // General mathematical Captcha logic for the Modals that aren't tied strictly to Alpine Form
+        // General text Captcha logic for the Modals that aren't tied strictly to Alpine Form
         function generateCaptcha() {
-            const n1 = Math.floor(Math.random() * 10) + 1;
-            const n2 = Math.floor(Math.random() * 10) + 1;
-            document.getElementById('modal-captcha-question').innerText = `${n1} + ${n2} =`;
-            document.getElementById('modal-captcha-answer').value = n1 + n2;
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+            let text = '';
+            for (let i = 0; i < 5; i++) {
+                text += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('modal-captcha-question').innerText = text;
+            document.getElementById('modal-captcha-answer').value = text;
             document.getElementById('modal-captcha').value = '';
         }
 
@@ -681,7 +684,7 @@
                     name: '', email: '', subject: '', message: ''
                 },
                 captcha: {
-                    num1: 0, num2: 0, input: null
+                    text: '', input: ''
                 },
                 captchaError: false,
                 
@@ -689,13 +692,17 @@
                     this.regenCaptcha();
                 },
                 regenCaptcha() {
-                    this.captcha.num1 = Math.floor(Math.random() * 10) + 1;
-                    this.captcha.num2 = Math.floor(Math.random() * 10) + 1;
-                    this.captcha.input = null;
+                    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+                    let text = '';
+                    for (let i = 0; i < 5; i++) {
+                        text += chars.charAt(Math.floor(Math.random() * chars.length));
+                    }
+                    this.captcha.text = text;
+                    this.captcha.input = '';
                     this.captchaError = false;
                 },
                 submitForm() {
-                    if (this.captcha.input !== (this.captcha.num1 + this.captcha.num2)) {
+                    if (this.captcha.input !== this.captcha.text) {
                         this.captchaError = true;
                         return;
                     }
