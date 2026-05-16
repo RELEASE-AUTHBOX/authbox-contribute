@@ -113,7 +113,7 @@
             <div class="flex justify-between items-center">
                 
                 <!-- Brand -->
-                <a href="#" class="flex items-center gap-2 font-heading font-bold text-xl transition-colors shrink-0 text-white"
+                <a href="/" class="flex items-center gap-2 font-heading font-bold text-xl transition-colors shrink-0 text-white"
                    :class="scrolled ? 'text-gray-900' : 'text-white'">
                    <img src="{% static 'lombok-biking-tour/assets/themes/img/Logo.png' %}" alt="Logo" class="h-10">
                    <span class="hidden sm:inline">{% if agency_meta %}{{agency_meta.name|title}}{% else %}Lombok Biking Tour{% endif %}</span>
@@ -159,7 +159,8 @@
         </div>
     </nav>
 
-    {{ hello_data|json_script:"hello-data" }}
+    {{ slideshow_data|json_script:"slideshow-data" }}
+    {{ news_data|json_script:"news-data" }}
 
     <!-- Main Content 
     {% comment %} [
@@ -175,7 +176,7 @@
             currentSlide: 0,
             timer: null,
             resumeTimer: null,
-            slides: JSON.parse(document.getElementById('hello-data').textContent),
+            slides: JSON.parse(document.getElementById('slideshow-data').textContent),
             nextSlide() { this.currentSlide = (this.currentSlide + 1) % this.slides.length },
             prevSlide() { this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length },
             startTimer() { this.timer = setInterval(() => { this.nextSlide() }, 5000) },
@@ -245,17 +246,15 @@
             </div>
         </section>
 
+        
+
         <!-- Package Section with Alpine.js filtering & Modal -->
         <section id="package" class="py-24 relative parallax-bg" style="background-image: url('{% static 'lombok-biking-tour/assets/themes/images/paralax.1.jpg' %}');" 
                  x-data="{ 
                     activeFilter: '0', 
                     packageModalOpen: false, 
                     modalData: null,
-                    packages: [
-                        { id: '101', category: '1', title: 'Rinjani Downhill Adventure', img: 'slider-image1.jpg', desc: '<p>A thrilling downhill ride from the slopes of Mount Rinjani through traditional villages and lush forests.</p>' },
-                        { id: '102', category: '2', title: 'Rice Terrace Half Day', img: 'slider-image2.jpg', desc: '<p>A leisurely morning ride through the terraced rice fields of central Lombok. Perfect for beginners and families.</p>' },
-                        { id: '103', category: '3', title: 'Beaches & Waterfalls Full Day', img: 'slider-image3.jpg', desc: '<p>Combine the best of both worlds. Explore spectacular waterfalls in the morning and cycle to pristine beaches in the afternoon.</p>' }
-                    ],
+                    packages: JSON.parse(document.getElementById('news-data').textContent),
                     openModal(pkg) { 
                         this.modalData = pkg; 
                         this.packageModalOpen = true; 
@@ -311,7 +310,7 @@
                              x-show="activeFilter === '0' || activeFilter === item.category">
                              
                             <div class="relative h-60 overflow-hidden shrink-0">
-                                <img :src="STATIC_THEMES_IMAGES + item.img" :alt="item.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <img :src="MEDIA_IMAGES + item.img" :alt="item.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 <span class="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded shadow" x-text="`#${item.id}`"></span>
                             </div>
                             <div class="p-6 text-left flex-grow flex flex-col">
@@ -320,24 +319,26 @@
                                 
                                 <!-- Buttons -->
                                 <div class="mt-auto flex flex-wrap gap-2">
-                                    <button @click="openModal({ id: item.id, title: item.title, img: STATIC_THEMES_IMAGES + item.img, desc: item.desc })" 
+                                    <button @click="openModal({ id: item.id, title: item.title, img: MEDIA_IMAGES + item.img, desc: item.desc })" 
                                             class="bg-primary hover:bg-primary-dark text-white text-xs font-bold py-2 px-4 rounded transition-colors uppercase tracking-wide">
                                         Quick View Modal
                                     </button>
-                                    <a :href="`detail.html?slug=${item.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`" 
+                                    <a :href="`/news/detail/${item.slug}/`"
                                        class="border border-primary text-primary hover:bg-primary hover:text-white text-xs font-bold py-2 px-4 rounded transition-colors uppercase tracking-wide inline-block text-center">
                                         Detail Page
                                     </a>
                                 </div>
                             </div>
                             <div class="bg-gray-50 p-4 border-t border-gray-100 flex items-center text-xs text-gray-500 text-left mt-auto">
-                                <i class="fa fa-clock-o mr-2"></i> Updated: recently
+                                <i class="fa fa-clock-o mr-2"></i> <span x-text="`Updated: ${new Date(item.date).toLocaleDateString()}`"></span>
                             </div>
                         </div>
                     </template>
                 </div>
 
             </div>
+
+            
 
             <!-- Alpine Package Modal -->
             <div x-show="packageModalOpen" style="display: none;" class="fixed inset-0 z-[100] flex items-center justify-center text-left" aria-modal="true">
