@@ -166,90 +166,152 @@
             }
         }
     }">
-        <section class="py-12">
-            <div class="container mx-auto px-6 md:px-12 max-w-4xl bg-white p-8 rounded-lg shadow-xl">
-                <a href="/" class="text-primary hover:text-primary-dark mb-6 inline-block font-bold">
-                    <i class="fa fa-arrow-left mr-2"></i> Back to Home
-                </a>
+        <section class="pt-2 pb-8">
+            <div class="container mx-auto px-6 md:px-12 max-w-6xl">
                 
-                {% if content_detail and content_detail.file_path %}
-                <img src="/media/{{ content_detail.file_path }}" class="w-full h-96 md:h-[500px] object-cover rounded-xl shadow-lg mb-8" alt="{{ content_detail.title }}">
-                {% else %}
-                <div class="w-full h-96 bg-gray-200 rounded-xl shadow-lg mb-8 flex items-center justify-center">
-                    <span class="text-gray-400 italic text-xl">Package Image</span>
-                </div>
-                {% endif %}
-
-                <div class="flex flex-col md:flex-row md:items-center gap-4 mb-6">
-                    <span class="bg-primary text-white text-sm font-bold px-4 py-2 rounded-lg shadow-md inline-block self-start md:self-auto">
-                        Package ID: #{% if content_detail %}{{ content_detail.id }}{% else %}???{% endif %}
-                    </span>
-                    <h1 class="text-3xl md:text-5xl font-bold font-heading m-0">
-                        {% if content_detail %}
-                            {{ content_detail.title }}
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Left Column (Content) -->
+                    <div class="lg:col-span-2 bg-white p-8 rounded-xl shadow-xl border-t-4 border-primary">
+                        
+                        <!-- Breadcrumb -->
+                        <nav class="flex text-sm text-gray-500 font-bold mb-8 border-b pb-4" aria-label="Breadcrumb">
+                            <ol class="inline-flex items-center space-x-1 md:space-x-3 w-full">
+                                <li class="inline-flex items-center">
+                                    <a href="/" class="hover:text-primary transition-colors flex items-center">
+                                        <i class="fa fa-home mr-2"></i> Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="flex items-center">
+                                        <i class="fa fa-chevron-right text-gray-400 text-[10px] mx-2"></i>
+                                        <a href="/#package" class="hover:text-primary transition-colors">Packages</a>
+                                    </div>
+                                </li>
+                                <li aria-current="page" class="truncate max-w-[150px] sm:max-w-xs">
+                                    <div class="flex items-center">
+                                        <i class="fa fa-chevron-right text-gray-400 text-[10px] mx-2"></i>
+                                        <span class="text-gray-800 truncate" x-text="pkgTitle ? pkgTitle : '{% if content_detail %}{{ content_detail.title }}{% else %}Detail{% endif %}'"></span>
+                                    </div>
+                                </li>
+                            </ol>
+                        </nav>
+                        
+                        {% if content_detail and content_detail.file_path %}
+                        <div class="relative mb-8">
+                            <img src="/media/{{ content_detail.file_path }}" class="w-full h-96 md:h-[500px] object-cover rounded-xl shadow-lg" alt="{{ content_detail.title }}">
+                            <span class="absolute top-4 right-4 bg-primary text-white text-sm font-bold px-4 py-2 rounded shadow-md">#{{ content_detail.id }}</span>
+                        </div>
                         {% else %}
-                            <span x-text="pkgTitle ? pkgTitle : 'Package Detail'"></span>
+                        <div class="relative mb-8">
+                            <div class="w-full h-96 bg-gray-200 rounded-xl shadow-lg flex items-center justify-center">
+                                <span class="text-gray-400 italic text-xl">Package Image</span>
+                            </div>
+                            <span class="absolute top-4 right-4 bg-primary text-white text-sm font-bold px-4 py-2 rounded shadow-md">#???</span>
+                        </div>
                         {% endif %}
-                    </h1>
-                </div>
-                <hr class="w-16 border-primary border-t-4 mb-8 rounded">
-                
-                <div class="prose max-w-none text-gray-700 mb-8 leading-relaxed">
-                    {% if content_detail %}
-                        {{ content_detail.content|safe }}
-                    {% else %}
-                        <p class="text-lg">This is the detail page for the package: <strong x-text="slug"></strong>.</p>
-                        <p>You can use Alpine.js to fetch the specific details for this slug from your database or an API endpoint, or populate it through Django context variables if you setup a Django View for this URL.</p>
-                    {% endif %}
-                </div>
 
-                <!-- Share options -->
-                <div class="mb-8 border-t pt-6">
-                    <p class="font-bold mb-4">Share this package:</p>
-                    <div class="flex flex-wrap gap-2">
-                        <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded text-sm transition-colors"><i class="fa fa-whatsapp mr-1"></i> WhatsApp</button>
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors"><i class="fa fa-facebook mr-1"></i> Facebook</button>
-                        <button class="bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded text-sm transition-colors"><i class="fa fa-twitter mr-1"></i> Twitter</button>
-                    </div>
-                </div>
-
-                <!-- Booking Form -->
-                <form @submit.prevent="submitForm()" class="bg-gray-50 p-6 rounded-lg shadow-inner text-left border border-gray-100" x-data="bookingForm()">
-                    <h5 class="font-bold text-lg mb-4 text-gray-800">Book This Package:</h5>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">Bike Type</label>
-                            <select x-model="formData.type" class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-white focus:ring-primary focus:border-primary">
-                                <option>Mountain Bike</option>
-                                <option>Road Bike</option>
-                                <option>Hybrid Bike</option>
-                                <option>E-Bike</option>
-                            </select>
+                        <div class="flex flex-col md:flex-row md:items-center gap-4 mb-6">
+                            <h1 class="text-3xl md:text-5xl font-bold font-heading m-0 text-gray-900">
+                                {% if content_detail %}
+                                    {{ content_detail.title }}
+                                {% else %}
+                                    <span x-text="pkgTitle ? pkgTitle : 'Package Detail'"></span>
+                                {% endif %}
+                            </h1>
                         </div>
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">Number of Bikes</label>
-                            <input x-model.number="formData.count" type="number" min="1" class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-white focus:ring-primary focus:border-primary">
+                        <hr class="w-16 border-primary border-t-4 mb-8 rounded">
+                        
+                        <div class="prose max-w-none text-gray-700 leading-relaxed">
+                            {% if content_detail %}
+                                {{ content_detail.content|safe }}
+                            {% else %}
+                                <p class="text-lg">This is the detail page for the package: <strong x-text="slug"></strong>.</p>
+                                <p>You can use Alpine.js to fetch the specific details for this slug from your database or an API endpoint, or populate it through Django context variables if you setup a Django View for this URL.</p>
+                            {% endif %}
                         </div>
-                    </div>
-                    <div class="mb-6">
-                        <label class="block text-sm font-bold text-gray-700 mb-1">Note</label>
-                        <textarea x-model="formData.note" class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-white focus:ring-primary focus:border-primary" rows="3" placeholder="Additional requirements..."></textarea>
                     </div>
 
-                    <div class="border-t pt-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <div class="flex items-center gap-2 w-full sm:w-auto">
-                            <span class="text-sm font-bold whitespace-nowrap text-gray-700">Captcha:</span>
-                            <span x-text="captcha.text" class="bg-primary text-white px-3 py-2 rounded-l text-sm font-bold text-center block tracking-widest italic select-none"></span>
-                            <input x-model="captcha.input" type="text" class="border p-2 rounded-r w-24 text-sm focus:outline-none focus:border-primary" placeholder="Type text" required>
-                            <span x-show="captchaError" style="display:none;" class="text-red-500 text-sm font-bold ml-2">Incorrect!</span>
+                    <!-- Right Column (Sidebar) -->
+                    <div class="space-y-6">
+                        
+                        <!-- Booking Form -->
+                        <div class="bg-white p-6 rounded-xl shadow-xl border-t-4 border-primary ">
+                            <h5 class="font-bold text-xl mb-6 text-gray-800 font-heading"><i class="fa fa-calendar-check-o text-primary mr-2"></i> Book This Package</h5>
+                            
+                            <form @submit.prevent="submitForm()" class="text-left" x-data="bookingForm()">
+                                <div class="space-y-4 mb-6">
+                                    <div>
+                                        <label class="block text-sm font-bold text-gray-700 mb-1">Bike Type</label>
+                                        <select x-model="formData.type" class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-gray-50 focus:bg-white focus:ring-primary focus:border-primary transition-colors">
+                                            <option>Mountain Bike</option>
+                                            <option>Road Bike</option>
+                                            <option>Hybrid Bike</option>
+                                            <option>E-Bike</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-gray-700 mb-1">Number of Bikes</label>
+                                        <input x-model.number="formData.count" type="number" min="1" class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-gray-50 focus:bg-white focus:ring-primary focus:border-primary transition-colors">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-gray-700 mb-1">Note</label>
+                                        <textarea x-model="formData.note" class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-gray-50 focus:bg-white focus:ring-primary focus:border-primary transition-colors" rows="3" placeholder="Additional requirements..."></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="border-t border-gray-100 pt-4 mb-6">
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Captcha Verification</label>
+                                    <div class="flex flex-col gap-2">
+                                        <div class="flex">
+                                            <span x-text="captcha.text" class="bg-primary text-white px-3 py-2 rounded-l text-sm font-bold text-center tracking-widest italic select-none w-24"></span>
+                                            <input x-model="captcha.input" type="text" class="border p-2 rounded-r w-full text-sm focus:outline-none focus:border-primary" placeholder="Type text" required>
+                                        </div>
+                                        <span x-show="captchaError" style="display:none;" class="text-red-500 text-sm font-bold">Incorrect captcha!</span>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="w-full py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors flex items-center justify-center gap-2 font-bold shadow-md uppercase tracking-wider">
+                                    <i class="fa fa-whatsapp text-xl"></i> Book via WhatsApp
+                                </button>
+                            </form>
                         </div>
-                        <div class="flex gap-2 w-full sm:w-auto">
-                            <button type="submit" class="w-full sm:w-auto px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded transition-colors flex items-center justify-center gap-2 text-sm font-bold shadow uppercase tracking-wider">
-                                <i class="fa fa-whatsapp"></i> Book via WhatsApp
-                            </button>
+                        
+                        <!-- Share Options -->
+                        <div class="bg-white p-6 rounded-xl shadow-xl border-t-4 border-primary" x-data="{ url: encodeURIComponent(window.location.href), title: encodeURIComponent(document.title) }">
+                            <h5 class="font-bold text-xl mb-4 text-gray-800 font-heading"><i class="fa fa-share-alt text-primary mr-2"></i> Share</h5>
+                            <div class="flex flex-col gap-3">
+                                <a :href="`https://api.whatsapp.com/send?text=${title}%20${url}`" target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-whatsapp mr-2"></i> Share on WhatsApp</a>
+                                <a :href="`https://www.facebook.com/sharer/sharer.php?u=${url}`" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-facebook mr-2"></i> Share on Facebook</a>
+                                <a :href="`https://twitter.com/intent/tweet?url=${url}&text=${title}`" target="_blank" class="w-full bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-twitter mr-2"></i> Share on Twitter</a>
+                            </div>
                         </div>
+
+                        <!-- Other Packages -->
+                        {% if random_paint %}
+                        <div class="bg-white p-6 rounded-xl shadow-xl border-t-4 border-primary">
+                            <h5 class="font-bold text-xl mb-4 text-gray-800 font-heading"><i class="fa fa-list-alt text-primary mr-2"></i> Other Packages</h5>
+                            <div class="flex flex-col gap-4">
+                                {% for item in random_paint|slice:":3" %}
+                                <a href="/{{ random_paint_kind }}/detail/{{ item.slug }}/" class="flex gap-3 items-start group hover:bg-gray-50 p-2 -mx-2 rounded-lg transition-colors">
+                                    {% if item.file_path %}
+                                    <img src="/media/{{ item.file_path }}" alt="{{ item.title }}" class="w-16 h-16 object-cover rounded shadow-sm group-hover:scale-105 transition-transform shrink-0">
+                                    {% else %}
+                                    <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center shadow-sm shrink-0">
+                                        <i class="fa fa-image text-gray-400"></i>
+                                    </div>
+                                    {% endif %}
+                                    <div class="flex-1 min-w-0">
+                                        <h6 class="font-bold text-sm text-gray-800 group-hover:text-primary transition-colors line-clamp-2">{{ item.title }}</h6>
+                                        <p class="text-xs text-gray-500 mt-1"><i class="fa fa-clock-o mr-1"></i> {{ item.created_at|date:"M d, Y" }}</p>
+                                    </div>
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
                     </div>
-                </form>
+                </div>
             </div>
         </section>
     </main>
