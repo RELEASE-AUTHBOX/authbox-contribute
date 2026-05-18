@@ -1,0 +1,45 @@
+{% load static %}
+    <footer class="bg-gray-100 py-16">
+        <div class="container mx-auto px-6 md:px-12 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 mt-8 lg:grid-cols-4 gap-8 mb-8">                
+                <div class="lg:col-span-2">
+                    <a href="#" class="flex items-center gap-3 font-heading font-bold text-xl mb-4 text-gray-800">                        
+                        <img src="{% static 'lombok-biking-tour/assets/themes/img/Logo.png' %}" alt="Logo" class="h-6">
+                        {% if agency_meta %}{{agency_meta.name|title}}{% else %}{{name|title}}{% endif %}
+                    </a>
+                    <p class="text-gray-500 max-w-md">Experience the best biking adventures in Lombok with our professional guides and top-quality equipment.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-heading font-bold uppercase mb-4 text-gray-800">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><a href="#" class="hover:text-primary transition-colors">Bike Tour</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Term of Use</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Payment</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-heading font-bold uppercase mb-4 text-gray-800">Follow Us</h4>
+                    <div class="flex gap-4">
+                        <a href="#" target="_blank" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-all shadow"><i class="fa fa-youtube-play"></i></a>
+                        <a href="#" target="_blank" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-all shadow"><i class="fa fa-facebook"></i></a>
+                        <a href="#" target="_blank" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-all shadow"><i class="fa fa-instagram"></i></a>
+                        <a href="#" target="_blank" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-all shadow"><i class="fa fa-twitter"></i></a>
+                    </div>
+                </div>                
+            </div>
+            
+            <div class="border-t border-gray-300 pt-8 pb-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p class="mb-4 md:mb-0">Copyright &copy; {{year}} - LombokBikingTour.com</p>
+                <div class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2">
+                    <span>Phone: {{phone}}</span>
+                    <span>WhatsApp: {{whatsapp}}</span>
+                    <span>Email: {{email}}</span>
+                    <span>Address:  {{address}}</span>
+                </div>
+            </div>
+        </div>
+    </footer>
