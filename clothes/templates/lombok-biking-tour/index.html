@@ -374,7 +374,7 @@
                                 </div>
                             </div>
                             <div class="bg-gray-50 p-4 border-t border-gray-100 flex items-center text-xs text-gray-500 text-left mt-auto">
-                                <i class="fa fa-clock-o mr-2"></i> <span x-text="`Updated: ${new Date(item.date).toLocaleDateString()}`"></span>
+                                <i class="fa fa-clock-o mr-2"></i> <span x-text="'Updated: ' + formatDate(item.updated_at)"></span>
                             </div>
                         </a>
                     </template>
@@ -692,6 +692,12 @@
     <!-- Scripts -->
     <script>
         // General text Captcha logic for the Modals that aren't tied strictly to Alpine Form
+        // Human-readable date formatter: e.g. "May 19, 2026"
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            return new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(dateStr));
+        }
+
         function generateCaptcha() {
             const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
             let text = '';
