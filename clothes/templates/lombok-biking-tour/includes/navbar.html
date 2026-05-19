@@ -14,20 +14,20 @@
                 
                 <!-- Brand -->
                 <a href="/" class="flex items-center gap-2 font-heading font-bold text-xl transition-colors shrink-0 {% if navbar_transparent %}text-white{% else %}text-gray-900{% endif %}"
-                   {% if navbar_transparent %}:class="scrolled ? 'text-gray-900' : 'text-white'"{% endif %}>
+                   {% if navbar_transparent %}:class="scrolled ? '!text-gray-900' : ''"{% endif %}>
                    <img src="{% static 'lombok-biking-tour/assets/themes/img/Logo.png' %}" alt="Logo" class="h-10">
                    <span>{% if agency_meta %}{{agency_meta.name|title}}{% else %}{{name|title}}{% endif %}</span>
                 </a>
                 
                 <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded focus:outline-none {% if navbar_transparent %}text-white{% else %}text-gray-800{% endif %}" {% if navbar_transparent %}:class="scrolled ? 'text-gray-800' : 'text-white'"{% endif %}>
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded focus:outline-none {% if navbar_transparent %}text-white{% else %}text-gray-800{% endif %}" {% if navbar_transparent %}:class="scrolled ? '!text-gray-800' : ''"{% endif %}>
                     <i class="fa fa-bars text-2xl"></i>
                 </button>
                 
                 <!-- Desktop Nav -->                
                 <div class="hidden md:flex space-x-6">
                     {% for i in my_menu %}
-                        <a href="{{i.link}}" class="text-sm font-semibold uppercase tracking-wider hover:text-primary transition-colors {% if navbar_transparent %}text-white/80{% else %}text-gray-600{% endif %}" {% if navbar_transparent %}:class="scrolled ? 'text-gray-700' : 'text-white/80'"{% endif %}>{{i.name}}</a>
+                        <a href="{% if pagetype == 'detail' %}/{% endif %}{{i.link}}" class="text-sm font-semibold uppercase tracking-wider hover:text-primary transition-colors {% if navbar_transparent %}text-white/80{% else %}text-gray-600{% endif %}" {% if navbar_transparent %}:class="scrolled ? '!text-gray-700' : ''"{% endif %}>{{i.name}}</a>
                     {% endfor %}
                 </div>
             </div>
@@ -44,7 +44,7 @@
                  class="md:hidden mt-4 bg-white rounded shadow-lg absolute left-4 right-4 text-gray-800 font-semibold" style="display: none;">
                 <div class="flex flex-col py-2">
                     {% for i in my_menu %}
-                        <a href="{{i.link}}" @click="mobileMenuOpen = false" class="px-4 py-2 hover:bg-gray-100 hover:text-primary">{{i.name}}</a>
+                        <a href="{% if pagetype == 'detail' %}/{% endif %}{{i.link}}" @click="mobileMenuOpen = false" class="px-4 py-2 hover:bg-gray-100 hover:text-primary">{{i.name}}</a>
                     {% endfor %}
                 </div>
             </div>
