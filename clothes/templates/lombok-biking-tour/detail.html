@@ -143,6 +143,7 @@
     <main class="pt-24 bg-gray-50 min-h-screen" x-data="{
         slug: new URLSearchParams(window.location.search).get('slug'),
         pkgTitle: '',
+        imageModalOpen: false,
         init() {
             if(this.slug) {
                 // Formatting slug back to title for display purposes
@@ -181,9 +182,13 @@
                         </nav>
                         
                         {% if content_detail and content_detail.file_path %}
-                        <div class="relative w-full aspect-video rounded-xl overflow-hidden mb-8 shadow-lg bg-gray-100">
-                            <img src="/media/{{ content_detail.file_path }}" class="w-full h-full object-cover" alt="{{ content_detail.title }}">
-                            <span class="absolute top-4 right-4 bg-primary text-white text-sm font-bold px-4 py-2 rounded shadow-md">#{{ content_detail.id }}</span>
+                        <div class="relative w-full aspect-video rounded-xl overflow-hidden mb-8 shadow-lg bg-gray-100 cursor-pointer group" @click="imageModalOpen = true">
+                            <img src="/media/{{ content_detail.file_path }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="{{ content_detail.title }}">
+                            <!-- Hover Overlay -->
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <i class="fa fa-search-plus text-white text-5xl drop-shadow-md"></i>
+                            </div>
+                            <span class="absolute top-4 right-4 bg-primary text-white text-sm font-bold px-4 py-2 rounded shadow-md z-10">#{{ content_detail.id }}</span>
                         </div>
                         {% else %}
                         <div class="relative w-full aspect-video rounded-xl overflow-hidden mb-8 shadow-lg bg-gray-200 flex items-center justify-center">
@@ -312,6 +317,20 @@
                 </div>
             </div>
         </section>
+
+        <!-- Fullscreen Image Modal -->
+        {% if content_detail and content_detail.file_path %}
+        <div x-show="imageModalOpen" 
+             x-transition.opacity.duration.300ms
+             style="display: none;" 
+             class="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-12 bg-black/95 backdrop-blur-sm" 
+             @keydown.escape.window="imageModalOpen = false">
+            <button @click="imageModalOpen = false" class="absolute top-6 right-6 text-white/70 hover:text-white text-4xl focus:outline-none z-10 transition-colors">
+                <i class="fa fa-times"></i>
+            </button>
+            <img src="/media/{{ content_detail.file_path }}" @click.outside="imageModalOpen = false" class="max-w-full max-h-full rounded shadow-2xl object-contain select-none" alt="{{ content_detail.title }}">
+        </div>
+        {% endif %}
     </main>
 
     {% include 'lombok-biking-tour/includes/footer.html' %}
