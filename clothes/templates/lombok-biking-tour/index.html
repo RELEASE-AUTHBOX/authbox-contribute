@@ -144,6 +144,7 @@
 
     {{ slideshow_data|json_script:"slideshow-data" }}
     {{ news_data|json_script:"news-data" }}
+    {{ categories_data|json_script:"categories-data" }}
 
     <!-- Main Content 
     {% comment %} [
@@ -238,6 +239,7 @@
                     packageModalOpen: false, 
                     modalData: null,
                     packages: JSON.parse(document.getElementById('news-data').textContent),
+                    categories: JSON.parse(document.getElementById('categories-data').textContent),
                     bookForm: { bikeType: 'Mountain Bike', bikeCount: 1, note: '' },
                     captchaToast: false,
                     openModal(pkg) { 
@@ -268,8 +270,9 @@
                             this.showCaptchaToast();
                             return;
                         }
+                        const detailUrl = `${window.location.origin}/news/detail/${this.modalData.slug}/`;
                         const noteText = this.bookForm.note ? `\nNote: ${this.bookForm.note}` : '';
-                        const waText = `Halo, saya ingin memesan paket tour:\n*${this.modalData.title}*\n\nBike Type: ${this.bookForm.bikeType}\nNumber of Bikes: ${this.bookForm.bikeCount}${noteText}`;
+                        const waText = `Hi, I'd like to book this tour package:\n*${this.modalData.title}*\n\nBike Type: ${this.bookForm.bikeType}\nNumber of Bikes: ${this.bookForm.bikeCount}${noteText}\n\nPackage link: ${detailUrl}`;
                         const waNumber = '6282236876881';
                         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
                         const waUrl = isMobile
@@ -280,16 +283,19 @@
                         generateCaptcha();
                     },
                     shareWhatsApp() {
-                        const url  = encodeURIComponent(window.location.href);
+                        const detailUrl = `${window.location.origin}/news/detail/${this.modalData?.slug}/`;
+                        const url  = encodeURIComponent(detailUrl);
                         const text = encodeURIComponent(`Check out this tour package: ${this.modalData?.title}`);
                         window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
                     },
                     shareFacebook() {
-                        const url = encodeURIComponent(window.location.href);
+                        const detailUrl = `${window.location.origin}/news/detail/${this.modalData?.slug}/`;
+                        const url = encodeURIComponent(detailUrl);
                         window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
                     },
                     shareTwitter() {
-                        const url  = encodeURIComponent(window.location.href);
+                        const detailUrl = `${window.location.origin}/news/detail/${this.modalData?.slug}/`;
+                        const url  = encodeURIComponent(detailUrl);
                         const text = encodeURIComponent(`${this.modalData?.title} - Lombok Biking Tour`);
                         window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
                     },
@@ -308,21 +314,30 @@
                 
                 <!-- Filters -->
                 <div class="flex flex-wrap justify-center gap-2 mb-12" x-data="{ dropdownOpen: false }">
-                    <button @click="activeFilter = '0'" :class="activeFilter === '0' ? 'bg-white text-gray-900 border-white' : 'bg-transparent text-white border-white/50 hover:bg-white/10'" class="px-4 py-2 border rounded text-sm transition-colors backdrop-blur-sm">All Packages</button>
+                    <button @click="activeFilter = '0'" 
+                            :class="activeFilter === '0' ? 'bg-white text-gray-900 border-white' : 'bg-transparent text-white border-white/50 hover:bg-white/10'" 
+                            class="px-4 py-2 border rounded text-sm transition-colors backdrop-blur-sm">
+                        All Packages
+                    </button>
                     
-                    <div class="relative">
-                        <button @click="dropdownOpen = !dropdownOpen" @click.outside="dropdownOpen = false" :class="activeFilter !== '0' ? 'bg-white text-gray-900 border-white' : 'bg-transparent text-white border-white/50 hover:bg-white/10'" class="px-4 py-2 border rounded text-sm transition-colors backdrop-blur-sm flex items-center gap-2">
-                            Filter by Category <i class="fa fa-caret-down"></i>
+                    <div class="relative" x-show="categories.length > 0" style="display:none">
+                        <button @click="dropdownOpen = !dropdownOpen" @click.outside="dropdownOpen = false" 
+                                :class="activeFilter !== '0' ? 'bg-white text-gray-900 border-white' : 'bg-transparent text-white border-white/50 hover:bg-white/10'" 
+                                class="px-4 py-2 border rounded text-sm transition-colors backdrop-blur-sm flex items-center gap-2">
+                            <span x-text="activeFilter !== '0' ? activeFilter : 'Filter by Category'"></span>
+                            <i class="fa fa-caret-down"></i>
                         </button>
                         
-                        <div x-show="dropdownOpen" x-transition style="display: none;" class="absolute top-full mt-2 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 w-48 bg-white rounded shadow-xl z-20 py-2 border border-gray-100">
-                            <button @click="activeFilter = '1'; dropdownOpen = false" :class="activeFilter === '1' ? 'text-primary font-bold bg-gray-50' : 'text-gray-700 hover:text-primary'" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors">Adventure Tour</button>
-                            <button @click="activeFilter = '2'; dropdownOpen = false" :class="activeFilter === '2' ? 'text-primary font-bold bg-gray-50' : 'text-gray-700 hover:text-primary'" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors">Half Day Biking</button>
-                            <button @click="activeFilter = '3'; dropdownOpen = false" :class="activeFilter === '3' ? 'text-primary font-bold bg-gray-50' : 'text-gray-700 hover:text-primary'" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors">Full Day Biking</button>
-                            <button @click="activeFilter = '4'; dropdownOpen = false" :class="activeFilter === '4' ? 'text-primary font-bold bg-gray-50' : 'text-gray-700 hover:text-primary'" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors">Long Route Bike</button>
-                            <button @click="activeFilter = '5'; dropdownOpen = false" :class="activeFilter === '5' ? 'text-primary font-bold bg-gray-50' : 'text-gray-700 hover:text-primary'" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors">Mountain Biking Tour</button>
-                            <button @click="activeFilter = '6'; dropdownOpen = false" :class="activeFilter === '6' ? 'text-primary font-bold bg-gray-50' : 'text-gray-700 hover:text-primary'" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors">Slope Rinjani Biking</button>
-                            <button @click="activeFilter = '7'; dropdownOpen = false" :class="activeFilter === '7' ? 'text-primary font-bold bg-gray-50' : 'text-gray-700 hover:text-primary'" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors">Combining Tour</button>
+                        <div x-show="dropdownOpen" x-transition style="display: none;" 
+                             class="absolute top-full mt-2 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 min-w-[180px] bg-white rounded shadow-xl z-20 py-2 border border-gray-100">
+                            <!-- Dynamic categories from model -->
+                            <template x-for="cat in categories" :key="cat.name">
+                                <button @click="activeFilter = cat.name; dropdownOpen = false"
+                                        :class="activeFilter === cat.name ? 'text-primary font-bold bg-gray-50' : 'text-gray-700 hover:text-primary'"
+                                        class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors"
+                                        x-text="cat.name">
+                                </button>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -344,7 +359,7 @@
                                 
                                 <!-- Buttons -->
                                 <div class="mt-auto flex flex-wrap gap-2">
-                                    <button @click.prevent.stop="openModal({ id: item.id, title: item.title, img: MEDIA_IMAGES + item.img, full_desc: item.full_desc })" 
+                                    <button @click.prevent.stop="openModal({ id: item.id, title: item.title, img: MEDIA_IMAGES + item.img, full_desc: item.full_desc, slug: item.slug })" 
                                             class="bg-primary hover:bg-primary-dark text-white text-xs font-bold py-2 px-4 rounded transition-colors uppercase tracking-wide">
                                         Quick View Modal
                                     </button>
