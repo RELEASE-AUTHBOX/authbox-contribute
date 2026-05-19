@@ -10,3 +10,6 @@ __pycache__/
 
 sendgrid.env
 
+# Original/source template references (not part of the project)
+origin/
+
