@@ -304,7 +304,12 @@
                     </div>
                     
                     <div class="p-6 overflow-y-auto text-left">
-                        <img :src="modalData?.img" class="w-full h-80 object-cover rounded-lg mb-6 shadow-md" alt="Package Image">
+                        <!-- Image with proportional aspect ratio and package number badge -->
+                        <div class="relative w-full aspect-video rounded-lg overflow-hidden mb-6 shadow-md bg-gray-100">
+                            <img :src="modalData?.img" class="w-full h-full object-cover" alt="Package Image">
+                            <span class="absolute top-3 left-3 bg-primary text-white text-sm font-bold px-3 py-1 rounded shadow-lg" x-text="`#${modalData?.id}`"></span>
+                        </div>
+                        <!-- Full description (no clamp) -->
                         <div class="prose prose-sm sm:prose max-w-none text-gray-600 mb-8" x-html="modalData?.desc"></div>
                         
                         <!-- Share options -->
