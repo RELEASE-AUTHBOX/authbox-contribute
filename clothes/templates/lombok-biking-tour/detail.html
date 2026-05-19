@@ -89,6 +89,37 @@
                 text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             }
         }
+        /* Spacing for CKEditor HTML content in detail page */
+        .detail-desc p {
+            margin-bottom: 1rem;
+            line-height: 1.75;
+        }
+        .detail-desc p:last-child { margin-bottom: 0; }
+        .detail-desc h1, .detail-desc h2, .detail-desc h3,
+        .detail-desc h4, .detail-desc h5, .detail-desc h6 {
+            font-weight: 700;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        .detail-desc h2 { font-size: 1.25rem; }
+        .detail-desc h3 { font-size: 1.1rem; }
+        .detail-desc ul, .detail-desc ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+        .detail-desc ul { list-style-type: disc; }
+        .detail-desc ol { list-style-type: decimal; }
+        .detail-desc li { margin-bottom: 0.35rem; line-height: 1.65; }
+        .detail-desc blockquote {
+            border-left: 4px solid #d32f2f;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        .detail-desc strong { font-weight: 700; }
+        .detail-desc a { color: #d32f2f; text-decoration: underline; }
     </style>
 
     <!-- Static URL Constants for Alpine.js -->
@@ -174,7 +205,7 @@
                         </div>
                         <hr class="w-16 border-primary border-t-4 mb-8 rounded">
                         
-                        <div class="prose max-w-none text-gray-700 leading-relaxed">
+                        <div class="detail-desc max-w-none text-gray-700 leading-relaxed text-sm">
                             {% if content_detail %}
                                 {{ content_detail.content|safe }}
                             {% else %}
@@ -207,35 +238,51 @@
                                         <input x-model.number="formData.count" type="number" min="1" class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-gray-50 focus:bg-white focus:ring-primary focus:border-primary transition-colors">
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-bold text-gray-700 mb-1">Note</label>
+                                        <label class="block text-sm font-bold text-gray-700 mb-1">
+                                            Note <span class="text-gray-400 font-normal text-xs">(optional)</span>
+                                        </label>
                                         <textarea x-model="formData.note" class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-gray-50 focus:bg-white focus:ring-primary focus:border-primary transition-colors" rows="3" placeholder="Additional requirements..."></textarea>
                                     </div>
                                 </div>
 
-                                <div class="border-t border-gray-100 pt-4 mb-6">
+                                <div class="border-t border-gray-100 pt-4 mb-4">
                                     <label class="block text-sm font-bold text-gray-700 mb-2">Captcha Verification</label>
                                     <div class="flex flex-col gap-2">
                                         <div class="flex">
                                             <span x-text="captcha.text" class="bg-primary text-white px-3 py-2 rounded-l text-sm font-bold text-center tracking-widest italic select-none w-24"></span>
-                                            <input x-model="captcha.input" type="text" class="border p-2 rounded-r w-full text-sm focus:outline-none focus:border-primary" placeholder="Type text" required>
+                                            <input x-model="captcha.input" @keydown.enter.prevent="submitForm()" type="text" class="border p-2 rounded-r w-full text-sm focus:outline-none focus:border-primary" placeholder="Type text" required autocomplete="off">
                                         </div>
-                                        <span x-show="captchaError" style="display:none;" class="text-red-500 text-sm font-bold">Incorrect captcha!</span>
                                     </div>
                                 </div>
 
                                 <button type="submit" class="w-full py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors flex items-center justify-center gap-2 font-bold shadow-md uppercase tracking-wider">
                                     <i class="fa fa-whatsapp text-xl"></i> Book via WhatsApp
                                 </button>
+                                
+                                <!-- Captcha incorrect toast popup -->
+                                <div x-show="captchaToast" 
+                                     x-transition.opacity 
+                                     style="display:none" 
+                                     class="fixed bottom-6 right-6 z-[200] flex items-center gap-3 bg-red-600 text-white px-5 py-3 rounded-lg shadow-2xl text-sm font-bold pointer-events-none">
+                                    <i class="fa fa-exclamation-circle text-lg"></i>
+                                    <span>Incorrect captcha &mdash; please try again.</span>
+                                </div>
                             </form>
                         </div>
                         
                         <!-- Share Options -->
-                        <div class="bg-white p-6 rounded-xl shadow-xl border-t-4 border-primary" x-data="{ url: encodeURIComponent(window.location.href), title: encodeURIComponent(document.title) }">
+                        <div class="bg-white p-6 rounded-xl shadow-xl border-t-4 border-primary">
                             <h5 class="font-bold text-xl mb-4 text-gray-800 font-heading"><i class="fa fa-share-alt text-primary mr-2"></i> Share</h5>
                             <div class="flex flex-col gap-3">
-                                <a :href="`https://api.whatsapp.com/send?text=${title}%20${url}`" target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-whatsapp mr-2"></i> Share on WhatsApp</a>
-                                <a :href="`https://www.facebook.com/sharer/sharer.php?u=${url}`" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-facebook mr-2"></i> Share on Facebook</a>
-                                <a :href="`https://twitter.com/intent/tweet?url=${url}&text=${title}`" target="_blank" class="w-full bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-twitter mr-2"></i> Share on Twitter</a>
+                                {% if content_detail %}
+                                <a href="https://api.whatsapp.com/send?text={{ 'Check out this tour package: #'|add:content_detail.id|add:' - '|add:content_detail.title|urlencode }}%20{{ request.build_absolute_uri }}" target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-whatsapp mr-2"></i> Share on WhatsApp</a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-facebook mr-2"></i> Share on Facebook</a>
+                                <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode }}&text={{ '#'|add:content_detail.id|add:' - '|add:content_detail.title|add:' - Lombok Biking Tour'|urlencode }}" target="_blank" class="w-full bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-twitter mr-2"></i> Share on Twitter</a>
+                                {% else %}
+                                <a href="https://api.whatsapp.com/send?text=Check+out+this+tour+package" target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-whatsapp mr-2"></i> Share on WhatsApp</a>
+                                <a href="https://www.facebook.com/sharer/sharer.php" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-facebook mr-2"></i> Share on Facebook</a>
+                                <a href="https://twitter.com/intent/tweet" target="_blank" class="w-full bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-twitter mr-2"></i> Share on Twitter</a>
+                                {% endif %}
                             </div>
                         </div>
 
@@ -338,7 +385,6 @@
                 }
             }));
 
-            // Alpine component logic for the Booking Form
             Alpine.data('bookingForm', () => ({
                 formData: {
                     type: 'Mountain Bike', count: 1, note: ''
@@ -347,6 +393,8 @@
                     text: '', input: ''
                 },
                 captchaError: false,
+                captchaToast: false,
+                _toastTimer: null,
                 init() {
                     this.regenCaptcha();
                 },
@@ -360,32 +408,36 @@
                     this.captcha.input = '';
                     this.captchaError = false;
                 },
+                showCaptchaToast() {
+                    this.captchaToast = true;
+                    clearTimeout(this._toastTimer);
+                    this._toastTimer = setTimeout(() => { this.captchaToast = false; }, 3000);
+                },
                 submitForm() {
                     if (this.captcha.input !== this.captcha.text) {
-                        this.captchaError = true;
+                        this.showCaptchaToast();
                         return;
                     }
-                    
                     const titleEl = document.querySelector('h1');
-                    const title = titleEl ? titleEl.innerText : 'Unknown Package';
-                    
-                    // Formulate WA text for Booking
-                    const waText = `Hello, I want to book a package:\nPackage: ${title}\nBike Type: ${this.formData.type}\nNumber of Bikes: ${this.formData.count}\nNote: ${this.formData.note}`;
-                    const waNumber = "6282236876881";
-                    
-                    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                    if (isMobile) {
-                        window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`, "_blank");
-                    } else {
-                        window.open(`https://web.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(waText)}`, "_blank");
-                    }
-                    
-                    // Reset everything
+                    const title   = titleEl ? titleEl.innerText.trim() : 'Unknown Package';
+                    const pkgId   = '{{ content_detail.id|default:"" }}';
+                    const slug    = '{{ content_detail.slug|default:"" }}';
+                    const detailUrl = slug ? `${window.location.origin}/news/detail/${slug}/` : window.location.href;
+                    const noteText  = this.formData.note ? `\nNote: ${this.formData.note}` : '';
+                    const label     = pkgId ? `#${pkgId} - ${title}` : title;
+                    const waText    = `Hi, I'd like to book this tour package:\n*${label}*\n\nBike Type: ${this.formData.type}\nNumber of Bikes: ${this.formData.count}${noteText}\n\nPackage link: ${detailUrl}`;
+                    const waNumber  = '6282236876881';
+                    const isMobile  = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                    const waUrl     = isMobile
+                        ? `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`
+                        : `https://web.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(waText)}`;
+                    window.open(waUrl, '_blank');
                     this.formData = { type: 'Mountain Bike', count: 1, note: '' };
                     this.regenCaptcha();
                 }
             }));
         });
+
     </script>
 {% endblock %}
 </body>
