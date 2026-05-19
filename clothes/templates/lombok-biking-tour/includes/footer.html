@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
     <footer class="bg-gray-100 py-16">
         <div class="container mx-auto px-6 md:px-12 max-w-6xl">
             <div class="grid grid-cols-1 md:grid-cols-2 mt-8 lg:grid-cols-4 gap-8 mb-8">                
@@ -33,10 +34,10 @@
             </div>
             
             <div class="border-t border-gray-300 pt-8 pb-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-                <p class="mb-4 md:mb-0">Copyright &copy; {{year}} - LombokBikingTour.com</p>
+                <p class="mb-4 md:mb-0">Copyright &copy; {% now "Y" %} - {{name}}</p>
                 <div class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2">
-                    <span>Phone: {{phone}}</span>
-                    <span>WhatsApp: {{whatsapp}}</span>
+                    <span>Phone: {{phone|phone_number}}</span>
+                    <span>WhatsApp: {{whatsapp|phone_number}}</span>
                     <span>Email: {{email}}</span>
                     <span>Address:  {{address}}</span>
                 </div>

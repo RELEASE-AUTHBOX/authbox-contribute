@@ -181,15 +181,13 @@
                         </nav>
                         
                         {% if content_detail and content_detail.file_path %}
-                        <div class="relative mb-8">
-                            <img src="/media/{{ content_detail.file_path }}" class="w-full h-96 md:h-[500px] object-cover rounded-xl shadow-lg" alt="{{ content_detail.title }}">
+                        <div class="relative w-full aspect-video rounded-xl overflow-hidden mb-8 shadow-lg bg-gray-100">
+                            <img src="/media/{{ content_detail.file_path }}" class="w-full h-full object-cover" alt="{{ content_detail.title }}">
                             <span class="absolute top-4 right-4 bg-primary text-white text-sm font-bold px-4 py-2 rounded shadow-md">#{{ content_detail.id }}</span>
                         </div>
                         {% else %}
-                        <div class="relative mb-8">
-                            <div class="w-full h-96 bg-gray-200 rounded-xl shadow-lg flex items-center justify-center">
-                                <span class="text-gray-400 italic text-xl">Package Image</span>
-                            </div>
+                        <div class="relative w-full aspect-video rounded-xl overflow-hidden mb-8 shadow-lg bg-gray-200 flex items-center justify-center">
+                            <span class="text-gray-400 italic text-xl">Package Image</span>
                             <span class="absolute top-4 right-4 bg-primary text-white text-sm font-bold px-4 py-2 rounded shadow-md">#???</span>
                         </div>
                         {% endif %}
