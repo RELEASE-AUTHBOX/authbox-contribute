@@ -365,10 +365,10 @@
             modalOpen: false, 
             activeItem: null, 
             items: [
-                { type: 'video', id: 'dQw4w9WgXcQ', title: 'Amazing Trail Ride', thumb: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg' },
+                { type: 'video', id: 'M7lc1UVf-VE', title: 'Amazing Trail Ride', thumb: 'https://img.youtube.com/vi/M7lc1UVf-VE/hqdefault.jpg' },
                 { type: 'photo', src: STATIC_THEMES_IMAGES + '1769579666_a4c1f59d49cc66b231d7.jpg', title: 'Experience Lombok', thumb: STATIC_THEMES_IMAGES + '1769579666_a4c1f59d49cc66b231d7.jpg' },
                 { type: 'photo', src: STATIC_THEMES_IMAGES + '1769573093_4c5e622fe1a7a9218123.jpg', title: 'Mountain Views', thumb: STATIC_THEMES_IMAGES + '1769573093_4c5e622fe1a7a9218123.jpg' },
-                { type: 'video', id: 'LXb3EKWsInQ', title: 'Downhill Adventure', thumb: 'https://img.youtube.com/vi/LXb3EKWsInQ/hqdefault.jpg' },
+                { type: 'video', id: 'XqZsoesa55w', title: 'Downhill Adventure', thumb: 'https://img.youtube.com/vi/XqZsoesa55w/hqdefault.jpg' },
                 { type: 'photo', src: STATIC_THEMES_IMAGES + 'item-10x.jpg', title: 'Rinjani Tour', thumb: STATIC_THEMES_IMAGES + 'item-10x.jpg' },
                 { type: 'photo', src: STATIC_THEMES_IMAGES + 'item-5x.jpg', title: 'Forest Ride', thumb: STATIC_THEMES_IMAGES + 'item-5x.jpg' },
             ],
@@ -424,7 +424,7 @@
                     <button @click="closeMedia()" class="absolute -top-12 right-0 text-white hover:text-primary transition-colors text-xl font-bold"><i class="fa fa-times mr-2"></i>Close</button>
                     <div class="w-full bg-transparent rounded shadow-2xl overflow-hidden flex flex-col items-center justify-center">
                         <div x-show="activeItem && activeItem.type === 'video'" class="aspect-video w-full bg-black shadow-lg rounded" style="display: none;">
-                            <iframe :src="(activeItem && activeItem.type === 'video') ? `https://www.youtube.com/embed/${activeItem.id}?autoplay=1` : ''" class="w-full h-full" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+                            <iframe :src="(activeItem && activeItem.type === 'video') ? `https://www.youtube.com/embed/${activeItem.id}?autoplay=1&rel=0&modestbranding=1` : ''" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
                         <div x-show="activeItem && activeItem.type === 'photo'" class="w-full flex flex-col items-center" style="display: none;">
                             <img :src="(activeItem && activeItem.type === 'photo') ? activeItem.src : ''" class="max-h-[80vh] w-auto max-w-full object-contain rounded shadow-lg bg-black" alt="Gallery Photo Preview">
