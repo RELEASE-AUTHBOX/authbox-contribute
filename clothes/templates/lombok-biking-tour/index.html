@@ -145,6 +145,8 @@
     {{ slideshow_data|json_script:"slideshow-data" }}
     {{ news_data|json_script:"news-data" }}
     {{ categories_data|json_script:"categories-data" }}
+    {{ gallery_items|json_script:"gallery-items" }}
+    
 
     <!-- Main Content 
     {% comment %} [
@@ -491,14 +493,7 @@
         <section id="gallery" class="py-24 bg-gray-50" x-data="{ 
             modalOpen: false, 
             activeItem: null, 
-            items: [
-                { type: 'video', id: 'M7lc1UVf-VE', title: 'Amazing Trail Ride', thumb: 'https://img.youtube.com/vi/M7lc1UVf-VE/hqdefault.jpg' },
-                { type: 'photo', src: STATIC_THEMES_IMAGES + '1769579666_a4c1f59d49cc66b231d7.jpg', title: 'Experience Lombok', thumb: STATIC_THEMES_IMAGES + '1769579666_a4c1f59d49cc66b231d7.jpg' },
-                { type: 'photo', src: STATIC_THEMES_IMAGES + '1769573093_4c5e622fe1a7a9218123.jpg', title: 'Mountain Views', thumb: STATIC_THEMES_IMAGES + '1769573093_4c5e622fe1a7a9218123.jpg' },
-                { type: 'video', id: 'XqZsoesa55w', title: 'Downhill Adventure', thumb: 'https://img.youtube.com/vi/XqZsoesa55w/hqdefault.jpg' },
-                { type: 'photo', src: STATIC_THEMES_IMAGES + 'item-10x.jpg', title: 'Rinjani Tour', thumb: STATIC_THEMES_IMAGES + 'item-10x.jpg' },
-                { type: 'photo', src: STATIC_THEMES_IMAGES + 'item-5x.jpg', title: 'Forest Ride', thumb: STATIC_THEMES_IMAGES + 'item-5x.jpg' },
-            ],
+            items: JSON.parse(document.getElementById('gallery-items').textContent),
             openMedia(item) { 
                 this.activeItem = item; 
                 this.modalOpen = true; 
