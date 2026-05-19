@@ -238,9 +238,13 @@
                     packageModalOpen: false, 
                     modalData: null,
                     packages: JSON.parse(document.getElementById('news-data').textContent),
+                    bookForm: { bikeType: 'Mountain Bike', bikeCount: 1, note: '' },
+                    captchaToast: false,
                     openModal(pkg) { 
                         this.modalData = pkg; 
-                        this.packageModalOpen = true; 
+                        this.packageModalOpen = true;
+                        this.bookForm = { bikeType: 'Mountain Bike', bikeCount: 1, note: '' };
+                        this.captchaError = false;
                         generateCaptcha(); 
                         const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
                         document.body.style.paddingRight = scrollbarWidth + 'px';
@@ -250,13 +254,50 @@
                     },
                     closeModal() { 
                         this.packageModalOpen = false; 
-                        // Wait for transition to finish before restoring scroll
                         setTimeout(() => {
                             document.body.style.overflow = ''; 
                             document.body.style.paddingRight = '';
                             const nav = document.getElementById('mainNav');
                             if(nav) nav.style.paddingRight = '';
                         }, 300);
+                    },
+                    bookWhatsApp() {
+                        const answer = document.getElementById('modal-captcha-answer').value;
+                        const input  = document.getElementById('modal-captcha').value.trim();
+                        if (!input || input !== answer) {
+                            this.showCaptchaToast();
+                            return;
+                        }
+                        const noteText = this.bookForm.note ? `\nNote: ${this.bookForm.note}` : '';
+                        const waText = `Halo, saya ingin memesan paket tour:\n*${this.modalData.title}*\n\nBike Type: ${this.bookForm.bikeType}\nNumber of Bikes: ${this.bookForm.bikeCount}${noteText}`;
+                        const waNumber = '6282236876881';
+                        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                        const waUrl = isMobile
+                            ? `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`
+                            : `https://web.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(waText)}`;
+                        window.open(waUrl, '_blank');
+                        this.bookForm = { bikeType: 'Mountain Bike', bikeCount: 1, note: '' };
+                        generateCaptcha();
+                    },
+                    shareWhatsApp() {
+                        const url  = encodeURIComponent(window.location.href);
+                        const text = encodeURIComponent(`Check out this tour package: ${this.modalData?.title}`);
+                        window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+                    },
+                    shareFacebook() {
+                        const url = encodeURIComponent(window.location.href);
+                        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+                    },
+                    shareTwitter() {
+                        const url  = encodeURIComponent(window.location.href);
+                        const text = encodeURIComponent(`${this.modalData?.title} - Lombok Biking Tour`);
+                        window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+                    },
+                    captchaToast: false,
+                    showCaptchaToast() {
+                        this.captchaToast = true;
+                        clearTimeout(this._toastTimer);
+                        this._toastTimer = setTimeout(() => { this.captchaToast = false; }, 3000);
                     }
                  }">
             
@@ -354,19 +395,19 @@
                         <div class="text-center mb-8 border-t pt-6">
                             <p class="font-bold mb-4">Share this package:</p>
                             <div class="flex flex-wrap justify-center gap-2">
-                                <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded text-sm transition-colors"><i class="fa fa-whatsapp mr-1"></i> WhatsApp</button>
-                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors"><i class="fa fa-facebook mr-1"></i> Facebook</button>
-                                <button class="bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded text-sm transition-colors"><i class="fa fa-twitter mr-1"></i> Twitter</button>
+                                <button @click="shareWhatsApp()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded text-sm transition-colors"><i class="fa fa-whatsapp mr-1"></i> WhatsApp</button>
+                                <button @click="shareFacebook()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors"><i class="fa fa-facebook mr-1"></i> Facebook</button>
+                                <button @click="shareTwitter()" class="bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded text-sm transition-colors"><i class="fa fa-twitter mr-1"></i> Twitter</button>
                             </div>
                         </div>
 
                         <!-- Booking Form -->
-                        <form class="bg-gray-50 p-6 rounded-lg shadow-inner text-left">
+                        <form @submit.prevent="bookWhatsApp()" class="bg-gray-50 p-6 rounded-lg shadow-inner text-left">
                             <h5 class="font-bold text-lg mb-4">Book This Package:</h5>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                 <div>
                                     <label class="block text-sm font-bold text-gray-700 mb-1">Bike Type</label>
-                                    <select class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-white focus:ring-primary focus:border-primary">
+                                    <select x-model="bookForm.bikeType" class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-white focus:ring-primary focus:border-primary">
                                         <option>Mountain Bike</option>
                                         <option>Road Bike</option>
                                         <option>Hybrid Bike</option>
@@ -375,31 +416,50 @@
                                 </div>
                                 <div>
                                     <label class="block text-sm font-bold text-gray-700 mb-1">Number of Bikes</label>
-                                    <input type="number" min="1" value="1" class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-white focus:ring-primary focus:border-primary">
+                                    <input type="number" x-model.number="bookForm.bikeCount" min="1" class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-white focus:ring-primary focus:border-primary" required>
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1">Note</label>
-                                <textarea class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-white focus:ring-primary focus:border-primary" rows="3" placeholder="Additional requirements..."></textarea>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">
+                                    Note <span class="text-gray-400 font-normal text-xs">(optional)</span>
+                                </label>
+                                <textarea x-model="bookForm.note" class="w-full border-gray-300 rounded shadow-sm py-2 px-3 bg-white focus:ring-primary focus:border-primary" rows="3" placeholder="Additional requirements..."></textarea>
                             </div>
                         </form>
                     </div>
                     
                     <div class="p-4 border-t bg-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <div class="flex items-center gap-2 w-full sm:w-auto">
-                            <span class="text-sm font-bold whitespace-nowrap">Captcha:</span>
-                            <span id="modal-captcha-question" class="bg-primary text-white px-3 py-2 rounded-l text-sm font-bold tracking-widest italic select-none"></span>
-                            <input type="text" id="modal-captcha" class="border p-2 rounded-r w-24 text-sm" placeholder="Type text" required>
-                            <input type="hidden" id="modal-captcha-answer">
+                        <div class="flex flex-col gap-1 w-full sm:w-auto">
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-bold whitespace-nowrap">Captcha:</span>
+                                <span id="modal-captcha-question" class="bg-primary text-white px-3 py-2 rounded-l text-sm font-bold tracking-widest italic select-none"></span>
+                                <input type="text" id="modal-captcha" class="border p-2 rounded-r w-24 text-sm" placeholder="Type text" autocomplete="off">
+                                <input type="hidden" id="modal-captcha-answer">
+                            </div>
+
                         </div>
                         <div class="flex gap-2 w-full sm:w-auto">
-                            <button @click="closeModal()" class="w-full sm:w-auto px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded transition-colors text-sm font-bold">Close</button>
-                            <button class="w-full sm:w-auto px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded transition-colors flex items-center justify-center gap-2 text-sm font-bold">
+                            <button type="button" @click="closeModal()" class="w-full sm:w-auto px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded transition-colors text-sm font-bold">Close</button>
+                            <button type="button" @click="bookWhatsApp()" class="w-full sm:w-auto px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded transition-colors flex items-center justify-center gap-2 text-sm font-bold">
                                 <i class="fa fa-whatsapp"></i> Book via WhatsApp
                             </button>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Captcha incorrect toast popup -->
+            <div x-show="captchaToast"
+                 style="display:none"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 translate-y-4"
+                 x-transition:enter-end="opacity-100 translate-y-0"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100 translate-y-0"
+                 x-transition:leave-end="opacity-0 translate-y-4"
+                 class="fixed bottom-6 right-6 z-[200] flex items-center gap-3 bg-red-600 text-white px-5 py-3 rounded-lg shadow-2xl text-sm font-bold pointer-events-none">
+                <i class="fa fa-exclamation-circle text-lg"></i>
+                <span>Incorrect captcha — please try again.</span>
             </div>
         </section>
 
