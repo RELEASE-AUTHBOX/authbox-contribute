@@ -272,7 +272,7 @@
                         }
                         const detailUrl = `${window.location.origin}/news/detail/${this.modalData.slug}/`;
                         const noteText = this.bookForm.note ? `\nNote: ${this.bookForm.note}` : '';
-                        const waText = `Hi, I'd like to book this tour package:\n*${this.modalData.title}*\n\nBike Type: ${this.bookForm.bikeType}\nNumber of Bikes: ${this.bookForm.bikeCount}${noteText}\n\nPackage link: ${detailUrl}`;
+                        const waText = `Hi, I'd like to book this tour package:\n*#${this.modalData.id} ${this.modalData.title}*\n\nBike Type: ${this.bookForm.bikeType}\nNumber of Bikes: ${this.bookForm.bikeCount}${noteText}\n\nPackage link: ${detailUrl}`;
                         const waNumber = '6282236876881';
                         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
                         const waUrl = isMobile
@@ -285,7 +285,7 @@
                     shareWhatsApp() {
                         const detailUrl = `${window.location.origin}/news/detail/${this.modalData?.slug}/`;
                         const url  = encodeURIComponent(detailUrl);
-                        const text = encodeURIComponent(`Check out this tour package: ${this.modalData?.title}`);
+                        const text = encodeURIComponent(`Check out this tour package: #${this.modalData?.id} - ${this.modalData?.title}`);
                         window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
                     },
                     shareFacebook() {
@@ -296,7 +296,7 @@
                     shareTwitter() {
                         const detailUrl = `${window.location.origin}/news/detail/${this.modalData?.slug}/`;
                         const url  = encodeURIComponent(detailUrl);
-                        const text = encodeURIComponent(`${this.modalData?.title} - Lombok Biking Tour`);
+                        const text = encodeURIComponent(`#${this.modalData?.id} - ${this.modalData?.title} - Lombok Biking Tour`);
                         window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
                     },
                     captchaToast: false,
