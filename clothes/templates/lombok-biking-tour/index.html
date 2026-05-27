@@ -606,11 +606,19 @@
         <section id="contact" class="py-24 parallax-bg relative bg-gray-50" x-data="contactForm()">
             <!-- Map Embed -->
             <div class="container mx-auto px-6 md:px-12 max-w-6xl mb-24">
-                <h2 class="text-center text-3xl font-bold mb-4">Find Us On Map</h2>
+                <h2 class="text-center text-3xl font-bold mb-4">
+                    {% for i in location|slice:":1" %}{{i.title}}{% endfor %}
+                    {% if not location %}Find Us On Map{% endif %}
+                </h2>
                 <hr class="w-12 border-primary border-t-4 mx-auto mb-12 rounded">
-                <div class="rounded-xl overflow-hidden shadow-xl h-96 border-4 border-white">
-                    <iframe src="https://maps.app.goo.gl/VguM4ZxedvrSP2v88" 
-                    class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
+                <div class="rounded-xl overflow-hidden shadow-xl h-96 border-4 border-white [&_iframe]:w-full [&_iframe]:h-full [&_iframe]:border-0">
+                    {% for i in location|slice:":1" %}
+                        {{i.embed|safe}}
+                    {% empty %}
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3946.1989486323905!2d116.10934152304882!3d-8.546087907210698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dcdc0e01d57bfd9%3A0x796a328b42a6e7e3!2sLombok%20Biking%20Tour!5e0!3m2!1sen!2sid!4v1716895200000!5m2!1sen!2sid"
+                            class="w-full h-full border-0" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    {% endfor %}
                 </div>
             </div>
 
