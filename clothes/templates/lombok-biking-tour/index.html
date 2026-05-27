@@ -609,7 +609,8 @@
                 <h2 class="text-center text-3xl font-bold mb-4">Find Us On Map</h2>
                 <hr class="w-12 border-primary border-t-4 mx-auto mb-12 rounded">
                 <div class="rounded-xl overflow-hidden shadow-xl h-96 border-4 border-white">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15783.567117173266!2d116.089856!3d-8.510000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMzAnMzYuMCJTIDExNsKwMDUnMjMuNSJF!5e0!3m2!1sen!2sid!4v1620000000000!5m2!1sen!2sid" class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://www.google.co.id/maps/place/Lombok+Biking+Tour/@-8.5460539,116.1115286,3a,75y,90t/data=!3m8!1e2!3m6!1sCIHM0ogKEICAgID3mpGUMQ!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAPNQkAFddEm_n7LmqjK0419XA7EBoSz_mK8XdxIToT2Uz_2gDiO__rv817nxp9f32VLyVpdOLyzN9a932QHRBd75GdXpcSzh_KPVkDKYzLi2bP9pJanwlDwImUMTB45NYfLh90b6itM%3Dw86-h186-k-no!7i1840!8i4000!4m7!3m6!1s0x2dcdc0e01d57bfd9:0x796a328b42a6e7e3!8m2!3d-8.5460879!4d116.1115288!10e5!16s%2Fg%2F11gfgzwmq7?hl=en&entry=ttu&g_ep=EgoyMDI2MDUyNS4wIKXMDSoASAFQAw%3D%3D" 
+                    class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
 
@@ -654,7 +655,8 @@
                             <p class="text-gray-700 font-bold">{{phone|phone_number}}</p>
                         </a>
                         
-                        <a href="#" @click.prevent="window.open('https://wa.me/{{whatsapp}}', '_blank')" class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow border border-gray-100 hover:shadow-lg transition-shadow group">
+                        <a href="#" @click.prevent="openWA('{{whatsapp}}', 'I am contacting you through the website. I have a question ...', {{is_mobile|lower}})"
+                            class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow border border-gray-100 hover:shadow-lg transition-shadow group">
                             <i class="fa fa-whatsapp text-4xl text-green-500 mb-4 group-hover:scale-110 transition-transform"></i>
                             <p class="text-gray-700 font-bold">{{whatsapp|phone_number}}</p>
                         </a>
@@ -664,7 +666,7 @@
                             <p class="text-gray-700 font-bold text-sm truncate w-full">{{email}}</p>
                         </a>
                         
-                        <a href="{{map_url}}" target="_blank" class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow border border-gray-100 hover:shadow-lg transition-shadow group">
+                        <a href="https://goo.gl/maps/KMhjKxhAEJMZkAT8A" target="_blank" class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow border border-gray-100 hover:shadow-lg transition-shadow group">
                             <i class="fa fa-map-marker text-4xl text-primary mb-4 group-hover:scale-110 transition-transform"></i>
                             <p class="text-gray-700 font-bold text-sm">{{address}}</p>
                         </a>
@@ -686,6 +688,20 @@
     
     <!-- Scripts -->
     <script>
+        function openWA(number, initial_text, is_mobile=false) {
+            //var number = document.getElementById("waNumber").value;
+            //if (isMobile()=="true")
+            // initial_text: Hai, Saya ada pertanyaan tentang cara membuat website di https://authbox.web.id/
+            // console.log('number',number);
+            if (is_mobile) {
+                window.open("https://api.whatsapp.com/send?phone="+ number +"&text=" + initial_text,"_blank");
+            } else {
+                window.open("https://web.whatsapp.com/send?phone="+ number +"&text=" + initial_text,"_blank");
+            }
+            //else
+            //   alert("This link will open Whatsapp on android");
+        }
+
         // General text Captcha logic for the Modals that aren't tied strictly to Alpine Form
         // Human-readable date formatter: e.g. "May 19, 2026"
         function formatDate(dateStr) {

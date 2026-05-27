@@ -1,1 +1,921 @@
-{% extends "direngine/base-index.html" %} {% load static %} {% block hero-image %} {% for i in slideshow %} <div class=slider-item  style="background-image: url('/media/{{i.file_path}}')"> <div class=title  style="display:none">{{i.title|safe}}</div> <div class=sub-title  style="display:none">{{i.sub_title|safe}}</div> <div class=content  style="display:none">&nbsp;{{i.content|safe}}</div> </div> {% endfor %} <div id=slider  class=slider > <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent=true > <div class=slider-panel > <div class=slider-panel__controls > <i class="far fa-arrow-alt-circle-left" id=previous ></i> <i class="far fa-pause-circle" id=pause-play ></i> <i class="far fa-arrow-alt-circle-right" id=next ></i> </div> <div class=slider-panel__navigation > {% for i in slideshow %} <i class="fas fa-circle indicator" data-slide-to="{{forloop.counter0}}"></i> {% endfor %} </div> </div> <div class=slider-item-show > <h1 class=mb-4  data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> <strong><div class=title ></div> </strong> <div class=sub-title ></div> </h1> <p class=content  data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> </p> <a href="#fasilities" class="btn btn-primary"> &nbsp; Read More &nbsp; </a> </div> </div> </div> {% endblock %} {% block why-us %} <section class="ftco-section services-section bg-light" style="padding: 7em 0 0;" > <div class=container > <div class="row d-flex"> {% for i in whyus|slice:":4" %} <div class="col-md-3 d-flex align-self-stretch ftco-animate"> <div class="media services block-6 d-block text-center"> <div class="d-flex justify-content-center"><div class=icon > <span class="{{i.icon}}"></span></div></div> <div class="media-body p-2 mt-2"> <h3 class="heading mb-3">{{i.title|truncatewords_html:3|safe}}</h3> <p>{{i.description|truncatewords_html:7|safe}}</p> </div> </div> </div> {% endfor %} </div> </div> </section> {% endblock %} {% block fasilities %} <span id=fasilities >&nbsp;</span> <section class="ftco-section ftco-destination" > <div class=container > {% for i in fasilities|slice:":1" %} <div class="row justify-content-start "> <div class="col-md-7 heading-section ftco-animate"> <span class=subheading >{{i.title|safe}}</span> <h2 class=mb-4 ><strong>{{title|title}}</strong> {{i.title|safe}}</h2> </div> </div> <div class="row justify-content-center mb-5 "> <div class=col-md-12 > {{i.content|striptags|safe}} <a href="/{{request.LANGUAGE_CODE}}/fasilities/list/all"> View all fasilities</a> </div> </div> {% endfor %} <div class=bod-modal  data-interval=4  data-title=center > <div class=row > <div class=col-md-12 > <div class="destination-slider owl-carousel ftco-animate"> {% for i in fasilities|slice:"1:" %} <div class=item > <div class=destination > <a href="/media/{{i.file_path}}" class="img d-flex justify-content-center align-items-center image-popup-no-margins" style="background-image: url('/media/{{i.file_path}}')"> <div class="icon d-flex justify-content-center align-items-center"> <span class=icon-search2 ></span> </div> </a> <div class="text p-3"> <h3><a href="/{{request.LANGUAGE_CODE}}/fasilities/detail/{{i.slug}}">{{i.title}}</a></h3> <span class=listing > {{i.content|striptags|truncatewords:15}} <a href="/{{request.LANGUAGE_CODE}}/fasilities/detail/{{i.slug}}">Read More</a> </span> </div> </div> </div> {% endfor %} </div> </div> </div> </div> </div> </section> {% endblock %} {% block gallery %} <span id=gallery >&nbsp;</span> <section class="ftco-section ftco-destination"> <div class=container > {% for i in photogallery|slice:":1" %} <div class="row justify-content-start "> <div class="col-md-7 heading-section ftco-animate"> <span class=subheading >{{i.title|safe}}</span> <h2 class=mb-4 ><strong>{{title|title}}</strong> {{i.title|safe}}</h2> </div> </div> <div class="row justify-content-center mb-5 "> <div class=col-md-12 > {{i.content|striptags|safe}} <a href="/{{request.LANGUAGE_CODE}}/photogallery/list/all"> View all gallery</a> </div> </div> {% endfor %} <div class=bod-modal  data-interval=4  data-title=center > <div class=row > <div class=col-md-12 > <div class="destination-slider owl-carousel ftco-animate"> {% for i in photogallery|slice:"1:" %} <div class=item > <div class=destination > <a href="/media/{{i.file_path}}" class="img d-flex justify-content-center align-items-center image-popup-no-margins" style="background-image: url('/media/{{i.file_path}}');"> <div class="icon d-flex justify-content-center align-items-center"> <span class=icon-search2 ></span> </div> </a> <div class="text p-3"> <h3><a href="/{{request.LANGUAGE_CODE}}/photogallery/detail/{{i.slug}}">{{i.title}}</a></h3> <span class=listing > {{i.content|striptags|truncatewords:15}} <a href="/{{request.LANGUAGE_CODE}}/photogallery/detail/{{i.slug}}">Read More</a> </span> </div> </div> </div> {% endfor %} </div> </div> </div> </div> </div> </section> {% endblock %} {% block special-offers %} <span id=offers >&nbsp;</span> <section class=ftco-section  id=offers > <div class=container > {% for i in offers|slice:":1" %} <div class="row justify-content-start "> <div class="col-md-7 heading-section ftco-animate"> <span class=subheading >{{i.title|safe}}</span> <h2 class=mb-4 ><strong>{{title|title}}</strong> {{i.title|safe}}</h2> </div> <div class="row justify-content-center mb-5" style="padding:0 15px 0 15px"> <div class=col-md-12  > {{i.content|striptags|safe}} <a href="/{{request.LANGUAGE_CODE}}/offers/list/all"> View all offers</a> </div> </div> </div> {% endfor %} <div class=row > {% for i in offers|slice:"1:5" %} <div class="col-md-6 col-lg-3 ftco-animate"> <div class=destination > <a href="/media/{{i.file_path}}" class="img img-2 d-flex justify-content-center align-items-center image-popup-no-margins" style="background-image: url('/media/{{i.file_path}}');"> <div class="icon d-flex justify-content-center align-items-center"> <span class=icon-search2 ></span> </div> </a> <div class="text p-3"> <h3><a href="/{{request.LANGUAGE_CODE}}/offers/detail/{{i.slug}}">{{i.title|safe}}</a></h3> {{i.content|striptags|truncatewords:15|safe}} <a href="/{{request.LANGUAGE_CODE}}/offers/detail/{{i.slug}}">Read More</a> <hr> <p class="bottom-area d-flex"> <span><i class=icon-map-o ></i> </span> <span class=ml-auto ><a href="/booking/detail/">Book Now</a></span> </p> </div> </div> </div> {% endfor %} </div> </div> </section> {% endblock %} {% block aboutus %} <div class="col-md-5 heading-section ftco-animate"> {% for i in aboutus|slice:":1" %} <span class=subheading >{{i.sub_title}}</span> <h2 class="mb-4 pb-3">{{i.title|safe}}</h2> <p>{{i.content|striptags|truncatewords:30}}</p> <a href="/{{request.LANGUAGE_CODE}}/aboutus/detail/{{i.slug}}" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3" style="margin-left:0px">Read more</a> {% endfor %} </div> {% endblock %} {% block testimony %} <div class="col-md-6 heading-section ftco-animate"> {% for i in testimony|slice:":1" %} <span class=subheading >{{i.subtitle}} ><a href="/{{request.LANGUAGE_CODE}}/testimony/list/all"> View all testimony</a> </span> <h2 class="mb-4 pb-3">{{i.title|safe}} </h2> {% endfor %} <div class="row ftco-animate"> <div class=col-md-12 > <div class="carousel-testimony owl-carousel"> {% for i in testimony|slice:"1:" %} <div class=item > <div class="testimony-wrap d-flex"> {% if i.file_path %} <div class="user-img mb-5" style="background-image: url(/media/{{i.file_path}})"> <span class="quote d-flex align-items-center justify-content-center"> <i class=icon-quote-left ></i> </span> </div> <div class="text ml-md-4"> {{i.content|striptags|truncatewords:15}} <p class=name >{{i.title}}</p> <span class=position >{{i.subtitle}}</span> </div> {% else %} <div class=user-img > <span class="quote d-flex align-items-center justify-content-center" style="bottom:50px"> <i class=icon-quote-left ></i> </span> </div> <div class="text ml-md-6"> {{i.content|striptags|truncatewords:15}} <p class=name >{{i.title|safe}}</p> <span class=position >{{i.subtitle}}</span> </div> <div class=user-img  > <span class="quote d-flex align-items-center justify-content-center" style="bottom:50px"> <i class=icon-quote-right ></i> </span> </div> {% endif %} </div> </div> {% endfor %} </div> </div> </div> </div> {% endblock %} {% block location %} <section class=ftco-section-parallax > <div class="parallax-img d-flex align-items-center"> <div class=container > <div class="row d-flex justify-content-center"> <div class="col-md-10 text-center heading-section heading-section-white ftco-animate"> {% for i in location %} <h2>{{i.title|safe}}</h2> {{i.subtitle}} {% endfor %} <div class="row d-flex justify-content-center mt-5"> <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3946.1989486323905!2d116.05216899999998!3d-8.480027000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMjgnNDguMSJTIDExNsKwMDMnMDcuOCJF!5e0!3m2!1sid!2sid!4v1677367144831!5m2!1sid!2sid" width="100%" height=450  style="border:0;" allowfullscreen="" loading=lazy  referrerpolicy=no-referrer-when-downgrade ></iframe> </div> </div> </div> </div> </div> </section> {% endblock %} {% block article %} <span id=article >&nbsp;</span> <section class="ftco-section "> <div class=container > <div class="row justify-content-start mb-4"> {% for i in article|slice:":1" %} <div class="col-md-7 heading-section ftco-animate"> <span class=subheading >{{i.title|safe}}</span> <h2>{{i.title|safe}}</h2> </div> <div class="row justify-content-center " style="padding:0 15px 0 15px"> <div class=col-md-12  > <p> {{i.content|striptags|safe}} <a href="/{{request.LANGUAGE_CODE}}/article/list/all" class="">View all article</a> </p> </div> </div> {% endfor %} </div> <div class="row d-flex"> {% for i in article|slice:"1:4" %} <div class="col-md-3 d-flex ftco-animate"> <div class="blog-entry align-self-stretch"> <a href="/{{request.LANGUAGE_CODE}}/article/detail/{{i.slug}}" class=block-20  style="background-image: url(/media/{{i.file_path}});"> </a> <div class="text p-4 d-block"> <span class=tag >{{i.categories}}</span> <h3 class="heading mt-3"> <a href="/{{request.LANGUAGE_CODE}}/article/detail/{{i.slug}}"> {{i.title|safe}}</a></h3> <div class="meta mb-3"> <div><a href="javascript:void(0);">{{i.created_at}}</a></div> <div><a href="javascript:void(0);">{{i.admin}}</a></div> <div><a href="javascript:void(0);" class=meta-chat ><span class=icon-star-o ></span> {{i.view_count}}</a></div> </div> </div> </div> </div> {% endfor %} </div> </div> </section> {% endblock %} {% block extra_body %} <script> function mylinkfunction(e, target) { window.location.href = target; }; $(document).on("ready", function() { $('.image-popup-no-margins').magnificPopup({ type: 'image', closeOnContentClick: true, closeBtnInside: true, fixedContentPos: true, mainClass: 'mfp-no-margins mfp-with-zoom', image: { horizontalFit: true }, zoom: { enabled: true, duration: 300 } }); window.onscroll = function() {myFunction()}; function myFunction() { if (document.documentElement.scrollTop < $('#about').offset().top-50) { activate_navlink('home'); } else if (document.documentElement.scrollTop < $('#gallery').offset().top-50) { activate_navlink('about'); } else if (document.documentElement.scrollTop < $('#calendar-scroll').offset().top-50) { activate_navlink('gallery'); } else if (document.documentElement.scrollTop < $('#offers').offset().top-50) { activate_navlink('calendar'); } else if (document.documentElement.scrollTop < $('#article').offset().top-50) { activate_navlink('offers'); } else if (document.documentElement.scrollTop < $('#contact').offset().top-50) { activate_navlink('article'); } else if (document.documentElement.scrollTop >= $('#contact').offset().top-50) { activate_navlink('contact'); } }; function activate_navlink(param) { $('#ftco-nav li').each(function(){ var $this = $(this); $this.removeClass('active'); if($this.find('a').attr('href').indexOf(param) !== -1){ $this.addClass('active'); } }); }; }); </script> {% endblock %}
+{% extends "direngine/base-index.html" %}
+{% load static %}
+
+{% block hero-image %}
+    {% for i in slideshow %}        
+        <div class="slider-item" style="background-image: url('/media/{{i.file_path}}')">
+            <div class="title" style="display:none">{{i.title|safe}}</div>
+            <div class="sub-title" style="display:none">{{i.sub_title|safe}}</div>
+            <div class="content" style="display:none">&nbsp;{{i.content|safe}}</div>
+        </div>
+    {% endfor %}
+<!--     
+    <div class="slider-item" style="background-image: url({% static 'direngine/images/bg_2.jpg' %})">            
+    </div>
+    <div class="slider-item" style="background-image: url({% static 'direngine/images/bg_3.jpg' %})"></div>
+    <div class="slider-item" style="background-image: url({% static 'direngine/images/bg_4.jpg' %})"></div>
+    <div class="slider-item" style="background-image: url({% static 'direngine/images/bg_5.jpg' %})"></div> -->
+
+    <!-- <div class="slider-item" style="background-image: url(https://source.unsplash.com/aiBYhrzsQw4/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/V5Owjg-ZNto/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/s1ihVBg5tbI/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/Z_t6gnbLmXA/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/e3OUQGT9bWU/1920x1200)"></div> -->
+
+    <!-- <div id="slider" class="slider"> hero-wrap js-fullheight-->
+    <div  id="slider" class="slider">
+        <!-- <div class="overlay"></div>
+        <div class="container"> -->
+        
+            <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+                
+                <div class="slider-panel">
+                    <div class="slider-panel__controls">
+                        <i class="far fa-arrow-alt-circle-left" id="previous"></i>
+                        <i class="far fa-pause-circle" id="pause-play"></i>
+                        <i class="far fa-arrow-alt-circle-right" id="next"></i>
+                    </div>
+                    
+                    <div class="slider-panel__navigation">
+                        
+                        {% for i in slideshow %} 
+                            <i class="fas fa-circle indicator" data-slide-to="{{forloop.counter0}}"></i>
+                        {% endfor %}
+                        <!-- <i class="far fa-circle indicator" data-slide-to="1"></i>
+                        <i class="far fa-circle indicator" data-slide-to="2"></i>
+                        <i class="far fa-circle indicator" data-slide-to="3"></i>
+                        <i class="far fa-circle indicator" data-slide-to="4"></i> -->
+                    </div>                        
+                </div>
+                
+                <div class="slider-item-show">
+                    <!-- <div class="col-md-9 ftco-animate" data-scrollax=" properties: { translateY: '70%' }"> -->
+                        <!-- Explore your amazing city-->
+                        <!-- Find great places to stay -->
+                        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">                            
+                            <strong><div class="title"></div> </strong> 
+                                    <div class="sub-title"></div>
+                        </h1>
+                        <p class="content" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">                            
+                        </p>
+                        <!-- <div class="block-17 my-4"> -->
+                            <!-- <form action="" method="post" class="d-block d-flex">
+                            <div class="fields d-block d-flex">
+                                <div class="textfield-search one-third">
+                                    <input type="text" class="form-control" placeholder="Ex: food, service, hotel">
+                                </div>
+                                <div class="select-wrap one-third">
+                                <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                <select name="" id="" class="form-control" placeholder="Keyword search">
+                                    <option value="">Where</option>
+                                    <option value="">San Francisco USA</option>
+                                    <option value="">Berlin Germany</option>
+                                    <option value="">Lodon United Kingdom</option>
+                                    <option value="">Paris Italy</option>
+                                </select>
+                                </div>
+                            </div>
+                            <input type="submit" class="search-submit btn btn-primary" value="Search">  
+                            </form> -->
+                            <!-- <input type="button" class="search-submit btn btn-primary" onclick="mylinkfunction(self,'#about')" value=" &nbsp; Read More &nbsp; ">   
+                                search-submit 
+                            -->
+                            <a href="#fasilities" class="btn btn-primary"> &nbsp; Read More &nbsp; </a>
+                            <!-- <a href="#" class="nav-link"><span>Add listing</span></a> -->
+                        <!-- </div> -->
+                        <!-- <p>Or browse the highlights</p>
+                        <p class="browse d-md-flex">
+                            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-fork"></i>Restaurant</a></span>
+                            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-hotel"></i>Hotel</a></span> 
+                            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-meeting-point"></i>Places</a></span> 
+                            <span class="d-flex justify-content-md-center align-items-md-	center"><a href="#"><i class="flaticon-shopping-bag"></i>Shopping</a></span>
+                        </p> -->
+                        <!-- </div> -->
+
+                        
+                    <!-- </div> -->
+                </div>
+            </div>
+           
+        <!-- </div> -->
+    <!-- </div> -->
+    </div>
+{% endblock %}
+
+{% block why-us %}
+    <section class="ftco-section services-section bg-light" style="padding: 7em 0 0;" >
+        <div class="container">
+        <div class="row d-flex">
+            
+            {% for i in whyus|slice:":4" %}
+                <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                    <div class="media services block-6 d-block text-center"> 
+                        <!--  -->
+                        <div class="d-flex justify-content-center"><div class="icon">
+                            <span class="{{i.icon}}"></span></div></div>
+                        <div class="media-body p-2 mt-2">
+                        <h3 class="heading mb-3">{{i.title|truncatewords_html:3|safe}}</h3>
+                        <p>{{i.description|truncatewords_html:7|safe}}</p>
+                        </div>
+                    </div>      
+                </div>
+            {% endfor %}
+            
+            <!-- <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block text-center">
+                <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-like"></span></div></div>
+                <div class="media-body p-2 mt-2">
+                <h3 class="heading mb-3">Travellers Love Us</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
+                </div>
+            </div>    
+            </div>
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block text-center">
+                <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-detective"></span></div></div>
+                <div class="media-body p-2 mt-2">
+                <h3 class="heading mb-3">Best Travel Agent</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
+                </div>
+            </div>      
+            </div>
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block text-center">
+                <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-support"></span></div></div>
+                <div class="media-body p-2 mt-2">
+                <h3 class="heading mb-3">Our Dedicated Support</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
+                </div>
+            </div>      
+            </div> -->
+        </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block fasilities %}
+    <span id="fasilities">&nbsp;</span>
+    
+    <section class="ftco-section ftco-destination" >
+        <div class="container">
+            {% for i in fasilities|slice:":1" %}
+                
+                <div class="row justify-content-start ">
+                    <div class="col-md-7 heading-section ftco-animate">
+                        <span class="subheading">{{i.title|safe}}</span>
+                        <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title|safe}}</h2>                    
+                    </div>    
+                </div>
+                <div class="row justify-content-center mb-5 ">
+                    <div class="col-md-12">                        
+                        {{i.content|striptags|safe}}    
+                        <a href="/{{request.LANGUAGE_CODE}}/fasilities/list/all"> View all fasilities</a>                
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="bod-modal" data-interval="4" data-title="center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="destination-slider owl-carousel ftco-animate">
+
+                            
+                            {% for i in fasilities|slice:"1:" %}
+                                <div class="item">
+                                    <div class="destination">
+
+                                        <a href="/media/{{i.file_path}}" 
+                                            class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
+                                            style="background-image: url('/media/{{i.file_path}}')">
+                                            <div class="icon d-flex justify-content-center align-items-center">
+                                                <span class="icon-search2"></span>
+                                            </div>
+                                            <!-- <img src="{% static 'direngine/images/destination-1.jpg' %}"> -->
+                                        </a>
+                                        
+                                        <div class="text p-3">
+                                            <h3><a href="/{{request.LANGUAGE_CODE}}/fasilities/detail/{{i.slug}}">{{i.title}}</a></h3>
+                                            <span class="listing">
+                                                {{i.content|striptags|truncatewords:15}}
+                                                <a href="/{{request.LANGUAGE_CODE}}/fasilities/detail/{{i.slug}}">Read More</a>
+                                            </span>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+
+                                <!-- <div class="item">
+                                    <div class="destination">
+                                        <a href="{% static 'direngine/images/destination-2.jpg' %}" 
+                                            class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
+                                            style="background-image: url({% static 'direngine/images/destination-2.jpg' %});">
+                                            <div class="icon d-flex justify-content-center align-items-center">
+                                                <span class="icon-search2"></span>
+                                            </div>
+                                        </a>
+                                        <div class="text p-3">
+                                            <h3><a href="#">Bedroom</a></h3>
+                                            <span class="listing">We have four bedrooms.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="destination">
+                                        <a href="{% static 'direngine/images/destination-3.jpg' %}" 
+                                            class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
+                                            style="background-image: url({% static 'direngine/images/destination-3.jpg' %});">
+                                            <div class="icon d-flex justify-content-center align-items-center">
+                                                <span class="icon-search2"></span>
+                                            </div>
+                                        </a>
+                                        <div class="text p-3">
+                                            <h3><a href="#">Bathroom</a></h3>
+                                            <span class="listing">We have three bathrooms.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="destination">
+                                        <a href="{% static 'direngine/images/destination-4.jpg' %}" 
+                                            class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
+                                            style="background-image: url({% static 'direngine/images/destination-4.jpg' %});">
+                                            <div class="icon d-flex justify-content-center align-items-center">
+                                                <span class="icon-search2"></span>
+                                            </div>
+                                        </a>
+                                        <div class="text p-3">
+                                            <h3><a href="#">Kitchen</a></h3>
+                                            <span class="listing">Our kitchen merges with the main room.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="destination">
+                                        <a href="{% static 'direngine/images/destination-5.jpg' %}" 
+                                            class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
+                                            style="background-image: url({% static 'direngine/images/destination-5.jpg' %});">
+                                            <div class="icon d-flex justify-content-center align-items-center">
+                                                <span class="icon-search2"></span>
+                                            </div>
+                                        </a>
+                                        <div class="text p-3">
+                                            <h3><a href="#">Swimming Pool</a></h3>
+                                            <span class="listing">The pool is the nicest place for relaxation.</span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            
+
+                            <!-- <div class="item">
+                                <div class="destination">
+                                    <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'direngine/images/destination-6.jpg' %});">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3">
+                                        <h3><a href="#">Paris, Italy</a></h3>
+                                        <span class="listing">3 Listing</span>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block gallery %}
+    <span id="gallery">&nbsp;</span>
+
+    <section class="ftco-section ftco-destination">
+        <div class="container">
+
+            {% for i in photogallery|slice:":1" %}
+                <div class="row justify-content-start ">
+                    <div class="col-md-7 heading-section ftco-animate">
+                        <span class="subheading">{{i.title|safe}}</span>
+                        <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title|safe}}</h2>                    
+                    </div>                
+                </div>
+                <div class="row justify-content-center mb-5 ">
+                    <div class="col-md-12">                        
+                        {{i.content|striptags|safe}}
+                        <a href="/{{request.LANGUAGE_CODE}}/photogallery/list/all"> View all gallery</a>                
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="bod-modal" data-interval="4" data-title="center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="destination-slider owl-carousel ftco-animate">
+                            {% for i in photogallery|slice:"1:" %}
+
+                                <div class="item">
+                                    <div class="destination">
+                                        <a href="/media/{{i.file_path}}" class="img d-flex justify-content-center align-items-center image-popup-no-margins" 
+                                            style="background-image: url('/media/{{i.file_path}}');">
+                                            <div class="icon d-flex justify-content-center align-items-center">
+                                                <span class="icon-search2"></span>
+                                            </div>
+                                        </a>
+                                        <div class="text p-3">
+                                            <h3><a href="/{{request.LANGUAGE_CODE}}/photogallery/detail/{{i.slug}}">{{i.title}}</a></h3>
+                                            <span class="listing">
+                                                {{i.content|striptags|truncatewords:15}}
+
+                                                <a href="/{{request.LANGUAGE_CODE}}/photogallery/detail/{{i.slug}}">Read More</a>
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            <!-- <div class="item">
+                                <div class="destination">
+                                    <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'direngine/images/destination-5.jpg' %});">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3">
+                                        <h3><a href="#">Living Room</a></h3>
+                                        <span class="listing">Living room description.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="destination">
+                                    <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'direngine/images/destination-3.jpg' %});">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3">
+                                        <h3><a href="#">Swimming Pool</a></h3>
+                                        <span class="listing">Picture of swimming pool on night</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="destination">
+                                    <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'direngine/images/destination-2.jpg' %});">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3">
+                                        <h3><a href="#">Kitchen</a></h3>
+                                        <span class="listing">Our kitchen merges with the main room.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="destination">
+                                    <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'direngine/images/destination-1.jpg' %});">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3">
+                                        <h3><a href="#">Swimming Pool</a></h3>
+                                        <span class="listing">The pool is the nicest place for relaxation.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="destination">
+                                    <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({% static 'direngine/images/destination-6.jpg' %});">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3">
+                                        <h3><a href="#">Garden</a></h3>
+                                        <span class="listing">Foto get using drone</span>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block special-offers %}
+    <span id="offers">&nbsp;</span>
+
+    <section class="ftco-section" id="offers">
+        <div class="container">
+            {% for i in offers|slice:":1" %}
+                <div class="row justify-content-start  "> <!--mb-5 pb-3-->                
+                    <div class="col-md-7 heading-section ftco-animate">
+                        <span class="subheading">{{i.title|safe}}</span>
+                        <h2 class="mb-4"><strong>{{title|title}}</strong> {{i.title|safe}}</h2>
+                    </div>
+                    <div class="row justify-content-center mb-5" style="padding:0 15px 0 15px">
+                        <div class="col-md-12" >
+                            {{i.content|striptags|safe}}    
+                            <a href="/{{request.LANGUAGE_CODE}}/offers/list/all"> View all offers</a>                                            
+                        </div>                                                
+                    </div>                
+                </div>    		
+            {% endfor %}
+
+            <div class="row">
+                {% for i in offers|slice:"1:5" %}
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                        <div class="destination">
+                            <a href="/media/{{i.file_path}}" class="img img-2 d-flex justify-content-center align-items-center image-popup-no-margins" 
+                                style="background-image: url('/media/{{i.file_path}}');">
+                                <div class="icon d-flex justify-content-center align-items-center">
+                                    <span class="icon-search2"></span>
+                                </div>
+                            </a>
+                            <div class="text p-3">
+                                <!-- <h3><a href="#">Stay 3 Night, 1 Night Off</a></h3> -->
+                                <h3><a href="/{{request.LANGUAGE_CODE}}/offers/detail/{{i.slug}}">{{i.title|safe}}</a></h3>
+
+                                <!-- <p class="rate">
+                                    <i class="icon-star"></i>
+                                    <i class="icon-star"></i>
+                                    <i class="icon-star"></i>
+                                    <i class="icon-star"></i>
+                                    <i class="icon-star-o"></i>
+                                    <span>8 Rating</span>
+                                </p> -->
+                                <!-- <p>Far far away, behind the word mountains, far from the countries</p> -->
+                                {{i.content|striptags|truncatewords:15|safe}}
+                                <a href="/{{request.LANGUAGE_CODE}}/offers/detail/{{i.slug}}">Read More</a>
+                                <hr>
+                                <p class="bottom-area d-flex">
+                                    <span><i class="icon-map-o"></i> </span> 
+                                    <span class="ml-auto"><a href="/booking/detail/">Book Now</a></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                
+
+                <!-- <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static 'direngine/images/restaurant-2.jpg' %});">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3">
+                            <h3><a href="#">Stay 7 Night, 1 Night Off + Free 1 Night For Next Visit</a></h3>
+                            <p class="rate">
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star-o"></i>
+                                <span>8 Rating</span>
+                            </p>
+                            <p>Far far away, behind the word mountains, far from the countries</p>
+                            <hr>
+                            <p class="bottom-area d-flex">
+                                <span><i class="icon-map-o"></i> </span> 
+                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static 'direngine/images/restaurant-3.jpg' %});">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3">
+                            <h3><a href="#">Stay 2 Night, For 2 Guest, Free Breakfast & Lunch</a></h3>
+                            <p class="rate">
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star-o"></i>
+                                <span>8 Rating</span>
+                            </p>
+                            <p>Far far away, behind the word mountains, far from the countries</p>
+                            <hr>
+                            <p class="bottom-area d-flex">
+                                <span><i class="icon-map-o"></i> </span> 
+                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({% static 'direngine/images/restaurant-4.jpg' %});">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3">
+                            <h3><a href="#">Book This Month, Free Souvenir From Narvik Villa</a></h3>
+                            <p class="rate">
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star"></i>
+                                <i class="icon-star-o"></i>
+                                <span>8 Rating</span>
+                            </p>
+                            <p>Far far away, behind the word mountains, far from the countries</p>
+                            <hr>
+                            <p class="bottom-area d-flex">
+                                <span><i class="icon-map-o"></i></span> 
+                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+       
+        </div>
+    </section>
+{% endblock %}
+
+{% block aboutus %}    
+    <div class="col-md-5 heading-section ftco-animate">
+        {% for i in aboutus|slice:":1" %}
+            <span class="subheading">{{i.sub_title}}</span>
+            <h2 class="mb-4 pb-3">{{i.title|safe}}</h2>
+            <!-- <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life.</p> -->
+            <p>{{i.content|striptags|truncatewords:30}}</p>
+            <a href="/{{request.LANGUAGE_CODE}}/aboutus/detail/{{i.slug}}" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3" style="margin-left:0px">Read more</a>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block testimony %}
+    <div class="col-md-6 heading-section ftco-animate">
+        {% for i in testimony|slice:":1" %}
+            <span class="subheading">{{i.subtitle}} 
+                ><a href="/{{request.LANGUAGE_CODE}}/testimony/list/all"> View all testimony</a>
+            </span>
+            <h2 class="mb-4 pb-3">{{i.title|safe}}                 
+            </h2>
+            
+        {% endfor %}
+
+            <div class="row ftco-animate">
+                <div class="col-md-12">
+                <div class="carousel-testimony owl-carousel">
+                    {% for i in testimony|slice:"1:" %}
+                        <div class="item">
+                            <div class="testimony-wrap d-flex">
+                                {% if i.file_path %}
+                                    <div class="user-img mb-5" style="background-image: url(/media/{{i.file_path}})">
+                                        <span class="quote d-flex align-items-center justify-content-center">
+                                            <i class="icon-quote-left"></i>                                    
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="text ml-md-4">
+                                    
+                                        {{i.content|striptags|truncatewords:15}}
+                                    
+                                        <p class="name">{{i.title}}</p>
+                                        <span class="position">{{i.subtitle}}</span>
+                                    </div>
+                                {% else %}
+                                    <div class="user-img">
+                                        <span class="quote d-flex align-items-center justify-content-center" style="bottom:50px">
+                                            <i class="icon-quote-left"></i>                                    
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="text ml-md-6">
+                                    
+                                        {{i.content|striptags|truncatewords:15}}
+                                    
+                                        <p class="name">{{i.title|safe}}</p>
+                                        <span class="position">{{i.subtitle}}</span>
+                                    </div>
+                                    <div class="user-img" >
+                                        <span class="quote d-flex align-items-center justify-content-center" style="bottom:50px">
+                                            <i class="icon-quote-right"></i>                                    
+                                        </span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <!-- <div class="item">
+                    <div class="testimony-wrap d-flex">
+                        <div class="user-img mb-5" style="background-image: url({% static 'direngine/images/person_2.jpg' %})">
+                        <span class="quote d-flex align-items-center justify-content-center">
+                            <i class="icon-quote-left"></i>
+                        </span>
+                        </div>
+                        <div class="text ml-md-4">
+                        <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <p class="name">Dennis Green</p>
+                        <span class="position">Guest from London</span>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="item">
+                    <div class="testimony-wrap d-flex">
+                        <div class="user-img mb-5" style="background-image: url({% static 'direngine/images/person_3.jpg' %})">
+                        <span class="quote d-flex align-items-center justify-content-center">
+                            <i class="icon-quote-left"></i>
+                        </span>
+                        </div>
+                        <div class="text ml-md-4">
+                        <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <p class="name">Dennis Green</p>
+                        <span class="position">Guest from Philippines</span>
+                        </div>
+                    </div>
+                    </div> -->
+                </div>
+                </div>
+            </div>
+        
+    </div>           
+{% endblock %}
+
+
+
+{% block location %}        
+    <section class="ftco-section-parallax">
+        <div class="parallax-img d-flex align-items-center">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+            <div class="col-md-10 text-center heading-section heading-section-white ftco-animate">
+                {% for i in location %}
+                    <h2>{{i.title|safe}}</h2>
+                    {{i.subtitle}}
+                {% endfor %}
+
+                <div class="row d-flex justify-content-center mt-5">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3946.1989486323905!2d116.05216899999998!3d-8.480027000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMjgnNDguMSJTIDExNsKwMDMnMDcuOCJF!5e0!3m2!1sid!2sid!4v1677367144831!5m2!1sid!2sid" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <!-- <div class="col-md-8">
+                    <form action="#" class="subscribe-form">
+                    <div class="form-group d-flex">
+                        <input type="text" class="form-control" placeholder="Enter email address">
+                        <input type="submit" value="Subscribe" class="submit px-3">
+                    </div>
+                    </form>
+                </div> -->
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block article %}
+    <span id="article">&nbsp;</span>
+    <!-- article -->
+    <section class="ftco-section "> 
+    <div class="container">
+    <div class="row justify-content-start mb-4">        
+        {% for i in article|slice:":1" %}
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading">{{i.title|safe}}</span>
+                <h2>{{i.title|safe}}</h2>
+            </div>
+            <div class="row justify-content-center " style="padding:0 15px 0 15px">
+                <div class="col-md-12" >
+                    <p>
+                        {{i.content|striptags|safe}}
+                        <a href="/{{request.LANGUAGE_CODE}}/article/list/all" class="">View all article</a>
+                    </p>                    
+                </div>                                
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row d-flex">
+        {% for i in article|slice:"1:4" %}
+            <div class="col-md-3 d-flex ftco-animate">
+                <div class="blog-entry align-self-stretch">
+                    <a href="/{{request.LANGUAGE_CODE}}/article/detail/{{i.slug}}" class="block-20" 
+                        style="background-image: url(/media/{{i.file_path}});">
+                    </a>
+                    <div class="text p-4 d-block">
+                        <span class="tag">{{i.categories}}</span>
+                    <h3 class="heading mt-3">
+                    <a href="/{{request.LANGUAGE_CODE}}/article/detail/{{i.slug}}">
+                        {{i.title|safe}}</a></h3>
+                    <div class="meta mb-3">
+                        <div><a href="javascript:void(0);">{{i.created_at}}</a></div>
+                        <div><a href="javascript:void(0);">{{i.admin}}</a></div>
+                        <div><a href="javascript:void(0);" class="meta-chat"><span class="icon-star-o"></span> {{i.view_count}}</a></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <!-- <div class="col-md-3 d-flex ftco-animate">
+        <div class="blog-entry align-self-stretch">
+            <a href="blog-single.html" class="block-20" style="background-image: url({% static 'direngine/images/image_2.jpg' %});">
+            </a>
+            <div class="text p-4">
+                <span class="tag">Culture</span>
+            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <div class="meta mb-3">
+                <div><a href="#">August 12, 2018</a></div>
+                <div><a href="#">Admin</a></div>
+                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-3 d-flex ftco-animate">
+        <div class="blog-entry align-self-stretch">
+            <a href="blog-single.html" class="block-20" style="background-image: url({% static 'direngine/images/image_3.jpg' %});">
+            </a>
+            <div class="text p-4">
+                <span class="tag">Tips, Travel</span>
+            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <div class="meta mb-3">
+                <div><a href="#">August 12, 2018</a></div>
+                <div><a href="#">Admin</a></div>
+                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-3 d-flex ftco-animate">
+        <div class="blog-entry align-self-stretch">
+            <a href="blog-single.html" class="block-20" style="background-image: url({% static 'direngine/images/image_4.jpg' %});">
+            </a>
+            <div class="text p-4">
+                <span class="tag">Tips, Travel</span>
+            <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+            <div class="meta mb-3">
+                <div><a href="#">August 12, 2018</a></div>
+                <div><a href="#">Admin</a></div>
+                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+            </div>
+            </div>
+        </div>
+        </div> -->
+    </div>
+    </div>
+    </section>
+{% endblock %}      
+
+{% block extra_body %}
+ 
+    <script>      
+                                                          
+        //document.addEventListener('DOMContentLoaded', function() {
+        //});           
+
+        function mylinkfunction(e, target) {
+
+            window.location.href = target; //#"#targetDiv";
+            // $('html, body').animate({scrollTop: 0}, 300);
+
+            /* need to stop the form sending of the form
+
+            UPDATE as comment: This may not be exactly correct syntax 
+            for stopping a form , look up preventing form submission */
+
+            // e.preventDefault();
+            // e.stopPropagation(); 
+
+        };
+        
+
+        $(document).on("ready", function() {
+                                    
+            $('.image-popup-no-margins').magnificPopup({
+                type: 'image',
+                closeOnContentClick: true,
+                closeBtnInside: true,
+                fixedContentPos: true,
+                mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side mfp-no-margins  mfp-with-zoom
+                image: {
+                    horizontalFit: true
+                },
+                zoom: {
+                    enabled: true,
+                    duration: 300 // don't foget to change the duration also in CSS
+                }
+            });
+
+
+            // function scrollToAnchor(aid){
+            //     const destination = $("a[name='"+ aid +"']");
+            //     $('html,body').animate({
+            //         scrollTop: destination.offset().top
+            //     },'slow');
+            // };
+
+            // $(document).on('click', '.smooth-link', function(){
+            //     scrollToAnchor('demo');
+            // });
+
+            /*[ Back to top ]*/
+            // try {
+            //     var windowH = $(window).height()/2;
+
+            //     $(window).on('scroll',function(){
+            //         if ($(this).scrollTop() > windowH) {
+            //             $("#myBtn").addClass('show-btn-back-to-top');
+            //         } else {
+            //             $("#myBtn").removeClass('show-btn-back-to-top');
+            //         }
+            //     });
+
+            //     $('#myBtn').on("click", function(){
+            //         $('html, body').animate({scrollTop: 0}, 300);
+            //     });
+            // } catch(er) {console.log(er);}
+
+            window.onscroll = function() {myFunction()};
+
+            function myFunction() {
+                // if (document.documentElement.scrollTop > 50) {
+                //     document.getElementById("myP").className = "test";
+                // } else {
+                //     document.getElementById("myP").className = "";
+                // }
+
+                // var rect = document.body.getBoundingClientRect();
+                // console.log(rect.top, rect.right, rect.bottom, rect.left);
+                if (document.documentElement.scrollTop  < $('#about').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('home');
+                }
+                else if (document.documentElement.scrollTop < $('#gallery').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('about');
+                }
+                else if (document.documentElement.scrollTop < $('#calendar-scroll').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('gallery');
+                }
+                else if (document.documentElement.scrollTop < $('#offers').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('calendar');
+                }
+                else if (document.documentElement.scrollTop < $('#article').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('offers');
+                }
+                else if (document.documentElement.scrollTop < $('#contact').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('article');
+                }
+                else if (document.documentElement.scrollTop >= $('#contact').offset().top-50) {
+                    // var current = location.pathname;
+                    // console.log(current);
+                    activate_navlink('contact');
+                }
+
+
+                // console.log($('#about').offset().top);
+            };
+
+            function activate_navlink(param) {
+                // $('#ftco-nav li').each(function(){
+                //     var $this = $(this);
+                //     $this.removeClass('active');
+                // });
+
+                $('#ftco-nav li').each(function(){
+                    var $this = $(this);
+                    $this.removeClass('active');
+                    // console.log($this.find('a').attr('href').indexOf(param));
+                    // if the current path is like this link, make it active
+                    if($this.find('a').attr('href').indexOf(param) !== -1){
+                        $this.addClass('active');                            
+                    }
+                });
+            };
+
+        });
+    
+    </script>
+{% endblock %}
