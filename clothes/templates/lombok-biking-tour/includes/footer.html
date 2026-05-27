@@ -8,20 +8,23 @@
                         <img src="{% static 'lombok-biking-tour/assets/themes/img/Logo.png' %}" alt="Logo" class="h-8 brightness-0 invert">
                         {% if agency_meta %}{{agency_meta.name|title}}{% else %}{{name|title}}{% endif %}
                     </a>
-                    <p class="text-gray-400 max-w-md leading-relaxed">Experience the best biking adventures in Lombok with our professional guides and top-quality equipment. Your unforgettable journey starts here.</p>
+                    <p class="text-gray-400 max-w-md leading-relaxed">{{notes|safe}}</p>
                 </div>
                 
                 <div>
+                    
                     <h4 class="font-heading font-bold uppercase tracking-wider mb-6 text-white relative inline-block">
-                        Quick Links
+                        {% for i in header_menu_1|slice:":1" %}
+                            {{i.name}}
+                        {% endfor %}
                         <span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-primary"></span>
                     </h4>
                     <ul class="space-y-3 text-gray-400">
-                        <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fa fa-angle-right text-xs"></i> Bike Tour</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fa fa-angle-right text-xs"></i> Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fa fa-angle-right text-xs"></i> Term of Use</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fa fa-angle-right text-xs"></i> Payment</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2"><i class="fa fa-angle-right text-xs"></i> FAQ</a></li>
+                        {% for i in header_menu_1|slice:"1:" %}
+                            <li><a href="/{{request.LANGUAGE_CODE}}/{{i.link}}" 
+                                class="hover:text-primary transition-colors flex items-center gap-2">
+                                <i class="fa fa-angle-right text-xs"></i>{{i.name}}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
                 
@@ -31,10 +34,26 @@
                         <span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-primary"></span>
                     </h4>
                     <div class="flex gap-3">
-                        <a href="#" target="_blank" class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all shadow-lg hover:-translate-y-1"><i class="fa fa-youtube-play text-lg"></i></a>
-                        <a href="#" target="_blank" class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all shadow-lg hover:-translate-y-1"><i class="fa fa-facebook text-lg"></i></a>
-                        <a href="#" target="_blank" class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all shadow-lg hover:-translate-y-1"><i class="fa fa-instagram text-lg"></i></a>
-                        <a href="#" target="_blank" class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all shadow-lg hover:-translate-y-1"><i class="fa fa-twitter text-lg"></i></a>
+                        {% for i in socialmedia %}
+                            <a href="{{i.link}}" target="_blank" title="{{i.get_kind_display}}"
+                               class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all shadow-lg hover:-translate-y-1">
+                                {% if i.kind == 1 %}
+                                    <i class="fa fa-facebook text-lg"></i>
+                                {% elif i.kind == 2 %}
+                                    <i class="fa fa-twitter text-lg"></i>
+                                {% elif i.kind == 4 %}
+                                    <i class="fa fa-youtube-play text-lg"></i>
+                                {% elif i.kind == 5 %}
+                                    <i class="fa fa-instagram text-lg"></i>
+                                {% elif i.kind == 6 %}
+                                    <i class="fa fa-whatsapp text-lg"></i>
+                                {% elif i.kind == 7 %}
+                                    <i class="fa fa-tiktok text-lg"></i>
+                                {% else %}
+                                    <i class="fa fa-link text-lg"></i>
+                                {% endif %}
+                            </a>
+                        {% endfor %}
                     </div>
                 </div>                
             </div>
