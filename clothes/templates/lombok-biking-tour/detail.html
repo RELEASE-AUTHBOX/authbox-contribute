@@ -145,6 +145,15 @@
         pkgTitle: '',
         imageModalOpen: false,
         isPages: {% if request and 'pages' in request.path %}true{% else %}window.location.href.includes('pages'){% endif %},
+        copied: false,
+        copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                this.copied = true;
+                setTimeout(() => { this.copied = false; }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy link: ', err);
+            });
+        },
         init() {
             if(this.slug) {
                 // Formatting slug back to title for display purposes
@@ -287,6 +296,10 @@
                                 <a href="https://www.facebook.com/sharer/sharer.php" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-facebook mr-2"></i> Share on Facebook</a>
                                 <a href="https://twitter.com/intent/tweet" target="_blank" class="w-full bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center"><i class="fa fa-twitter mr-2"></i> Share on Twitter</a>
                                 {% endif %}
+                                <button @click="copyLink()" class="w-full bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm font-bold transition-colors flex items-center justify-center gap-2">
+                                    <i class="fa" :class="copied ? 'fa-check text-green-400' : 'fa-clone'"></i>
+                                    <span x-text="copied ? 'Copied!' : 'Copy Link'"></span>
+                                </button>
                             </div>
                         </div>
 
