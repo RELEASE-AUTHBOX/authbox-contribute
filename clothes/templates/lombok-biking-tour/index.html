@@ -245,14 +245,23 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-24 bg-white">
+        <section id="about" class="py-24 bg-white" x-data="{ aboutImgOpen: false, aboutImgSrc: '' }" @keydown.escape.window="aboutImgOpen = false">
             <div class="container mx-auto px-6 md:px-12 max-w-5xl">
                 {% for i in aboutus|slice:':1' %}
                 <h2 class="text-center text-3xl font-bold mb-4">{{ i.title }}</h2>
                 <hr class="w-12 border-primary border-t-4 mx-auto mb-12 rounded">
                 
                 <div class="flex flex-col md:flex-row gap-8 items-start">
-                    <img src="/media/{{i.file_path}}" alt="About Us" class="w-full md:w-1/3 rounded shadow-lg object-cover rounded">
+                    <!-- Clickable image -->
+                    <div class="w-full md:w-1/3 relative group cursor-zoom-in shrink-0"
+                         @click="aboutImgSrc = '/media/{{i.file_path}}'; aboutImgOpen = true">
+                        <img src="/media/{{i.file_path}}" alt="About Us"
+                             class="w-full rounded shadow-lg object-cover transition-transform duration-300 group-hover:scale-[1.02]">
+                        <!-- zoom hint overlay -->
+                        <div class="absolute inset-0 rounded bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                            <i class="fa fa-search-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"></i>
+                        </div>
+                    </div>
                     <div class="md:w-2/3 text-gray-600 text-justify leading-relaxed">
                         <div class="ck-prose">
                             {{i.content|safe}}
@@ -265,7 +274,36 @@
                 </div>
                 {% endfor %}
             </div>
+
+            <!-- Lightbox overlay -->
+            <div x-show="aboutImgOpen"
+                 style="display:none"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm "
+                 @click.self="aboutImgOpen = false">
+                <div x-show="aboutImgOpen"
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 scale-90"
+                     x-transition:enter-end="opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-200"
+                     x-transition:leave-start="opacity-100 scale-100"
+                     x-transition:leave-end="opacity-0 scale-90"
+                     class="relative max-w-4xl w-full">
+                    <button @click="aboutImgOpen = false"
+                            class="absolute -top-10 right-0 text-white hover:text-primary transition-colors text-lg font-bold focus:outline-none">
+                        <i class="fa fa-times mr-1"></i> Close
+                    </button>
+                    <img :src="aboutImgSrc" alt="About Us"
+                         class="w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
+                </div>
+            </div>
         </section>
+
 
         
 
