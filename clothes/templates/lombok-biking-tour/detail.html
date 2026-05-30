@@ -144,6 +144,7 @@
         slug: new URLSearchParams(window.location.search).get('slug'),
         pkgTitle: '',
         imageModalOpen: false,
+        isPages: {% if request and 'pages' in request.path %}true{% else %}window.location.href.includes('pages'){% endif %},
         init() {
             if(this.slug) {
                 // Formatting slug back to title for display purposes
@@ -169,7 +170,7 @@
                                 <li>
                                     <div class="flex items-center">
                                         <i class="fa fa-chevron-right text-gray-400 text-[10px] mx-2"></i>
-                                        <a href="/#package" class="hover:text-primary transition-colors">Packages</a>
+                                        <a :href="isPages ? '/#pages' : '/#package'" class="hover:text-primary transition-colors" x-text="isPages ? 'Pages' : 'Packages'">Packages</a>
                                     </div>
                                 </li>
                                 <li aria-current="page" class="truncate max-w-[150px] sm:max-w-xs">
@@ -188,12 +189,12 @@
                             <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <i class="fa fa-search-plus text-white text-5xl drop-shadow-md"></i>
                             </div>
-                            <span class="absolute top-4 right-4 bg-primary text-white text-sm font-bold px-4 py-2 rounded shadow-md z-10">#{{ content_detail.id }}</span>
+                            <span x-show="!isPages" class="absolute top-4 right-4 bg-primary text-white text-sm font-bold px-4 py-2 rounded shadow-md z-10">#{{ content_detail.id }}</span>
                         </div>
                         {% else %}
                         <div class="relative -mx-8 aspect-video overflow-hidden mb-8 shadow-lg bg-gray-200 flex items-center justify-center">
                             <span class="text-gray-400 italic text-xl">Package Image</span>
-                            <span class="absolute top-4 right-4 bg-primary text-white text-sm font-bold px-4 py-2 rounded shadow-md">#???</span>
+                            <span x-show="!isPages" class="absolute top-4 right-4 bg-primary text-white text-sm font-bold px-4 py-2 rounded shadow-md">#???</span>
                         </div>
                         {% endif %}
 
@@ -222,7 +223,7 @@
                     <div class="space-y-6">
                         
                         <!-- Booking Form -->
-                        <div class="bg-white p-6 rounded-xl shadow-xl border-t-4 border-primary ">
+                        <div x-show="!isPages" class="bg-white p-6 rounded-xl shadow-xl border-t-4 border-primary ">
                             <h5 class="font-bold text-xl mb-6 text-gray-800 font-heading"><i class="fa fa-calendar-check-o text-primary mr-2"></i> Book This Package</h5>
                             
                             <form @submit.prevent="submitForm()" class="text-left" x-data="bookingForm()">
@@ -274,7 +275,7 @@
                         </div>
                         
                         <!-- Share Options -->
-                        <div class="bg-white p-6 rounded-xl shadow-xl border-t-4 border-primary">
+                        <div :class="isPages ? 'sticky top-24 !mt-0' : ''" class="bg-white p-6 rounded-xl shadow-xl border-t-4 border-primary">
                             <h5 class="font-bold text-xl mb-4 text-gray-800 font-heading"><i class="fa fa-share-alt text-primary mr-2"></i> Share</h5>
                             <div class="flex flex-col gap-3">
                                 {% if content_detail %}
