@@ -359,10 +359,11 @@
                         const waText = `Hi, I'd like to book this tour package:\n*#${this.modalData.id} ${this.modalData.title}*\n\nBike Type: ${this.bookForm.bikeType}\nNumber of Bikes: ${this.bookForm.bikeCount}${noteText}\n\nPackage link: ${detailUrl}`;
                         const waNumber = '6282236876881';
                         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                        const waUrl = isMobile
-                            ? `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`
-                            : `https://web.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(waText)}`;
-                        window.open(waUrl, '_blank');
+                        if (isMobile) {
+                            window.open(`https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(waText)}`, '_blank');
+                        } else {
+                            window.open(`https://web.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(waText)}`, '_blank');
+                        }
                         this.bookForm = { bikeType: 'Mountain Bike', bikeCount: 1, note: '' };
                         generateCaptcha();
                     },

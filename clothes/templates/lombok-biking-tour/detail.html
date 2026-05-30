@@ -404,7 +404,7 @@
                     
                     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
                     if (isMobile) {
-                        window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`, "_blank");
+                        window.open(`https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(waText)}`, "_blank");
                     } else {
                         window.open(`https://web.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(waText)}`, "_blank");
                     }
@@ -459,10 +459,11 @@
                     const waText    = `Hi, I'd like to book this tour package:\n*${label}*\n\nBike Type: ${this.formData.type}\nNumber of Bikes: ${this.formData.count}${noteText}\n\nPackage link: ${detailUrl}`;
                     const waNumber  = '6282236876881';
                     const isMobile  = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                    const waUrl     = isMobile
-                        ? `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`
-                        : `https://web.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(waText)}`;
-                    window.open(waUrl, '_blank');
+                    if (isMobile) {
+                        window.open(`https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(waText)}`, '_blank');
+                    } else {
+                        window.open(`https://web.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(waText)}`, '_blank');
+                    }
                     this.formData = { type: 'Mountain Bike', count: 1, note: '' };
                     this.regenCaptcha();
                 }
