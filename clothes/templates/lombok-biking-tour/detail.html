@@ -7,19 +7,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% if content_detail %}{{ content_detail.title }} - {% endif %}{{name|title}}{% endblock %}</title>
+
+    <!--Favicon-->
+    <link rel="icon" href="/static/lombok-biking-tour/favicon.ico" type="image/x-icon">
     
 
     <!-- Meta Tags -->
     {% if agency_meta %}
-        <meta property="og:url" content="{{agency_meta.url}}">    
+        <meta property="og:url" content="{{ request.build_absolute_uri }}">    
+        {% if content_detail %}
+        <meta property="og:title" content="{{ content_detail.title }}">         
+        <meta property="og:description" content="{{ content_detail.content|striptags|truncatewords:30 }}">
+        {% else %}
         <meta property="og:title" content="{{agency_meta.title}}">         
-        <meta property="og:description" content="{{agency_meta.description}}">                  
-        <meta property="og:type" content="{{agency_meta.get_web_type_display}}" /> 
+        <meta property="og:description" content="{{agency_meta.description}}">
+        {% endif %}
+        <meta property="og:type" content="{{agency_meta.get_web_type_display}}" />
     
-        {% if agency_meta.file_path %}
+        {% if content_detail and content_detail.file_path %}
+        <meta property="og:image" content="{{agency_meta.url}}media/{{ content_detail.file_path }}">
+        {% elif agency_meta.file_path %}
         <meta property="og:image" content="{{agency_meta.file_path}}">
         {% else %}
-        <meta property="og:image" content="{{agency_meta.url}}/media/{{logo_top_normal.file_path}}">
+        <meta property="og:image" content="{{agency_meta.url}}media/{{logo_top_normal.file_path}}">
         {% endif %}
 
         <meta property="og:image:type" content="{{agency_meta.get_image_type_display}}" />  
@@ -28,15 +38,22 @@
         <meta property='og:locale:alternate' content='{{agency_meta.get_locale_alternate_display}}' />                        
         
         <meta property="twitter:domain" content="{{agency_meta.name}}">        
-        <meta property="twitter:url" content="{{agency_meta.url}}">
+        <meta property="twitter:url" content="{{ request.build_absolute_uri }}">
         <meta name="twitter:card" content="summary_large_image">
+        {% if content_detail %}
+        <meta name="twitter:title" content="{{ content_detail.title }}">
+        <meta name="twitter:description" content="{{ content_detail.content|striptags|truncatewords:30 }}">
+        {% else %}
         <meta name="twitter:title" content="{{agency_meta.title}}">
         <meta name="twitter:description" content="{{agency_meta.description}}">
+        {% endif %}
         
-        {% if agency_meta.file_path %}
+        {% if content_detail and content_detail.file_path %}
+        <meta name="twitter:image" content="{{agency_meta.url}}media/{{ content_detail.file_path }}">
+        {% elif agency_meta.file_path %}
         <meta name="twitter:image" content="{{agency_meta.file_path}}">
         {% else %}
-        <meta name="twitter:image" content="{{agency_meta.url}}/media/{{logo_top_normal.file_path}}">
+        <meta name="twitter:image" content="{{agency_meta.url}}media/{{logo_top_normal.file_path}}">
         {% endif %}
     {% endif %}
     
