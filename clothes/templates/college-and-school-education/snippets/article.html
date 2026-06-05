@@ -1,3 +1,4 @@
+{% load humanize %}
 <section class="tg-sectionspace tg-haslayout">
     <div class="tg-latestnews">
         <div class="tg-borderheading">
@@ -18,7 +19,7 @@
                                 <li>
                                     <a href="article/detail/{{i.slug}}/">
                                         <i class="fa fa-calendar"></i>
-                                        <span>{{i.created_at}}</span>
+                                        <span>{{i.created_at|naturaltime|title}}</span>
                                     </a>
                                 </li>
                             </ul>

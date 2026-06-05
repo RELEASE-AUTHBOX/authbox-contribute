@@ -2,6 +2,7 @@
 {% load static %}
 {% load hitcount_tags %}
 {% load custom_filters %}
+{% load humanize %}
 
 {% block inner-banner %}
     <!--************************************
@@ -61,7 +62,7 @@
                                                         <li>
                                                             <a href="{{base_url}}{{kind}}/detail/{{i.slug}}">
                                                                 <i class="fa fa-calendar"></i>
-                                                                <span>{{i.created_at|title}}</span>
+                                                                <span>{{i.created_at|naturaltime|title}}</span>
                                                             </a>
                                                         </li>
                                                     </ul>

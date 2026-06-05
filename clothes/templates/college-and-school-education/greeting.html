@@ -1,5 +1,6 @@
 {% extends "college-and-school-education/base-detail.html" %}
 {% load static %}
+{% load humanize %}
 {% load hitcount_tags %}
 
 {% block inner-banner %}
@@ -75,7 +76,7 @@
                                                         <div class="tg-campuscontent">
                                                             <div class="tg-datetime">
                                                                 <i class="fa fa-calendar"></i>
-                                                                <span>{{i.created_at}}</span>
+                                                                <span>{{i.created_at|naturaltime|title}}</span>
                                                             </div>
                                                             <div class="tg-campustitle">
                                                                 <h3><a href="{{base_url}}/announcement/detail/{{i.slug}}">{{i.title}}</a></h3>

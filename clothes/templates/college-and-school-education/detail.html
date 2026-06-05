@@ -2,6 +2,7 @@
 {% load static %}
 {% load hitcount_tags %}
 {% load custom_filters %}
+{% load humanize %}
 
 {% block inner-banner %}
     <!--************************************
@@ -50,7 +51,7 @@
                                             <li>
                                                 <div class="tg-infodata">
                                                     <span>Date:</span>
-                                                    <strong><a href="javascript:void(0);">{{content_detail.created_at|title}}</a></strong>
+                                                    <strong><a href="javascript:void(0);">{{content_detail.created_at|naturaltime|title}}</a></strong>
                                                 </div>
                                             </li>
                                             <li>
@@ -119,7 +120,7 @@
                                                                 <li>
                                                                     <a href="{{base_url}}{{random_paint_kind}}/detail/{{i.slug}}">
                                                                         <i class="fa fa-calendar"></i>
-                                                                        <span>{{i.created_at|title}}</span>
+                                                                        <span>{{i.created_at|naturaltime|title}}</span>
                                                                     </a>
                                                                 </li>
                                                             </ul>
@@ -190,7 +191,7 @@
                                                 <div class="tg-campuscontent">
                                                     <div class="tg-datetime">
                                                         <i class="fa fa-calendar"></i>
-                                                        <span>{{i.created_at|title}}</span>
+                                                        <span>{{i.created_at|naturaltime|title}}</span>
                                                     </div>
                                                     <div class="tg-campustitle">
                                                         <h3><a href="{{base_url}}{{latest_kind_kind}}/detail/{{i.slug}}">{{i.title}}</a></h3>
