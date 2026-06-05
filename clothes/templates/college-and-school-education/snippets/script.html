@@ -20,3 +20,25 @@
 <script src="{% static 'college-and-school-education/js/main.js' %}"></script>
 
 <script src="{% static 'js/custom.js' %}"></script>
+
+<script>
+    (function () {
+        var btn = document.getElementById('tg-btnsearch');
+        var form = btn ? btn.closest('.tg-searchbox').querySelector('.tg-formsearch') : null;
+        if (btn && form) {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                form.classList.toggle('open');
+                if (form.classList.contains('open')) {
+                    var inp = form.querySelector('input');
+                    if (inp) inp.focus();
+                }
+            });
+            document.addEventListener('click', function (e) {
+                if (!btn.contains(e.target) && !form.contains(e.target)) {
+                    form.classList.remove('open');
+                }
+            });
+        }
+    })();
+</script>

@@ -14,6 +14,11 @@
 
 <!-- Font Awesome 6 Free (CDN, for backward compat with fa-* classes) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- FA v4 shims: maps old fa-* class names (fa fa-facebook) to FA6 equivalents -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/v4-shims.min.css">
+
+<!-- Icomoon icons (icon-magnifier, icon-location, icon-envelope, etc.) -->
+<link rel="stylesheet" href="{% static 'college-and-school-education/css/icomoon.css' %}">
 
 <link rel="stylesheet" href="{% static 'college-and-school-education/css/normalize.css' %}">
 <link rel="stylesheet" href="{% static 'college-and-school-education/css/animate.css' %}">
@@ -161,17 +166,76 @@
         }
     }
 
-    /* ── Nav wrapper ── */
+    /* ── Nav wrapper: flex row so search is inline with menu ── */
     .tg-navigationarea {
         background: #fff !important;
         border-top: 1px solid #e8e8e8;
         border-bottom: 1px solid #e8e8e8;
+        display: flex !important;
+        align-items: center;
+        width: 100%;
+        float: none !important;
     }
     .tg-nav {
-        width: 100%;
+        flex: 1 1 auto;
+        min-width: 0;
     }
     .tg-navigation {
         background: #fff;
+    }
+
+    /* ── Search box: inline at right of menu bar ── */
+    .tg-searchbox {
+        flex: 0 0 auto;
+        display: flex !important;
+        align-items: center;
+        height: 44px;
+        padding: 0 8px 0 0;
+        position: relative;
+    }
+    .tg-btnsearch {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        color: #555 !important;
+        font-size: 16px;
+        border-radius: 50%;
+        transition: background 0.18s, color 0.18s;
+        text-decoration: none;
+    }
+    .tg-btnsearch:hover {
+        background: #2563eb;
+        color: #fff !important;
+    }
+    .tg-btnsearch i {
+        font-size: 16px;
+        line-height: 1;
+    }
+    /* Search form: hidden by default, expand on button click */
+    .tg-formsearch {
+        display: none;
+        position: absolute;
+        right: 44px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 220px;
+        z-index: 9999;
+    }
+    .tg-formsearch.open {
+        display: block;
+    }
+    .tg-formsearch fieldset {
+        margin: 0;
+        border: none;
+    }
+    .tg-formsearch input {
+        height: 36px;
+        font-size: 13px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        padding: 0 14px;
     }
 
     /* ── Top-level list: horizontal row ── */
