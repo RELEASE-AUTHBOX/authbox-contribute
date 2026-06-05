@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="tg-homebannervtwo">
+                    <div class="tg-homebannervtwo {% if not banner %}tg-nobanner{% endif %}">
                         <div id="tg-homeslider" class="tg-homeslider owl-carousel tg-btnround tg-haslayout">
 
                             {% for i in slideshow %}
@@ -32,7 +32,7 @@
                             {% for i in banner|slice:":1" %}
                             <div class="tg-widget tg-widgetadmissionform">
                                 <!-- <div class="tg-widgetcontent"> -->
-                                <a href="{{i.link}}" target="_blank"><img src="/media/{{i.file_path}}" alt="top banner"></a>
+                                <a href="{{i.link}}" target="_blank"><img src="/media/{{i.file_path}}" alt="top banner" class="img-fluid w-100"></a>
                             </div>
                             {% endfor %}       
                         </div>
@@ -52,7 +52,7 @@
     <main id="tg-main" class="tg-main tg-haslayout">
         <div class="container">
             <div class="row">
-                <div id="tg-twocolumns" class="tg-twocolumns">
+                <div id="tg-twocolumns" class="tg-twocolumns row">
                     <div class="col-12 col-sm-8 col-md-9">
                         <div id="tg-content" class="tg-content">
                                                                                          

@@ -38,6 +38,33 @@
         padding: 0px;
     }
 
+    /* Fix Home Banner Slider and Noticeboard layout on mobile/desktop */
+    .tg-homebannervtwo {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .tg-homebannervtwo .tg-homeslider {
+        width: 100% !important;
+        float: none !important;
+    }
+    @media (min-width: 992px) {
+        .tg-homebannervtwo .tg-homeslider {
+            width: 75% !important;
+        }
+        .tg-homebannervtwo.tg-nobanner .tg-homeslider {
+            width: 100% !important;
+        }
+    }
+    .tg-noticeboardarea {
+        width: 25% !important;
+        float: right !important;
+    }
+    .tg-noticeboardarea img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
     p {
         line-height: 25px;
     }
