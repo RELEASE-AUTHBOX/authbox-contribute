@@ -62,7 +62,7 @@
                 <p class="mb-6 lg:mb-0">Copyright &copy; {% now "Y" %} - <span class="text-gray-400 font-bold">{{name}}</span>. All Rights Reserved.</p>
                 <div class="flex flex-wrap justify-center lg:justify-end gap-x-6 gap-y-3">
                     <span class="flex items-center gap-2 hover:text-gray-300 transition-colors"><a href="tel:{{phone}}"><i class="fa fa-phone text-primary"></i> {{phone|phone_number}}</a></span>
-                    <span class="flex items-center gap-2 hover:text-gray-300 transition-colors"><a href="#" @click.prevent="openWA('{{whatsapp}}', 'I am contacting you through the website. I have a question ...', {{is_mobile|lower}})"><i class="fa fa-whatsapp text-green-500"></i> {{whatsapp|phone_number}}</a></span>
+                    <span class="flex items-center gap-2 hover:text-gray-300 transition-colors"><a href="javascript:void(0)" @click.prevent="openWA('{{whatsapp}}', 'I am contacting you through the website. I have a question ...', {{is_mobile|lower}})"><i class="fa fa-whatsapp text-green-500"></i> {{whatsapp|phone_number}}</a></span>
                     <span class="flex items-center gap-2 hover:text-gray-300 transition-colors"><a href="mailto:{{email}}" target="_blank"><i class="fa fa-envelope text-primary"></i> {{email}}</a></span>
                     <span class="flex items-center gap-2 hover:text-gray-300 transition-colors"><a href="https://goo.gl/maps/KMhjKxhAEJMZkAT8A" target="_blank"><i class="fa fa-map-marker text-primary"></i> {{address}}</a></span>
                 </div>
