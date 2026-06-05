@@ -15,7 +15,7 @@
                                         <img src="/media/{{i.file_path}}" alt="image description">
                                         <figcaption class="tg-slidercontent">
                                             <div class="tg-slidercontentbox">
-                                                <a class="tg-btn" href="slideshow/detail/{{i.slug}}/">read more</a>
+                                                {% comment %} <a class="tg-btn" href="slideshow/detail/{{i.slug}}/">read more</a> {% endcomment %}
                                                 <div class="tg-titledescription">
                                                     <h1>{{i.title|truncatewords_html:8}}</h1>
                                                     <div class="tg-description">
