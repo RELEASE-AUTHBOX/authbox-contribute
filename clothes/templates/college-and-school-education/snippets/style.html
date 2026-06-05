@@ -139,8 +139,169 @@
         border: 3px solid #ddd;
     }
 
-    /* BS3 hidden-* compatibility via BS5 display utilities */
-    /* These are provided as fallback if the template CSS uses these classes */
+    /* ============================================================
+       NAVIGATION REDESIGN — match screenshot style
+       ============================================================ */
+
+    /* ── Desktop collapse fix ── */
+    @media (min-width: 992px) {
+        #tg-navigation.collapse {
+            display: block !important;
+        }
+        .navbar-header .navbar-toggler {
+            display: none;
+        }
+    }
+    @media (max-width: 991.98px) {
+        #tg-navigation.collapse:not(.show) {
+            display: none !important;
+        }
+        #tg-navigation.collapse.show {
+            display: block !important;
+        }
+    }
+
+    /* ── Nav wrapper ── */
+    .tg-navigationarea {
+        background: #fff !important;
+        border-top: 1px solid #e8e8e8;
+        border-bottom: 1px solid #e8e8e8;
+    }
+    .tg-nav {
+        width: 100%;
+    }
+    .tg-navigation {
+        background: #fff;
+    }
+
+    /* ── Top-level list: horizontal row ── */
+    .tg-navigation > ul {
+        display: flex !important;
+        flex-wrap: nowrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        float: none !important;
+    }
+    .tg-navigation > ul > li {
+        float: none !important;
+        position: relative;
+    }
+
+    /* ── Top-level links ── */
+    .tg-navigation > ul > li > a {
+        display: flex !important;
+        align-items: center;
+        gap: 4px;
+        padding: 0 18px !important;
+        height: 44px;
+        line-height: 44px;
+        color: #333 !important;
+        font-size: 13px;
+        font-weight: 500;
+        white-space: nowrap;
+        text-decoration: none;
+        transition: background 0.18s, color 0.18s;
+    }
+
+    /* ── Hover & active state: blue background ── */
+    .tg-navigation > ul > li:hover > a,
+    .tg-navigation > ul > li.current-menu-item > a,
+    .tg-navigation > ul > li.active > a {
+        background: #2563eb !important;
+        color: #fff !important;
+    }
+
+    /* ── Caret for parent items (replaces FontAwesome :before) ── */
+    li.menu-item-has-children > a::after {
+        content: "▾";
+        font-size: 11px;
+        font-family: inherit;
+        line-height: 1;
+        margin-left: 2px;
+    }
+    /* Remove the old FontAwesome pseudo-element */
+    li.menu-item-has-children > a::before,
+    li.menu-item-has-mega-menu > a::before {
+        display: none !important;
+        content: none !important;
+    }
+
+    /* ── Dropdown / sub-menu ── */
+    .tg-navigation .sub-menu {
+        top: 44px !important;      /* flush below the nav bar */
+        left: 0;
+        z-index: 9999;
+        min-width: 180px;
+        width: auto;
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-top: 2px solid #2563eb;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        border-radius: 0 0 6px 6px;
+        padding: 4px 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.18s, visibility 0.18s;
+        display: block !important;  /* always in DOM, hidden via opacity */
+    }
+    .tg-navigation ul li:hover > .sub-menu {
+        opacity: 1;
+        visibility: visible;
+    }
+    .tg-navigation .sub-menu li {
+        float: none !important;
+        width: 100% !important;
+        border-top: none !important;
+    }
+    .tg-navigation .sub-menu li + li {
+        border-top: 1px solid #f0f0f0 !important;
+    }
+    .tg-navigation .sub-menu li a {
+        display: block;
+        padding: 9px 18px !important;
+        color: #444 !important;
+        font-size: 13px;
+        white-space: nowrap;
+        line-height: 1.5 !important;
+        height: auto !important;
+    }
+    .tg-navigation .sub-menu li:hover > a,
+    .tg-navigation .sub-menu li > a:hover {
+        color: #2563eb !important;
+        background: #f0f5ff !important;
+    }
+    /* Remove left-bar pseudo on sub items */
+    .sub-menu > li > a::before {
+        display: none !important;
+        content: none !important;
+    }
+
+    /* ── Mobile: stack vertically ── */
+    @media (max-width: 991.98px) {
+        .tg-navigation > ul {
+            flex-direction: column !important;
+        }
+        .tg-navigation > ul > li > a {
+            height: auto;
+            line-height: 1.5;
+            padding: 10px 16px !important;
+        }
+        .tg-navigation .sub-menu {
+            position: static !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            box-shadow: none !important;
+            border: none !important;
+            border-left: 3px solid #2563eb !important;
+            border-radius: 0 !important;
+            padding: 0 !important;
+            margin-left: 16px;
+        }
+        .tg-navigation .sub-menu li a {
+            padding: 8px 16px !important;
+        }
+    }
 </style>
 
 <style>
