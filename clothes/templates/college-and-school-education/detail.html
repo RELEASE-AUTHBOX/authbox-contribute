@@ -4,6 +4,9 @@
 {% load custom_filters %}
 {% load humanize %}
 
+{% block title %}{% if content_detail %}{{ content_detail.title }} - {% endif %}{{name|title}}{% endblock %}
+
+
 {% block inner-banner %}
     <!--************************************
             Inner Banner Start

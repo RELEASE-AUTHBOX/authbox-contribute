@@ -1,6 +1,9 @@
 {% extends "college-and-school-education/base-index.html" %}
 {% load static %}
 
+{% block title %}{{ name|title }}{% if logo_top_normal.name %} - {{ logo_top_normal.name }}{% endif %}{% endblock %}
+
+
 {% block slider %}
     {% if slideshow %}
         <div class="container">

@@ -8,8 +8,44 @@
 <html lang="id">
 
 <head>
-    <title> {{ title }} </title>
+    {% comment %} <title> {{ title }} </title> {% endcomment %}
+    <title>{% block title %}{{name|title}}{% endblock %}</title>
     
+    {% if agency_meta %}
+        <meta property="og:url" content="{% if content_detail %}{{ request.build_absolute_uri }}{% else %}{{ agency_meta.url }}{% endif %}">    
+        <meta property="og:title" content="{% if content_detail %}{{ content_detail.title }}{% else %}{{ agency_meta.title }}{% endif %}">         
+        <meta property="og:description" content="{% if content_detail %}{{ content_detail.content|striptags|truncatewords:30 }}{% else %}{{ agency_meta.description }}{% endif %}">                  
+        <meta property="og:type" content="{{ agency_meta.get_web_type_display }}" /> 
+    
+        {% if content_detail and content_detail.file_path %}
+        <meta property="og:image" content="{{ agency_meta.url }}/media/{{ content_detail.file_path }}">
+        {% elif agency_meta.file_path %}
+        <meta property="og:image" content="{{ agency_meta.file_path }}">
+        {% else %}
+        <meta property="og:image" content="{{ agency_meta.url }}/media/{{ logo_top_normal.file_path }}">
+        {% endif %}
+
+        <meta property="og:image:type" content="{{ agency_meta.get_image_type_display }}" />  
+        <meta property='og:site_name' content='{{ agency_meta.name }}' />  
+        <meta property='og:locale' content='{{ agency_meta.get_locale_display }}' />
+        <meta property='og:locale:alternate' content='{{ agency_meta.get_locale_alternate_display }}' />                        
+        
+        <meta property="twitter:domain" content="{{ agency_meta.name }}">        
+        <meta property="twitter:url" content="{% if content_detail %}{{ request.build_absolute_uri }}{% else %}{{ agency_meta.url }}{% endif %}">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{% if content_detail %}{{ content_detail.title }}{% else %}{{ agency_meta.title }}{% endif %}">
+        <meta name="twitter:description" content="{% if content_detail %}{{ content_detail.content|striptags|truncatewords:30 }}{% else %}{{ agency_meta.description }}{% endif %}">
+        
+        {% if content_detail and content_detail.file_path %}
+        <meta name="twitter:image" content="{{ agency_meta.url }}/media/{{ content_detail.file_path }}">
+        {% elif agency_meta.file_path %}
+        <meta name="twitter:image" content="{{ agency_meta.file_path }}">
+        {% else %}
+        <meta name="twitter:image" content="{{ agency_meta.url }}/media/{{ logo_top_normal.file_path }}">
+        {% endif %}
+    {% endif %}
+
+
     {% include 'college-and-school-education/snippets/style.html' %}
 
     {% block extra_head %}{% endblock %}  
